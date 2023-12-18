@@ -22,9 +22,9 @@
     if ($result->rowCount() > 0) {
         // Output data of each row
         while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-            // Display appointment details
-            echo "Date: " . $row["date"] . " - Title: " . $row["title"] . "<br>";
-            // Add edit and delete links here
+            echo "Date: " . $row["date"] . " - Title: " . $row["title"];
+            // Add a delete link
+            echo " - <a href='delete.php?id=" . $row["id"] . "' onclick='return confirm(\"Are you sure?\")'>Delete</a><br>";
         }
     } else {
         echo "No appointments scheduled.";
