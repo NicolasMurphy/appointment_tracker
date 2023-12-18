@@ -3,9 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Add New Appointment</title>
+
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require 'db_connect.php';
+
+    // Validate and sanitize inputs
+    $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+    $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+    $date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
+    $time = filter_input(INPUT_POST, 'time', FILTER_SANITIZE_STRING);
+
+    // Validate date and time format (add your own validation logic here)
+    if (!validateDate($date) || !validateTime($time)) {
+        echo "Invalid date or time format.";
+        exit;
+    }
 
     // Prepare an insert statement
     $sql = "INSERT INTO appointments (title, description, date, time) VALUES (:title, :description, :date, :time)";
@@ -17,12 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':date', $date);
         $stmt->bindParam(':time', $time);
 
-        // Set parameters and execute
-        $title = $_POST["title"];
-        $description = $_POST["description"];
-        $date = $_POST["date"];
-        $time = $_POST["time"];
-
+        // Execute the prepared statement
         if ($stmt->execute()) {
             // Redirect to index.php after successful insertion
             header('Location: index.php');
@@ -37,6 +45,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Close connection
     unset($conn);
+}
+
+// Function to validate date format
+function validateDate($date, $format = 'Y-m-d') {
+    $d = DateTime::createFromFormat($format, $date);
+    return $d && $d->format($format) === $date;
+}
+
+// Function to validate time format
+function validateTime($time, $format = 'H:i') {
+    $t = DateTime::createFromFormat($format, $time);
+    return $t && $t->format($format) === $time;
 }
 ?>
 
