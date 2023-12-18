@@ -24,7 +24,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $time = $_POST["time"];
 
         if ($stmt->execute()) {
-            echo "Appointment added successfully.";
+            // Redirect to index.php after successful insertion
+            header('Location: index.php');
+            exit;
         } else {
             echo "Error adding appointment.";
         }

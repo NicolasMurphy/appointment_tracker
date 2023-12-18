@@ -23,7 +23,9 @@
         // Output data of each row
         while($row = $result->fetch(PDO::FETCH_ASSOC)) {
             echo "Date: " . $row["date"] . " - Title: " . $row["title"];
-            // Add a delete link
+            // edit link
+            echo " - <a href='edit.php?id=" . $row["id"] . "'>Edit</a>";
+            // delete link
             echo " - <a href='delete.php?id=" . $row["id"] . "' onclick='return confirm(\"Are you sure?\")'>Delete</a><br>";
         }
     } else {
