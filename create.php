@@ -14,7 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
     $time = filter_input(INPUT_POST, 'time', FILTER_SANITIZE_STRING);
 
-    // Validate date and time format (add your own validation logic here)
+    // Before the validation checks
+    echo "Date: $date, Time: $time";
+
+    // Validate date and time format
     if (!validateDate($date) || !validateTime($time)) {
         echo "Invalid date or time format.";
         exit;

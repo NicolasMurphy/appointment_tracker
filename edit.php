@@ -1,9 +1,9 @@
 <?php
 require 'db_connect.php';
 
-// Fetch existing appointment data
+// Fetch existing appointment data for editing
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-    $id = $_GET['id'];
+    $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
     $sql = "SELECT * FROM appointments WHERE id = :id";
     if ($stmt = $conn->prepare($sql)) {
@@ -12,31 +12,37 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             $appointment = $stmt->fetch(PDO::FETCH_ASSOC);
         }
     }
-    // Close statement
     unset($stmt);
 }
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Assuming the 'id' is being sent via a hidden input in the form
-    $id = $_POST['id'];
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-    $date = $_POST['date'];
-    $time = $_POST['time'];
+    // Sanitize and validate POST data
+    $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+    $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+    $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+    $date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
+    $time = filter_input(INPUT_POST, 'time', FILTER_SANITIZE_STRING);
+
+    // Before the validation checks
+    echo "Date: $date, Time: $time";
+
+    // Validate date and time format
+    if (!validateDate($date) || !validateTime($time)) {
+        echo "Invalid date or time format.";
+        exit;
+    }
 
     // Prepare an update statement
     $sql = "UPDATE appointments SET title = :title, description = :description, date = :date, time = :time WHERE id = :id";
 
     if ($stmt = $conn->prepare($sql)) {
-        // Bind variables to the prepared statement as parameters
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':date', $date);
         $stmt->bindParam(':time', $time);
 
-        // Attempt to execute the prepared statement
         if ($stmt->execute()) {
             echo "Appointment updated successfully.";
         } else {
@@ -44,15 +50,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Close statement
     unset($stmt);
-
-    // After updating, redirect back to index.php
     header('Location: index.php');
     exit;
 }
 
+// Function to validate date format
+function validateDate($date, $format = 'Y-m-d') {
+    $d = DateTime::createFromFormat($format, $date);
+    return $d && $d->format($format) === $date;
+}
+
+// Function to validate time format
+function validateTime($time, $format = 'H:i:s') {
+    $t = DateTime::createFromFormat($format, $time);
+    return $t && $t->format($format) === $time;
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
