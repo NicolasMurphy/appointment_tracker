@@ -58,15 +58,19 @@ const AppointmentList: React.FC = () => {
 
   return (
     <div>
-      <h1>Appointments</h1>
+      <h1 className='text-5xl font-bold text-center'>Appointments</h1>
       {appointments.length > 0 ? (
         appointments.map(appointment => (
-          <div key={appointment.id}>
-            <h2>{appointment.title}</h2>
+          <div className="card my-4 w-96 bg-neutral text-neutral-content" key={appointment.id}>
+            <div className='card-body items-center text-center'>
+            <h2 className='card-title'>{appointment.title}</h2>
             <p>{appointment.date}</p>
             {/* Add more details here */}
-            <button onClick={() => deleteAppointment(appointment.id)}>Delete</button>
-            <Link to={`/edit-appointment/${appointment.id}`} >Edit Appointment</Link>
+            <div className="card-actions justify-end">
+              <button className='btn btn-primary' onClick={() => deleteAppointment(appointment.id)}>Delete</button>
+              <Link className='btn btn-primary' to={`/edit-appointment/${appointment.id}`} >Edit Appointment</Link>
+            </div>
+            </div>
           </div>
         ))
       ) : (
