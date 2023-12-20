@@ -1,8 +1,13 @@
 <?php
-$servername = "localhost";
-$username = "user";
-$password = ""; // make env
-$dbname = "user";
+require_once __DIR__ . '/../vendor/autoload.php'; // Path to autoload.php file
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
+
+$servername = $_ENV['DB_HOST'];
+$username = $_ENV['DB_USER'];
+$password = $_ENV['DB_PASS'];
+$dbname = $_ENV['DB_NAME'];
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
