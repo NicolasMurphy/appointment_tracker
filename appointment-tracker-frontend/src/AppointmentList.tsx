@@ -18,7 +18,6 @@ const AppointmentList: React.FC = () => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        console.log(response)
         const data = await response.json();
         setAppointments(data);
       } catch (error) {
