@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 type Appointment = {
   id: number;
@@ -65,6 +66,7 @@ const AppointmentList: React.FC = () => {
             <p>{appointment.date}</p>
             {/* Add more details here */}
             <button onClick={() => deleteAppointment(appointment.id)}>Delete</button>
+            <Link to={`/edit-appointment/${appointment.id}`} >Edit Appointment</Link>
           </div>
         ))
       ) : (
