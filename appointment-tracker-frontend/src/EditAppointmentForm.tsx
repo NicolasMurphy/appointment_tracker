@@ -48,7 +48,6 @@ const EditAppointmentForm: React.FC<EditAppointmentFormProps> = ({ onAppointment
         },
         body: JSON.stringify({ id, title, description, date, time }),
       });
-
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
