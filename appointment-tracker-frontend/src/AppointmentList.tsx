@@ -1,12 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-type Appointment = {
-  id: number;
-  title: string;
-  date: string;
-  // Add other fields as necessary
-};
+import { Appointment } from './types';
 
 const AppointmentList: React.FC<{ fetchAppointments: () => void; appointments: Appointment[], isLoading: boolean }> = ({ appointments, isLoading, fetchAppointments }) => {
 
