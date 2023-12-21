@@ -1,6 +1,6 @@
 # 12/21/23
     Goals:
-        - Make sure Edit is functioning properly (time issue)
+        - Make sure Edit is functioning properly (time issue) ✓
         - Make Edit Appointment Form a modal
         - Style both forms
         - Order appointments by date/time

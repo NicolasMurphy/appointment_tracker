@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Appointment } from './types'; // Import the Appointment type
+import { AppointmentDetails } from './types'; // Import the Appointment type
 
 type EditAppointmentFormProps = {
-  onAppointmentUpdated: (updatedAppointment: Appointment) => void;
+  onAppointmentUpdated: (updatedAppointment: AppointmentDetails) => void;
 };
 
 const EditAppointmentForm: React.FC<EditAppointmentFormProps> = ({ onAppointmentUpdated }) => {
   const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id?: string }>();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
 
   useEffect(() => {
+    if (!id) {
+      console.error('No ID provided for editing.');
+      return;
+    }
     // Fetch the existing appointment data for editing
     const fetchAppointmentData = async () => {
       try {
@@ -39,7 +43,10 @@ const EditAppointmentForm: React.FC<EditAppointmentFormProps> = ({ onAppointment
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
+    if (!id) {
+      console.error('No ID provided for editing.');
+      return;
+    }
     try {
       const response = await fetch('http://localhost:8000/api/edit.php', {
         method: 'POST',
@@ -53,7 +60,7 @@ const EditAppointmentForm: React.FC<EditAppointmentFormProps> = ({ onAppointment
       }
 
       // Construct the updated appointment object
-      const updatedAppointment: Appointment = {
+      const updatedAppointment: AppointmentDetails = {
         id: parseInt(id), // Convert id to a number if it's a string
         title,
         description,
