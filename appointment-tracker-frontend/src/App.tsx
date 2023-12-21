@@ -35,7 +35,6 @@ function App() {
               path="/"
               element={
                 <AppointmentList
-                  fetchAppointments={fetchAppointments}
                   appointments={appointments}
                   isLoading={isLoading}
                   setAppointments={setAppointments}

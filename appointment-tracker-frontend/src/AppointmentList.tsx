@@ -5,7 +5,6 @@ import { Appointment } from './types';
 type AppointmentListProps = {
   appointments: Appointment[];
   isLoading: boolean;
-  fetchAppointments: () => void;
   setAppointments: React.Dispatch<React.SetStateAction<Appointment[]>>;
 };
 
