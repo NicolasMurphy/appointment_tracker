@@ -1,11 +1,25 @@
+# 12/22/23
+    Goals:
+        - Add time to appointment list
+        - Add user authentication
+        - Add ranges for time and date
+        - Add more fields: address, medications, assistance with bathroom, cooking, washing, etc,
+        - Make 2 types of users: nurses and clients
+        - Filter nurses by availability and location
+        - Add state management tool
+        -
+    Notes:
+        -
+
 # 12/21/23
     Goals:
         - Make sure Edit is functioning properly (time issue) ✓
         - Make Edit Appointment Form a modal ✓
         - Style both forms ✓
-        - Order appointments by date/time
+        - Order appointments by date/time ✓
         -
     Notes:
+        - Look into why PHP changes time to with seconds
         -
 
 # 12/20/23

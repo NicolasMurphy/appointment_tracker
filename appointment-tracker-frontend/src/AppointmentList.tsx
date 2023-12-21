@@ -54,6 +54,10 @@ const AppointmentList: React.FC<AppointmentListProps> = ({
     }
   };
 
+  const sortedAppointments = [...appointments].sort((a, b) => {
+    return a.date.localeCompare(b.date);
+  });
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -62,8 +66,8 @@ const AppointmentList: React.FC<AppointmentListProps> = ({
     <div className="mx-10">
       <h1 className="text-5xl font-bold text-center mb-4">Appointments</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
-        {appointments.length > 0 ? (
-          appointments.map((appointment) => (
+        {sortedAppointments.length > 0 ? (
+          sortedAppointments.map((appointment) => (
             <div
               className="card m-2 bg-neutral text-neutral-content"
               key={appointment.id}
@@ -79,12 +83,6 @@ const AppointmentList: React.FC<AppointmentListProps> = ({
                   >
                     Delete
                   </button>
-                  {/* <Link
-                    className="btn btn-primary"
-                    to={`/edit-appointment/${appointment.id}`}
-                  >
-                    Edit
-                  </Link> */}
 
                   <button
                     onClick={() => openEditModal(appointment.id)}
