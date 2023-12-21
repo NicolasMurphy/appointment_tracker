@@ -3,7 +3,7 @@ import AppointmentList from "./AppointmentList";
 import EditAppointmentForm from "./EditAppointmentForm";
 import Nav from "./Nav";
 import { useState, useEffect } from "react";
-import { Appointment } from './types';
+import { Appointment } from "./types";
 
 function App() {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
@@ -28,10 +28,20 @@ function App() {
   return (
     <Router>
       <div className="mx-auto min-w-screen min-h-screen">
-      <Nav onAppointmentCreated={fetchAppointments} />
+        <Nav onAppointmentCreated={fetchAppointments} />
         <div className="flex justify-center">
           <Routes>
-            <Route path="/" element={<AppointmentList fetchAppointments={fetchAppointments} appointments={appointments} isLoading={isLoading} />} />
+            <Route
+              path="/"
+              element={
+                <AppointmentList
+                  fetchAppointments={fetchAppointments}
+                  appointments={appointments}
+                  isLoading={isLoading}
+                  setAppointments={setAppointments}
+                />
+              }
+            />
             <Route
               path="/edit-appointment/:id"
               element={<EditAppointmentForm />}

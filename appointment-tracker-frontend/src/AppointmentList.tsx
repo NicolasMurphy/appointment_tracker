@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Appointment } from './types';
 
-const AppointmentList: React.FC<{ fetchAppointments: () => void; appointments: Appointment[], isLoading: boolean }> = ({ appointments, isLoading, fetchAppointments }) => {
+const AppointmentList: React.FC<{ setAppointments: () => void; appointments: Appointment[], isLoading: boolean }> = ({ appointments, isLoading, setAppointments }) => {
 
   const deleteAppointment = async (id: number) => {
     try {
@@ -18,12 +18,14 @@ const AppointmentList: React.FC<{ fetchAppointments: () => void; appointments: A
         throw new Error("Network response was not ok");
       }
 
-      await response.json();
-      await fetchAppointments(); // Refetch the appointments after deletion
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+    // Update state without re-fetching all appointments
+    setAppointments(currentAppointments =>
+      currentAppointments.filter(appointment => appointment.id !== id)
+    );
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
 
   if (isLoading) {
     return <div>Loading...</div>;
