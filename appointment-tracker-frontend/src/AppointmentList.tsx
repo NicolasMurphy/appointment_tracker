@@ -2,7 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Appointment } from './types';
 
-const AppointmentList: React.FC<{ setAppointments: () => void; appointments: Appointment[], isLoading: boolean }> = ({ appointments, isLoading, setAppointments }) => {
+type AppointmentListProps = {
+  appointments: Appointment[];
+  isLoading: boolean;
+  fetchAppointments: () => void;
+  setAppointments: React.Dispatch<React.SetStateAction<Appointment[]>>;
+};
+
+const AppointmentList: React.FC<AppointmentListProps> = ({
+  appointments,
+  isLoading,
+  setAppointments
+}) => {
 
   const deleteAppointment = async (id: number) => {
     try {
