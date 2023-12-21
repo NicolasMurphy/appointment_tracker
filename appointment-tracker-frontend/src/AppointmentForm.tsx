@@ -48,11 +48,11 @@ const AppointmentForm: React.FC<{
         onSubmit={handleSubmit}
         className="form-control w-full max-w-xs mx-auto"
       >
-
-        <label className="label">
+        <label className="label" htmlFor="title">
           <span className="label-text">Title</span>
         </label>
         <input
+          id="title"
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -60,19 +60,21 @@ const AppointmentForm: React.FC<{
           className="input input-bordered input-info"
         />
 
-        <label className="label">
+        <label className="label" htmlFor="description">
           <span className="label-text">Description</span>
         </label>
         <textarea
+          id="description"
           className="textarea textarea-info"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
 
-        <label className="label">
+        <label className="label" htmlFor="date">
           <span className="label-text">Date</span>
         </label>
         <input
+          id="date"
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
@@ -80,10 +82,11 @@ const AppointmentForm: React.FC<{
           required
         />
 
-        <label className="label">
+        <label className="label" htmlFor="time">
           <span className="label-text">Time</span>
         </label>
         <input
+          id="time"
           type="time"
           value={time}
           onChange={(e) => setTime(e.target.value + ":00")} // adding seconds for consistency with PHP backend
