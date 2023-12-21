@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-const AppointmentForm: React.FC = () => {
-  const navigate = useNavigate();
+const AppointmentForm: React.FC<{ onAppointmentCreated: () => void }> = ({ onAppointmentCreated }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
@@ -29,11 +27,10 @@ const AppointmentForm: React.FC = () => {
       setDescription('');
       setDate('');
       setTime('');
-
+      onAppointmentCreated();
     } catch (error) {
       console.error('Error:', error);
     }
-    navigate('/');
   };
 
   return (

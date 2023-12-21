@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 type Appointment = {
@@ -8,28 +8,7 @@ type Appointment = {
   // Add other fields as necessary
 };
 
-const AppointmentList: React.FC = () => {
-  const [appointments, setAppointments] = useState<Appointment[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const fetchAppointments = async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch("http://localhost:8000/api/index.php");
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      setAppointments(data);
-    } catch (error) {
-      console.error("Fetch error:", error);
-    }
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    fetchAppointments();
-  }, []);
+const AppointmentList: React.FC<{ fetchAppointments: () => void; appointments: Appointment[], isLoading: boolean }> = ({ appointments, isLoading, fetchAppointments }) => {
 
   const deleteAppointment = async (id: number) => {
     try {

@@ -1,22 +1,45 @@
 import { Link } from "react-router-dom";
+import AppointmentForm from "./AppointmentForm";
+import { useState } from 'react';
 
-function Nav() {
+type NavProps = {
+  onAppointmentCreated: () => void;
+};
+
+function Nav({ onAppointmentCreated }: NavProps) {
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
+
+  const handleAppointmentCreated = () => {
+    onAppointmentCreated();
+    handleModalClose();
+  };
+
   return (
-    <nav className="navbar bg-base-100">
-      <div className="navbar-start"></div>
-      <div className="navbar-center">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/create-appointment">Create Appointment</Link>
-          </li>
-        </ul>
-      </div>
-      <div className="navbar-end"></div>
-    </nav>
+    <div className="text-center py-4">
+      <Link to="/">Home</Link>
+      <button onClick={() => setModalOpen(true)} className="btn btn-outline mx-2">
+        Create Appointment
+      </button>
+      {isModalOpen && (
+        <div className="modal modal-open">
+          <div className="modal-box relative">
+            <button
+              onClick={handleModalClose}
+              className="btn btn-sm btn-circle absolute right-2 top-2"
+            >
+              ✕
+            </button>
+            <AppointmentForm onAppointmentCreated={handleAppointmentCreated} />
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
+
 
 export default Nav;
