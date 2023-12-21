@@ -17,7 +17,9 @@
         - Make Edit Appointment Form a modal ✓
         - Style both forms ✓
         - Order appointments by date/time ✓
-        -
+        - Fix these two issues in the console:
+            - A form field element should have an id or name attribute
+            - No label associated with a form field
     Notes:
         - Look into why PHP changes time to with seconds
         -
