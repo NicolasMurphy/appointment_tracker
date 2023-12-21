@@ -1,5 +1,9 @@
 # 12/21/23
     Goals:
+        - Make sure Edit is functioning properly (time issue)
+        - Make Edit Appointment Form a modal
+        - Style both forms
+        - Order appointments by date/time
         -
     Notes:
         -
@@ -7,10 +11,11 @@
 # 12/20/23
     Goals:
         - Order appointments by date/time
-        - When creating an appointment, update state locally instead of refetching all appointments to prevent 'blinking'
-        - Fix type issues in App.tsx and AppointmentList.tsx
+        - When creating an appointment, update state locally instead of refetching all appointments to prevent 'blinking' ✓
+        - Fix type issues in App.tsx and AppointmentList.tsx ✓
         -
     Notes:
         - '=> void' means does not return a value
         - redux and contextAPI sucks, look into Zustand, Jotai
+        - Edit is currently broken, seems to be an issue with time using seconds or not
         -

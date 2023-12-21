@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Appointment } from './types';
 
-const AppointmentForm: React.FC<{ onAppointmentCreated: () => void }> = ({ onAppointmentCreated }) => {
+const AppointmentForm: React.FC<{ onAppointmentCreated: (newAppointment: Appointment) => void }> = ({ onAppointmentCreated }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
@@ -8,7 +9,6 @@ const AppointmentForm: React.FC<{ onAppointmentCreated: () => void }> = ({ onApp
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
     try {
       const response = await fetch('http://localhost:8000/api/create.php', {
         method: 'POST',
@@ -22,12 +22,14 @@ const AppointmentForm: React.FC<{ onAppointmentCreated: () => void }> = ({ onApp
         throw new Error('Network response was not ok');
       }
 
+      const newAppointment = await response.json(); // Assuming the response contains the new appointment data
+      onAppointmentCreated(newAppointment);
+
       // Clear the form
       setTitle('');
       setDescription('');
       setDate('');
       setTime('');
-      onAppointmentCreated();
     } catch (error) {
       console.error('Error:', error);
     }

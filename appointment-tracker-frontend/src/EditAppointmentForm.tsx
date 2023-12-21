@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Appointment } from './types'; // Import the Appointment type
 
-const EditAppointmentForm: React.FC = () => {
+type EditAppointmentFormProps = {
+  onAppointmentUpdated: (updatedAppointment: Appointment) => void;
+};
+
+const EditAppointmentForm: React.FC<EditAppointmentFormProps> = ({ onAppointmentUpdated }) => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [title, setTitle] = useState('');
@@ -10,6 +15,7 @@ const EditAppointmentForm: React.FC = () => {
   const [time, setTime] = useState('');
 
   useEffect(() => {
+    // Fetch the existing appointment data for editing
     const fetchAppointmentData = async () => {
       try {
         const response = await fetch(`http://localhost:8000/api/get-appointment.php?id=${id}`);
@@ -47,11 +53,25 @@ const EditAppointmentForm: React.FC = () => {
         throw new Error('Network response was not ok');
       }
 
+      // Construct the updated appointment object
+      const updatedAppointment: Appointment = {
+        id: parseInt(id), // Convert id to a number if it's a string
+        title,
+        description,
+        date,
+        time
+      };
+
+      // Call the onAppointmentUpdated function with the updated appointment
+      onAppointmentUpdated(updatedAppointment);
+
+      // Navigate back to the appointment list or close the modal
       navigate('/');
     } catch (error) {
       console.error('Error:', error);
     }
   };
+
 
   return (
     <div>

@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import AppointmentForm from "./AppointmentForm";
 import { useState } from 'react';
+import { Appointment } from './types';
 
 type NavProps = {
-  onAppointmentCreated: () => void;
+  onAppointmentCreated: (newAppointment: Appointment) => void;
 };
 
 function Nav({ onAppointmentCreated }: NavProps) {
@@ -13,8 +14,8 @@ function Nav({ onAppointmentCreated }: NavProps) {
     setModalOpen(false);
   };
 
-  const handleAppointmentCreated = () => {
-    onAppointmentCreated();
+  const handleAppointmentCreated = (newAppointment: Appointment) => {
+    onAppointmentCreated(newAppointment);
     handleModalClose();
   };
 

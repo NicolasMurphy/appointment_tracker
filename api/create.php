@@ -41,17 +41,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':time', $time);
 
         if ($stmt->execute()) {
-            echo json_encode(['message' => 'Appointment added successfully.']);
+            $newAppointmentId = $conn->lastInsertId(); // Get the ID of the newly created appointment
+
+            // Optionally, fetch the entire new appointment row from the database
+            $sql = "SELECT * FROM appointments WHERE id = :id";
+            if ($stmt = $conn->prepare($sql)) {
+                $stmt->bindParam(':id', $newAppointmentId, PDO::PARAM_INT);
+                if ($stmt->execute()) {
+                    $newAppointment = $stmt->fetch(PDO::FETCH_ASSOC);
+                    echo json_encode($newAppointment); // Return the new appointment data
+                } else {
+                    http_response_code(500);
+                    echo json_encode(['error' => 'Error fetching new appointment.']);
+                }
+            }
         } else {
             http_response_code(500);
             echo json_encode(['error' => 'Error adding appointment.']);
         }
-    } else {
-        http_response_code(500);
-        echo json_encode(['error' => 'Error preparing statement.']);
-    }
 
     unset($stmt);
     unset($conn);
+    }
 }
 ?>

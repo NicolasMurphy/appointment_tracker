@@ -25,10 +25,21 @@ function App() {
   useEffect(() => {
     fetchAppointments();
   }, []);
+
+  const handleAppointmentCreated = (newAppointment: Appointment) => {
+    setAppointments(currentAppointments => [...currentAppointments, newAppointment]);
+  };
+  const handleAppointmentUpdated = (updatedAppointment: Appointment) => {
+    setAppointments(currentAppointments =>
+      currentAppointments.map(appointment =>
+        appointment.id === updatedAppointment.id ? updatedAppointment : appointment
+      )
+    );
+  };
   return (
     <Router>
       <div className="mx-auto min-w-screen min-h-screen">
-        <Nav onAppointmentCreated={fetchAppointments} />
+        <Nav onAppointmentCreated={handleAppointmentCreated} />
         <div className="flex justify-center">
           <Routes>
             <Route
@@ -43,7 +54,7 @@ function App() {
             />
             <Route
               path="/edit-appointment/:id"
-              element={<EditAppointmentForm />}
+              element={<EditAppointmentForm onAppointmentUpdated={handleAppointmentUpdated} />}
             />
           </Routes>
         </div>
