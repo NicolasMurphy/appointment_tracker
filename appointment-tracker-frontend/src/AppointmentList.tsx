@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 type Appointment = {
   id: number;
@@ -15,14 +15,14 @@ const AppointmentList: React.FC = () => {
   const fetchAppointments = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/api/index.php');
+      const response = await fetch("http://localhost:8000/api/index.php");
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const data = await response.json();
       setAppointments(data);
     } catch (error) {
-      console.error('Fetch error:', error);
+      console.error("Fetch error:", error);
     }
     setIsLoading(false);
   };
@@ -34,21 +34,21 @@ const AppointmentList: React.FC = () => {
   const deleteAppointment = async (id: number) => {
     try {
       const response = await fetch(`http://localhost:8000/api/delete.php`, {
-        method: 'DELETE',
+        method: "DELETE",
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          "Content-Type": "application/x-www-form-urlencoded",
         },
         body: `id=${id}`,
       });
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
 
       await response.json();
       await fetchAppointments(); // Refetch the appointments after deletion
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
@@ -57,25 +57,40 @@ const AppointmentList: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1 className='text-5xl font-bold text-center'>Appointments</h1>
-      {appointments.length > 0 ? (
-        appointments.map(appointment => (
-          <div className="card my-4 w-96 bg-neutral text-neutral-content" key={appointment.id}>
-            <div className='card-body items-center text-center'>
-            <h2 className='card-title'>{appointment.title}</h2>
-            <p>{appointment.date}</p>
-            {/* Add more details here */}
-            <div className="card-actions justify-end">
-              <button className='btn btn-primary' onClick={() => deleteAppointment(appointment.id)}>Delete</button>
-              <Link className='btn btn-primary' to={`/edit-appointment/${appointment.id}`} >Edit Appointment</Link>
+    <div className="mx-10">
+      <h1 className="text-5xl font-bold text-center mb-4">Appointments</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {appointments.length > 0 ? (
+          appointments.map((appointment) => (
+            <div
+              className="card m-2 bg-neutral text-neutral-content"
+              key={appointment.id}
+            >
+              <div className="card-body items-center text-center">
+                <h2 className="card-title">{appointment.title}</h2>
+                <p>{appointment.date}</p>
+                {/* Add more details here */}
+                <div className="card-actions justify-end">
+                  <button
+                    className="btn btn-secondary"
+                    onClick={() => deleteAppointment(appointment.id)}
+                  >
+                    Delete
+                  </button>
+                  <Link
+                    className="btn btn-primary"
+                    to={`/edit-appointment/${appointment.id}`}
+                  >
+                    Edit
+                  </Link>
+                </div>
+              </div>
             </div>
-            </div>
-          </div>
-        ))
-      ) : (
-        <p>No appointments found.</p>
-      )}
+          ))
+        ) : (
+          <p>No appointments found.</p>
+        )}
+      </div>
     </div>
   );
 };

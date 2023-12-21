@@ -1,30 +1,15 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AppointmentList from "./AppointmentList";
 import AppointmentForm from "./AppointmentForm";
 import EditAppointmentForm from "./EditAppointmentForm";
+import Nav from "./Nav";
 
 function App() {
   return (
     <Router>
-      <div>
-        <nav className="navbar bg-base-100">
-          <div className="navbar-start">
-          </div>
-          <div className="navbar-center">
-            <ul className="menu menu-horizontal px-1">
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/create-appointment">Create Appointment</Link>
-              </li>
-            </ul>
-          </div>
-          <div className="navbar-end">
-          </div>
-        </nav>
-        <div className="h-screen flex justify-center">
+      <div className="mx-auto min-w-screen min-h-screen">
+        <Nav />
+        <div className="flex justify-center">
           <Routes>
             <Route path="/" element={<AppointmentList />} />
             <Route path="/create-appointment" element={<AppointmentForm />} />
