@@ -9,13 +9,15 @@ const AppointmentForm: React.FC<{ onAppointmentCreated: (newAppointment: Appoint
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    const requestData = { title, description, date, time };
+    // console.log('Sending data:', requestData); // Log the data for debugging
     try {
       const response = await fetch('http://localhost:8000/api/create.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title, description, date, time }),
+        body: JSON.stringify(requestData),
       });
 
       if (!response.ok) {
@@ -69,7 +71,7 @@ const AppointmentForm: React.FC<{ onAppointmentCreated: (newAppointment: Appoint
           <input
             type="time"
             value={time}
-            onChange={(e) => setTime(e.target.value)}
+            onChange={(e) => setTime(e.target.value + ":00")}
             required
           />
         </div>

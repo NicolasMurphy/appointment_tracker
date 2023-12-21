@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
 import { AppointmentDetails } from './types'; // Import the Appointment type
 
 type EditAppointmentFormProps = {
+  appointmentId: number;
   onAppointmentUpdated: (updatedAppointment: AppointmentDetails) => void;
 };
 
-const EditAppointmentForm: React.FC<EditAppointmentFormProps> = ({ onAppointmentUpdated }) => {
-  const navigate = useNavigate();
-  const { id } = useParams<{ id?: string }>();
+const EditAppointmentForm: React.FC<EditAppointmentFormProps> = ({ appointmentId, onAppointmentUpdated }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
 
   useEffect(() => {
-    if (!id) {
+    if (!appointmentId) {
       console.error('No ID provided for editing.');
       return;
     }
     // Fetch the existing appointment data for editing
     const fetchAppointmentData = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/get-appointment.php?id=${id}`);
+        const response = await fetch(`http://localhost:8000/api/get-appointment.php?id=${appointmentId}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -36,32 +34,37 @@ const EditAppointmentForm: React.FC<EditAppointmentFormProps> = ({ onAppointment
       }
     };
 
-    if (id) {
+    if (appointmentId) {
       fetchAppointmentData();
     }
-  }, [id]);
+  }, [appointmentId]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (!id) {
+    if (!appointmentId) {
       console.error('No ID provided for editing.');
       return;
     }
+
+    const requestData = { id: appointmentId, title, description, date, time };
+    // console.log('Sending data:', requestData); // Log the data for debugging
+
     try {
       const response = await fetch('http://localhost:8000/api/edit.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id, title, description, date, time }),
+        body: JSON.stringify(requestData),
       });
+
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error(`Network response was not ok, status: ${response.status}`);
       }
 
       // Construct the updated appointment object
       const updatedAppointment: AppointmentDetails = {
-        id: parseInt(id), // Convert id to a number if it's a string
+        id: appointmentId,
         title,
         description,
         date,
@@ -71,8 +74,6 @@ const EditAppointmentForm: React.FC<EditAppointmentFormProps> = ({ onAppointment
       // Call the onAppointmentUpdated function with the updated appointment
       onAppointmentUpdated(updatedAppointment);
 
-      // Navigate back to the appointment list or close the modal
-      navigate('/');
     } catch (error) {
       console.error('Error:', error);
     }
@@ -113,7 +114,7 @@ const EditAppointmentForm: React.FC<EditAppointmentFormProps> = ({ onAppointment
           <input
             type="time"
             value={time}
-            onChange={(e) => setTime(e.target.value)}
+            onChange={(e) => setTime(e.target.value + ":00")}
             required
           />
         </div>

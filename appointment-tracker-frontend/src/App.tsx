@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AppointmentList from "./AppointmentList";
-import EditAppointmentForm from "./EditAppointmentForm";
 import Nav from "./Nav";
 import { useState, useEffect } from "react";
 import { Appointment } from "./types";
@@ -49,12 +48,9 @@ function App() {
                   appointments={appointments}
                   isLoading={isLoading}
                   setAppointments={setAppointments}
+                  onAppointmentUpdated={handleAppointmentUpdated}
                 />
               }
-            />
-            <Route
-              path="/edit-appointment/:id"
-              element={<EditAppointmentForm onAppointmentUpdated={handleAppointmentUpdated} />}
             />
           </Routes>
         </div>

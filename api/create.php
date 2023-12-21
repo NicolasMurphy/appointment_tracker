@@ -13,7 +13,7 @@ function validateDate($date, $format = 'Y-m-d') {
 }
 
 // Function to validate time format
-function validateTime($time, $format = 'H:i') {
+function validateTime($time, $format = 'H:i:s') {
     $t = DateTime::createFromFormat($format, $time);
     return $t && $t->format($format) === $time;
 }

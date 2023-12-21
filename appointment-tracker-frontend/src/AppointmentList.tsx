@@ -1,18 +1,35 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Appointment } from './types';
+import EditAppointmentForm from "./EditAppointmentForm";
+import { Appointment } from "./types";
+import { useState } from "react";
 
 type AppointmentListProps = {
   appointments: Appointment[];
   isLoading: boolean;
   setAppointments: React.Dispatch<React.SetStateAction<Appointment[]>>;
+  onAppointmentUpdated: (updatedAppointment: Appointment) => void;
 };
 
 const AppointmentList: React.FC<AppointmentListProps> = ({
   appointments,
   isLoading,
-  setAppointments
+  setAppointments,
+  onAppointmentUpdated,
 }) => {
+  const [isEditModalOpen, setEditModalOpen] = useState(false);
+  const [editingAppointmentId, setEditingAppointmentId] = useState<
+    number | null
+  >(null);
+
+  const openEditModal = (id: number) => {
+    setEditingAppointmentId(id);
+    setEditModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setEditModalOpen(false);
+    setEditingAppointmentId(null);
+  };
 
   const deleteAppointment = async (id: number) => {
     try {
@@ -28,14 +45,14 @@ const AppointmentList: React.FC<AppointmentListProps> = ({
         throw new Error("Network response was not ok");
       }
 
-    // Update state without re-fetching all appointments
-    setAppointments(currentAppointments =>
-      currentAppointments.filter(appointment => appointment.id !== id)
-    );
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
+      // Update state without re-fetching all appointments
+      setAppointments((currentAppointments) =>
+        currentAppointments.filter((appointment) => appointment.id !== id)
+      );
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -44,7 +61,7 @@ const AppointmentList: React.FC<AppointmentListProps> = ({
   return (
     <div className="mx-10">
       <h1 className="text-5xl font-bold text-center mb-4">Appointments</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
         {appointments.length > 0 ? (
           appointments.map((appointment) => (
             <div
@@ -62,12 +79,38 @@ const AppointmentList: React.FC<AppointmentListProps> = ({
                   >
                     Delete
                   </button>
-                  <Link
+                  {/* <Link
                     className="btn btn-primary"
                     to={`/edit-appointment/${appointment.id}`}
                   >
                     Edit
-                  </Link>
+                  </Link> */}
+
+                  <button
+                    onClick={() => openEditModal(appointment.id)}
+                    className="btn btn-primary"
+                  >
+                    Edit
+                  </button>
+                  {isEditModalOpen && editingAppointmentId && (
+                    <div className="modal modal-open">
+                      <div className="modal-box relative">
+                        <button
+                          onClick={handleModalClose}
+                          className="btn btn-sm btn-circle absolute right-2 top-2"
+                        >
+                          ✕
+                        </button>
+                        <EditAppointmentForm
+                          appointmentId={editingAppointmentId}
+                          onAppointmentUpdated={(updatedAppointment) => {
+                            onAppointmentUpdated(updatedAppointment);
+                            handleModalClose(); // Close the modal after updating
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

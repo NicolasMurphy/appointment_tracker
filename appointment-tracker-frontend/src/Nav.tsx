@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import AppointmentForm from "./AppointmentForm";
 import { useState } from 'react';
 import { Appointment } from './types';
@@ -21,7 +20,6 @@ function Nav({ onAppointmentCreated }: NavProps) {
 
   return (
     <div className="text-center py-4">
-      <Link to="/">Home</Link>
       <button onClick={() => setModalOpen(true)} className="btn btn-outline mx-2">
         Create Appointment
       </button>
