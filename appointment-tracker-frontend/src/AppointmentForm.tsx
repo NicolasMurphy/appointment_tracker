@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Appointment } from "./types";
+import { AppointmentDetails } from "./types";
 
 const AppointmentForm: React.FC<{
-  onAppointmentCreated: (newAppointment: Appointment) => void;
+  onAppointmentCreated: (newAppointment: AppointmentDetails) => void;
 }> = ({ onAppointmentCreated }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");

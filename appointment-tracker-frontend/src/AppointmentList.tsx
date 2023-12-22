@@ -1,13 +1,13 @@
 import React from "react";
 import EditAppointmentForm from "./EditAppointmentForm";
-import { Appointment } from "./types";
+import { AppointmentDetails } from "./types";
 import { useState } from "react";
 
 type AppointmentListProps = {
-  appointments: Appointment[];
+  appointments: AppointmentDetails[];
   isLoading: boolean;
-  setAppointments: React.Dispatch<React.SetStateAction<Appointment[]>>;
-  onAppointmentUpdated: (updatedAppointment: Appointment) => void;
+  setAppointments: React.Dispatch<React.SetStateAction<AppointmentDetails[]>>;
+  onAppointmentUpdated: (updatedAppointment: AppointmentDetails) => void;
 };
 
 const AppointmentList: React.FC<AppointmentListProps> = ({
@@ -55,8 +55,12 @@ const AppointmentList: React.FC<AppointmentListProps> = ({
   };
 
   const sortedAppointments = [...appointments].sort((a, b) => {
-    return a.date.localeCompare(b.date);
+    const dateTimeA = `${a.date}T${a.time}`;
+    const dateTimeB = `${b.date}T${b.time}`;
+
+    return dateTimeA.localeCompare(dateTimeB);
   });
+
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -75,7 +79,17 @@ const AppointmentList: React.FC<AppointmentListProps> = ({
               <div className="card-body items-center text-center">
                 <h2 className="card-title">{appointment.title}</h2>
                 <p>{appointment.date}</p>
-                {/* Add more details here */}
+                {/* convert 24 time to 12 hour with am/pm */}
+                <p>
+                  {new Date(
+                    "1970-01-01T" + appointment.time + "Z"
+                  ).toLocaleTimeString("en-US", {
+                    timeZone: "UTC",
+                    hour12: true,
+                    hour: "numeric",
+                    minute: "numeric",
+                  })}
+                </p>
                 <div className="card-actions justify-end">
                   <button
                     className="btn btn-secondary"

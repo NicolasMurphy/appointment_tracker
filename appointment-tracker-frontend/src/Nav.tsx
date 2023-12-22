@@ -1,9 +1,9 @@
 import AppointmentForm from "./AppointmentForm";
 import { useState } from 'react';
-import { Appointment } from './types';
+import { AppointmentDetails } from './types';
 
 type NavProps = {
-  onAppointmentCreated: (newAppointment: Appointment) => void;
+  onAppointmentCreated: (newAppointment: AppointmentDetails) => void;
 };
 
 function Nav({ onAppointmentCreated }: NavProps) {
@@ -13,7 +13,7 @@ function Nav({ onAppointmentCreated }: NavProps) {
     setModalOpen(false);
   };
 
-  const handleAppointmentCreated = (newAppointment: Appointment) => {
+  const handleAppointmentCreated = (newAppointment: AppointmentDetails) => {
     onAppointmentCreated(newAppointment);
     handleModalClose();
   };

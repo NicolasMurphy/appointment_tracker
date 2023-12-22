@@ -2,10 +2,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AppointmentList from "./AppointmentList";
 import Nav from "./Nav";
 import { useState, useEffect } from "react";
-import { Appointment } from "./types";
+import { AppointmentDetails } from "./types";
 
 function App() {
-  const [appointments, setAppointments] = useState<Appointment[]>([]);
+  const [appointments, setAppointments] = useState<AppointmentDetails[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const fetchAppointments = async (): Promise<void> => {
     setIsLoading(true);
@@ -25,10 +25,10 @@ function App() {
     fetchAppointments();
   }, []);
 
-  const handleAppointmentCreated = (newAppointment: Appointment) => {
+  const handleAppointmentCreated = (newAppointment: AppointmentDetails) => {
     setAppointments(currentAppointments => [...currentAppointments, newAppointment]);
   };
-  const handleAppointmentUpdated = (updatedAppointment: Appointment) => {
+  const handleAppointmentUpdated = (updatedAppointment: AppointmentDetails) => {
     setAppointments(currentAppointments =>
       currentAppointments.map(appointment =>
         appointment.id === updatedAppointment.id ? updatedAppointment : appointment

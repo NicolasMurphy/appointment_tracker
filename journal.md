@@ -6,12 +6,13 @@
 
 # 12/22/23
     Goals:
+        - Add toast for "appointment successfully created/edited/deleted"
         - Improve security in backend:
             - Review validation and sanitization
             - CSRF
             - XSS
             - HIPAA-compliant
-        - Add time to appointment list
+        - Add time to appointment list ✓
         - Add user authentication (Firebase?)
         - Add ranges for time and date
         - Add more fields: address, medications, assistance with bathroom, cooking, washing, etc,
