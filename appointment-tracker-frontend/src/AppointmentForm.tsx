@@ -6,12 +6,13 @@ const AppointmentForm: React.FC<{
 }> = ({ onAppointmentCreated }) => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [time, setTime] = useState<string>("");
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const requestData = { title, description, date, time };
+    const requestData = { title, description, address, date, time };
     // console.log('Sending data:', requestData); // Log the data for debugging
     try {
       const response = await fetch("http://localhost:8000/api/create.php", {
@@ -21,7 +22,6 @@ const AppointmentForm: React.FC<{
         },
         body: JSON.stringify(requestData),
       });
-
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -32,6 +32,7 @@ const AppointmentForm: React.FC<{
       // Clear the form
       setTitle("");
       setDescription("");
+      setAddress("");
       setDate("");
       setTime("");
     } catch (error) {
@@ -69,6 +70,17 @@ const AppointmentForm: React.FC<{
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
+
+        <label className="label" htmlFor="address">
+          <span className="label-text">Address</span>
+        </label>
+        <input
+          id="address"
+          type="text"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          className="input input-bordered input-info"
+        />
 
         <label className="label" htmlFor="date">
           <span className="label-text">Date</span>

@@ -12,6 +12,7 @@ const EditAppointmentForm: React.FC<EditAppointmentFormProps> = ({
 }) => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [time, setTime] = useState<string>("");
 
@@ -32,6 +33,7 @@ const EditAppointmentForm: React.FC<EditAppointmentFormProps> = ({
         const data = await response.json();
         setTitle(data.title);
         setDescription(data.description);
+        setAddress(data.address);
         setDate(data.date);
         setTime(data.time);
       } catch (error) {
@@ -51,7 +53,7 @@ const EditAppointmentForm: React.FC<EditAppointmentFormProps> = ({
       return;
     }
 
-    const requestData = { id: appointmentId, title, description, date, time };
+    const requestData = { id: appointmentId, title, description, address, date, time };
     // console.log('Sending data:', requestData); // Log the data for debugging
 
     try {
@@ -74,6 +76,7 @@ const EditAppointmentForm: React.FC<EditAppointmentFormProps> = ({
         id: appointmentId,
         title,
         description,
+        address,
         date,
         time,
       };
@@ -115,6 +118,17 @@ const EditAppointmentForm: React.FC<EditAppointmentFormProps> = ({
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
+
+        <label className="label" htmlFor="address">
+          <span className="label-text">Address</span>
+        </label>
+        <input
+          id="address"
+          type="text"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          className="input input-bordered input-info"
+        />
 
         <label className="label" htmlFor="date">
           <span className="label-text">Date</span>

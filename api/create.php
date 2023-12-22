@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate and sanitize inputs
     $title = filter_var($input['title'], FILTER_SANITIZE_STRING);
     $description = filter_var($input['description'], FILTER_SANITIZE_STRING);
+    $address = filter_var($input['address'], FILTER_SANITIZE_STRING);
     $date = filter_var($input['date'], FILTER_SANITIZE_STRING);
     $time = filter_var($input['time'], FILTER_SANITIZE_STRING);
 
@@ -33,10 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    $sql = "INSERT INTO appointments (title, description, date, time) VALUES (:title, :description, :date, :time)";
+    $sql = "INSERT INTO appointments (title, description, address, date, time) VALUES (:title, :description, :address, :date, :time)";
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':address', $address);
         $stmt->bindParam(':date', $date);
         $stmt->bindParam(':time', $time);
 

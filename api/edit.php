@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = filter_var($input['id'], FILTER_SANITIZE_NUMBER_INT);
     $title = filter_var($input['title'], FILTER_SANITIZE_STRING);
     $description = filter_var($input['description'], FILTER_SANITIZE_STRING);
+    $address = filter_var($input['address'], FILTER_SANITIZE_STRING);
     $date = filter_var($input['date'], FILTER_SANITIZE_STRING);
     $time = filter_var($input['time'], FILTER_SANITIZE_STRING);
 
@@ -41,12 +42,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Prepare an update statement
-    $sql = "UPDATE appointments SET title = :title, description = :description, date = :date, time = :time WHERE id = :id";
+    $sql = "UPDATE appointments SET title = :title, description = :description, address = :address, date = :date, time = :time WHERE id = :id";
 
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':address', $address);
         $stmt->bindParam(':date', $date);
         $stmt->bindParam(':time', $time);
 
