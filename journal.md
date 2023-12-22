@@ -1,5 +1,6 @@
 # 12/23/23
     Goals:
+        - Narrow down the goals from below
         -
     Notes:
         -
@@ -27,6 +28,8 @@
             - Healthcare data API (Redox, Health Gorilla)
     Notes:
         - Review The Twelve-Factor App
+        - For parse_str you use Form URL Encoded instead of JSON
+        - Using POST for updates is acceptable. PUT is idempotent, POST is not
         -
 
 # 12/21/23
