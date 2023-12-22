@@ -6,6 +6,8 @@ import { useState } from "react";
 type AppointmentListProps = {
   appointments: AppointmentDetails[];
   isLoading: boolean;
+  isAppointmentCreated: boolean;
+  isAppointmentUpdated: boolean;
   setAppointments: React.Dispatch<React.SetStateAction<AppointmentDetails[]>>;
   onAppointmentUpdated: (updatedAppointment: AppointmentDetails) => void;
 };
@@ -13,13 +15,16 @@ type AppointmentListProps = {
 const AppointmentList: React.FC<AppointmentListProps> = ({
   appointments,
   isLoading,
+  isAppointmentCreated,
+  isAppointmentUpdated,
   setAppointments,
   onAppointmentUpdated,
 }) => {
-  const [isEditModalOpen, setEditModalOpen] = useState(false);
+  const [isEditModalOpen, setEditModalOpen] = useState<boolean>(false);
   const [editingAppointmentId, setEditingAppointmentId] = useState<
     number | null
   >(null);
+  const [isAppointmentDeleted, setIsAppointmentDeleted] = useState<boolean>(false);
 
   const openEditModal = (id: number) => {
     setEditingAppointmentId(id);
@@ -49,6 +54,11 @@ const AppointmentList: React.FC<AppointmentListProps> = ({
       setAppointments((currentAppointments) =>
         currentAppointments.filter((appointment) => appointment.id !== id)
       );
+      // show toast and remove after 3 seconds
+      setIsAppointmentDeleted(true);
+      setTimeout(() => {
+        setIsAppointmentDeleted(false);
+      }, 5000);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -60,7 +70,6 @@ const AppointmentList: React.FC<AppointmentListProps> = ({
 
     return dateTimeA.localeCompare(dateTimeB);
   });
-
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -131,6 +140,21 @@ const AppointmentList: React.FC<AppointmentListProps> = ({
           <p>No appointments found.</p>
         )}
       </div>
+      {isAppointmentDeleted && <div className="toast toast-center">
+        <div className="alert alert-success">
+          <span>Appointment successfully deleted.</span>
+        </div>
+      </div>}
+      {isAppointmentCreated && <div className="toast toast-center">
+        <div className="alert alert-success">
+          <span>Appointment successfully created.</span>
+        </div>
+      </div>}
+      {isAppointmentUpdated && <div className="toast toast-center">
+        <div className="alert alert-success">
+          <span>Appointment successfully updated.</span>
+        </div>
+      </div>}
     </div>
   );
 };

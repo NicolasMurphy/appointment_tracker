@@ -4,10 +4,10 @@ import { AppointmentDetails } from "./types";
 const AppointmentForm: React.FC<{
   onAppointmentCreated: (newAppointment: AppointmentDetails) => void;
 }> = ({ onAppointmentCreated }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [date, setDate] = useState<string>("");
+  const [time, setTime] = useState<string>("");
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();

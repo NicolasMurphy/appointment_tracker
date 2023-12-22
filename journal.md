@@ -6,7 +6,7 @@
 
 # 12/22/23
     Goals:
-        - Add toast for "appointment successfully created/edited/deleted"
+        - Add toast for "appointment successfully created/edited/deleted" ✓
         - Improve security in backend:
             - Review validation and sanitization
             - CSRF

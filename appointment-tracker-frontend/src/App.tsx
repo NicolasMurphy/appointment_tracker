@@ -7,6 +7,8 @@ import { AppointmentDetails } from "./types";
 function App() {
   const [appointments, setAppointments] = useState<AppointmentDetails[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isAppointmentCreated, setIsAppointmentCreated] = useState<boolean>(false);
+  const [isAppointmentUpdated, setIsAppointmentUpdated] = useState<boolean>(false);
   const fetchAppointments = async (): Promise<void> => {
     setIsLoading(true);
     try {
@@ -26,14 +28,29 @@ function App() {
   }, []);
 
   const handleAppointmentCreated = (newAppointment: AppointmentDetails) => {
-    setAppointments(currentAppointments => [...currentAppointments, newAppointment]);
+    setAppointments((currentAppointments) => [
+      ...currentAppointments,
+      newAppointment,
+    ]);
+    // show toast and remove after 3 seconds
+    setIsAppointmentCreated(true);
+    setTimeout(() => {
+      setIsAppointmentCreated(false);
+    }, 5000);
   };
   const handleAppointmentUpdated = (updatedAppointment: AppointmentDetails) => {
-    setAppointments(currentAppointments =>
-      currentAppointments.map(appointment =>
-        appointment.id === updatedAppointment.id ? updatedAppointment : appointment
+    setAppointments((currentAppointments) =>
+      currentAppointments.map((appointment) =>
+        appointment.id === updatedAppointment.id
+          ? updatedAppointment
+          : appointment
       )
     );
+    // show toast and remove after 3 seconds
+    setIsAppointmentUpdated(true);
+    setTimeout(() => {
+      setIsAppointmentUpdated(false);
+    }, 5000);
   };
   return (
     <Router>
@@ -49,6 +66,8 @@ function App() {
                   isLoading={isLoading}
                   setAppointments={setAppointments}
                   onAppointmentUpdated={handleAppointmentUpdated}
+                  isAppointmentCreated={isAppointmentCreated}
+                  isAppointmentUpdated={isAppointmentUpdated}
                 />
               }
             />

@@ -7,7 +7,7 @@ type NavProps = {
 };
 
 function Nav({ onAppointmentCreated }: NavProps) {
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState<boolean>(false);
 
   const handleModalClose = () => {
     setModalOpen(false);
