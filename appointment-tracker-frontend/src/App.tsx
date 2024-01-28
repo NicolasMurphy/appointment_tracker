@@ -3,6 +3,7 @@ import AppointmentList from "./AppointmentList";
 import Nav from "./Nav";
 import { useState, useEffect } from "react";
 import { AppointmentDetails } from "./types";
+import { API_BASE_URL } from './apiConfig';
 
 function App() {
   const [appointments, setAppointments] = useState<AppointmentDetails[]>([]);
@@ -12,7 +13,7 @@ function App() {
   const fetchAppointments = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:8000/api/index.php");
+      const response = await fetch(`${API_BASE_URL}/index.php`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }

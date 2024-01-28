@@ -2,6 +2,7 @@ import React from "react";
 import EditAppointmentForm from "./EditAppointmentForm";
 import { AppointmentDetails } from "./types";
 import { useState } from "react";
+import { API_BASE_URL } from './apiConfig';
 
 type AppointmentListProps = {
   appointments: AppointmentDetails[];
@@ -38,7 +39,7 @@ const AppointmentList: React.FC<AppointmentListProps> = ({
 
   const deleteAppointment = async (id: number) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/delete.php`, {
+      const response = await fetch(`${API_BASE_URL}/delete.php`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",

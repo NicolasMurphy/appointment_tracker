@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AppointmentDetails } from "./types";
+import { API_BASE_URL } from './apiConfig';
 
 const AppointmentForm: React.FC<{
   onAppointmentCreated: (newAppointment: AppointmentDetails) => void;
@@ -15,7 +16,7 @@ const AppointmentForm: React.FC<{
     const requestData = { title, description, address, date, time };
     // console.log('Sending data:', requestData); // Log the data for debugging
     try {
-      const response = await fetch("http://localhost:8000/api/create.php", {
+      const response = await fetch(`${API_BASE_URL}/create.php`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { AppointmentDetails } from "./types"; // Import the Appointment type
+import { AppointmentDetails } from "./types";
+import { API_BASE_URL } from './apiConfig';
 
 type EditAppointmentFormProps = {
   appointmentId: number;
@@ -25,7 +26,7 @@ const EditAppointmentForm: React.FC<EditAppointmentFormProps> = ({
     const fetchAppointmentData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/get-appointment.php?id=${appointmentId}`
+          `${API_BASE_URL}/get-appointment.php?id=${appointmentId}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -57,7 +58,7 @@ const EditAppointmentForm: React.FC<EditAppointmentFormProps> = ({
     // console.log('Sending data:', requestData); // Log the data for debugging
 
     try {
-      const response = await fetch("http://localhost:8000/api/edit.php", {
+      const response = await fetch(`${API_BASE_URL}/edit.php`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

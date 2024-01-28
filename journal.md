@@ -1,3 +1,18 @@
+# 1/7/24
+    Goals:
+        - Dockerize the backend, database, and frontend ✓
+        - Create an appointments table on build ✓
+        - Update 'FILTER_SANITIZE_STRING', since it is deprecated. Or perhaps get rid of sanitization
+        - Get rid of modals?
+        - Use the singleton pattern for database connections
+        - Test the app on a different computer
+        - Update README
+        -
+    Notes:
+        - CHOKIDAR_USEPOLLING=true to enable polling for hot reloading to work in Docker
+        - /docker-entrypoint-initdb.d for mounting SQL scripts to create the table on build
+        -
+
 # 12/23/23
     Goals:
         - Narrow down the goals from below
