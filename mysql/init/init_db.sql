@@ -10,5 +10,5 @@ CREATE TABLE appointments (
     time TIME NOT NULL
 );
 
--- Insert initial data if needed
+-- Insert initial data
 INSERT INTO appointments (title, description, address, date, time) VALUES ('Sample Appointment', 'This is a test appointment.', 'Sample Address', CURDATE(), CURTIME());

@@ -7,6 +7,8 @@
         - Use the singleton pattern for database connections
         - Test the app on a different computer
         - Update README
+        - Update PHP, SQL, and node versions
+        - Update SQL TIMESTAMP ([Warning] TIMESTAMP with implicit DEFAULT value is deprecated.)
         -
     Notes:
         - CHOKIDAR_USEPOLLING=true to enable polling for hot reloading to work in Docker

@@ -10,7 +10,7 @@ $password = getenv('DB_PASS');
 $dbname = getenv('DB_NAME');
 
 try {
-    $conn = new PDO("mysql:host=" . getenv('DB_HOST') . ";dbname=" . getenv('DB_NAME'), getenv('DB_USER'), getenv('DB_PASS'));
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     // Set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // Removed the echo statement for successful connection
