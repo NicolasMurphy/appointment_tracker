@@ -1,3 +1,9 @@
+# 2/28/24
+    Goals:
+        - Update README
+    Notes:
+        -
+
 # 1/7/24
     Goals:
         - Dockerize the backend, database, and frontend ✓
