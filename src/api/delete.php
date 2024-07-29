@@ -1,8 +1,5 @@
 <?php
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *'); // Only for development!
-header('Access-Control-Allow-Methods: DELETE, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
 
 require 'db_connect.php';
 
@@ -50,4 +47,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 
 // Close connection
 unset($conn);
-?>

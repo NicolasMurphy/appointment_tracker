@@ -1,10 +1,21 @@
+# 7/28/24
+
+    Goals:
+        - Transition from microservices to monolithic architecture
+        - Update to latest version of PHP
+        -
+    Notes:
+        -
+
 # 2/28/24
+
     Goals:
         - Update README
     Notes:
         -
 
 # 1/7/24
+
     Goals:
         - Dockerize the backend, database, and frontend ✓
         - Create an appointments table on build ✓
@@ -22,6 +33,7 @@
         -
 
 # 12/23/23
+
     Goals:
         - Narrow down the goals from below
         -
@@ -29,6 +41,7 @@
         -
 
 # 12/22/23
+
     Goals:
         - Add toast for "appointment successfully created/edited/deleted" ✓
         - Improve security in backend:
@@ -56,6 +69,7 @@
         -
 
 # 12/21/23
+
     Goals:
         - Make sure Edit is functioning properly (time issue) ✓
         - Make Edit Appointment Form a modal ✓
@@ -69,6 +83,7 @@
         -
 
 # 12/20/23
+
     Goals:
         - Order appointments by date/time
         - When creating an appointment, update state locally instead of refetching all appointments to prevent 'blinking' ✓

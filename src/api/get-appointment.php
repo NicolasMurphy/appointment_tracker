@@ -1,6 +1,5 @@
 <?php
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *'); // Only for development!
 
 require 'db_connect.php';
 
@@ -28,4 +27,3 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 }
 
 unset($conn);
-?>
