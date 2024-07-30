@@ -1,18 +1,19 @@
 <?php
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *'); // Only for development!
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Content-Type');
 
 require 'db_connect.php';
 
 // Function to validate date format
-function validateDate($date, $format = 'Y-m-d')
-{
+function validateDate($date, $format = 'Y-m-d') {
     $d = DateTime::createFromFormat($format, $date);
     return $d && $d->format($format) === $date;
 }
 
 // Function to validate time format
-function validateTime($time, $format = 'H:i:s')
-{
+function validateTime($time, $format = 'H:i:s') {
     $t = DateTime::createFromFormat($format, $time);
     return $t && $t->format($format) === $time;
 }
@@ -61,7 +62,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo json_encode(['error' => 'Error adding appointment.']);
         }
 
-        unset($stmt);
-        unset($conn);
+    unset($stmt);
+    unset($conn);
     }
 }
+?>
