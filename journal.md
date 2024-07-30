@@ -2,8 +2,8 @@
 
     Goals:
         - Look into ways to make the frontend and backend more tightly coupled
-        - Update to latest version of PHP
-        - Find a react calendar to use
+        - Fix appointment form error
+        - Work on Calendar
         -
     Notes:
         -
