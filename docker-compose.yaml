@@ -4,7 +4,7 @@ services:
     build: ./appointment-tracker-frontend
     volumes:
       - ./appointment-tracker-frontend:/app
-      - /app/node_modules  # Volume for node_modules to avoid overriding the container's node_modules with local ones
+      - node_modules:/app/node_modules
     ports:
       - "3000:3000"
     environment:
@@ -35,4 +35,5 @@ services:
       - "3306:3306"
 
 volumes:
-  db_data:
+  node_modules: {}
+  db_data: {}
