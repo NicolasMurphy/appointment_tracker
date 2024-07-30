@@ -1,15 +1,19 @@
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AppointmentList from "./AppointmentList";
 import Nav from "./Nav";
-import { useState, useEffect } from "react";
 import { AppointmentDetails } from "./types";
-import { API_BASE_URL } from './apiConfig';
+import { API_BASE_URL } from "./apiConfig";
+import FullCalendarComponent from "./FullCalendarComponent";
 
 function App() {
   const [appointments, setAppointments] = useState<AppointmentDetails[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isAppointmentCreated, setIsAppointmentCreated] = useState<boolean>(false);
-  const [isAppointmentUpdated, setIsAppointmentUpdated] = useState<boolean>(false);
+  const [isAppointmentCreated, setIsAppointmentCreated] =
+    useState<boolean>(false);
+  const [isAppointmentUpdated, setIsAppointmentUpdated] =
+    useState<boolean>(false);
+
   const fetchAppointments = async (): Promise<void> => {
     setIsLoading(true);
     try {
@@ -24,6 +28,7 @@ function App() {
     }
     setIsLoading(false);
   };
+
   useEffect(() => {
     fetchAppointments();
   }, []);
@@ -33,12 +38,12 @@ function App() {
       ...currentAppointments,
       newAppointment,
     ]);
-    // show toast and remove after 3 seconds
     setIsAppointmentCreated(true);
     setTimeout(() => {
       setIsAppointmentCreated(false);
     }, 5000);
   };
+
   const handleAppointmentUpdated = (updatedAppointment: AppointmentDetails) => {
     setAppointments((currentAppointments) =>
       currentAppointments.map((appointment) =>
@@ -47,12 +52,12 @@ function App() {
           : appointment
       )
     );
-    // show toast and remove after 3 seconds
     setIsAppointmentUpdated(true);
     setTimeout(() => {
       setIsAppointmentUpdated(false);
     }, 5000);
   };
+
   return (
     <Router>
       <div className="mx-auto min-w-screen min-h-screen">
@@ -71,6 +76,10 @@ function App() {
                   isAppointmentUpdated={isAppointmentUpdated}
                 />
               }
+            />
+            <Route
+              path="/calendar"
+              element={<FullCalendarComponent appointments={appointments} />}
             />
           </Routes>
         </div>
