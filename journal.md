@@ -1,6 +1,19 @@
 # 7/29/24
 
     Goals:
+        - Singleton Pattern
+        - Fix default time init db
+        - update MySQL
+        - Look into ways to make the frontend and backend more tightly coupled
+        - Work on Calendar
+        - Add authentication
+        -
+    Notes:
+        -
+
+# 7/29/24
+
+    Goals:
         - Look into ways to make the frontend and backend more tightly coupled
         - Fix appointment form error
         - Work on Calendar
