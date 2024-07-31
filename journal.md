@@ -1,12 +1,15 @@
-# 7/29/24
+# 7/30/24
 
     Goals:
         - Singleton Pattern
         - Fix default time init db
+        - docker compose env
         - update MySQL
+        - refactor -> types
         - Look into ways to make the frontend and backend more tightly coupled
         - Work on Calendar
         - Add authentication
+        - Do a test deploy with Heroku
         -
     Notes:
         -
