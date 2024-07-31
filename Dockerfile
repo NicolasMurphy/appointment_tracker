@@ -11,11 +11,12 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-COPY composer.json composer.lock api/ ./
+COPY composer.json composer.lock /var/www/html/
+RUN composer install --no-scripts --no-autoloader --prefer-dist
+
+COPY api/ /var/www/html/
 
 COPY .env /var/www/html/
-
-RUN composer install --no-scripts --no-autoloader
 
 RUN composer dump-autoload --optimize
 

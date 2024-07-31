@@ -20,6 +20,10 @@ services:
       DB_USER: user
       DB_PASS: password
       DB_NAME: mydatabase
+    volumes:
+      - ./api:/var/www/html
+      - ./vendor:/var/www/html/vendor
+      - ./.env:/var/www/html/.env
 
   mysql:
     image: mysql:5.7
