@@ -7,13 +7,15 @@ header('Access-Control-Allow-Headers: Content-Type');
 require 'db_connect.php';
 
 // Function to validate date format
-function validateDate($date, $format = 'Y-m-d') {
+function validateDate($date, $format = 'Y-m-d')
+{
     $d = DateTime::createFromFormat($format, $date);
     return $d && $d->format($format) === $date;
 }
 
 // Function to validate time format
-function validateTime($time, $format = 'H:i:s') {
+function validateTime($time, $format = 'H:i:s')
+{
     $t = DateTime::createFromFormat($format, $time);
     return $t && $t->format($format) === $time;
 }
@@ -29,11 +31,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Sanitize and validate POST data
     $id = filter_var($input['id'], FILTER_SANITIZE_NUMBER_INT);
-    $title = filter_var($input['title'], FILTER_SANITIZE_STRING);
-    $description = filter_var($input['description'], FILTER_SANITIZE_STRING);
-    $address = filter_var($input['address'], FILTER_SANITIZE_STRING);
-    $date = filter_var($input['date'], FILTER_SANITIZE_STRING);
-    $time = filter_var($input['time'], FILTER_SANITIZE_STRING);
+    $title = filter_var($input['title'], FILTER_SANITIZE_SPECIAL_CHARS);
+    $description = filter_var($input['description'], FILTER_SANITIZE_SPECIAL_CHARS);
+    $address = filter_var($input['address'], FILTER_SANITIZE_SPECIAL_CHARS);
+    $date = filter_var($input['date'], FILTER_SANITIZE_SPECIAL_CHARS);
+    $time = filter_var($input['time'], FILTER_SANITIZE_SPECIAL_CHARS);
 
     if (!validateDate($date) || !validateTime($time)) {
         http_response_code(400);
@@ -71,4 +73,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Close connection
 unset($conn);
-?>
