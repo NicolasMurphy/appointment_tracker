@@ -1,3 +1,26 @@
+# 8/3
+
+    Goals:
+        - Add TypeScript
+        -
+    Notes:
+        - Trying to not use api for backend/frontend communication
+        -
+
+# 7/31/24
+
+    Goals:
+        - Drop React, use vanilla Typescript instead
+        - Singleton Pattern
+        - docker compose env
+        - refactor -> types
+        - Work on Calendar
+        - Add authentication
+        - Do a test deploy with Heroku
+        -
+    Notes:
+        -
+
 # 7/30/24
 
     Goals:
