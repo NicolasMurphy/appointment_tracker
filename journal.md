@@ -1,3 +1,11 @@
+# 8/4
+
+    Goals:
+        - Hot reloading for backend/frontend
+        -
+    Notes:
+        -
+
 # 8/3
 
     Goals:
