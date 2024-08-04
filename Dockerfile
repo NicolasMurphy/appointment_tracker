@@ -1,3 +1,13 @@
+FROM node:latest AS frontend-build
+
+WORKDIR /app
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm install
+COPY frontend/ ./
+RUN npm run build
+
 FROM php:8.3-apache
 
-COPY src/ /var/www/html/
+COPY --from=frontend-build /app/dist /var/www/html/
+
+COPY backend/ /var/www/html/
