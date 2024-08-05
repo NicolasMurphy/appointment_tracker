@@ -1,5 +1,8 @@
 services:
-  web:
+  app:
     build: .
     ports:
       - "80:80"
+    volumes:
+      - ./frontend:/app/frontend
+      - ./backend:/var/www/html/backend

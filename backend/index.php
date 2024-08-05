@@ -9,9 +9,9 @@
 
 <body>
     <h1>Appointment Tracker Backend</h1>
-    <p><?php echo "Hello world from PHP!!"; ?></p>
+    <p><?php echo "Hello world from PHP!"; ?></p>
     <p id="message"></p>
-    <script src="bundle.js"></script>
+    <script src="../frontend/bundle.js"></script>
 </body>
 
 </html>

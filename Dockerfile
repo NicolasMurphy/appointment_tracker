@@ -8,6 +8,6 @@ RUN npm run build
 
 FROM php:8.3-apache
 
-COPY --from=frontend-build /app/dist /var/www/html/
+COPY --from=frontend-build /app/dist /var/www/html/frontend
 
-COPY backend/ /var/www/html/
+COPY backend/ /var/www/html/backend
