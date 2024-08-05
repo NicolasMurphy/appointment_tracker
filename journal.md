@@ -1,9 +1,10 @@
 # 8/4
 
     Goals:
-        - Hot reloading for backend/frontend
+        - Live reloading for frontend
         -
     Notes:
+        - nodemon watch
         -
 
 # 8/3
