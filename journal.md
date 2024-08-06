@@ -1,3 +1,16 @@
+# 8/5
+
+    Goals:
+        - Live reloading for frontend
+        -
+    Notes:
+        - nodemon watch?
+        - apache.conf?
+        - tsc watch?
+        - need index.html
+        - separate ports?
+        -
+
 # 8/4
 
     Goals:
