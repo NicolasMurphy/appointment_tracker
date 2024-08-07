@@ -1,4 +1,12 @@
-# 8/5
+# 8/7
+
+    Goals:
+        - Get typescript hot reloading working with php in single container
+        -
+    Notes:
+        -
+
+# 8/6
 
     Goals:
         - Now that --legacy-watch makes nodemon work, finish incorporating the frontend
