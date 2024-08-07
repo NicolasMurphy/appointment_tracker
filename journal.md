@@ -1,6 +1,15 @@
 # 8/5
 
     Goals:
+        - Now that --legacy-watch makes nodemon work, finish incorporating the frontend
+        -
+    Notes:
+        - Docker on Windows with WSL 2 doesn't propagate file system events, --legacy-watch polling as workaround
+        -
+
+# 8/5
+
+    Goals:
         - Live reloading for frontend
         -
     Notes:
