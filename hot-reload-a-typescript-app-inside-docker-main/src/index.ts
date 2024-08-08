@@ -5,4 +5,4 @@ const sayHello = (name: string) => {
   console.log(cheese)
 };
 
-sayHello('WittCode of justice and tranquilityyyyyy');
+sayHello('WittCode of justice and tranquilityyy');
