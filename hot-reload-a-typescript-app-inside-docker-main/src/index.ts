@@ -1,8 +1,16 @@
-import cheese from "./cheese.js";
+import express from 'express';
 
-const sayHello = (name: string) => {
-  console.log(`Hello asdfasdfthere ${name}!`);
-  console.log(cheese)
-};
+const app = express();
+const PORT = 3000;
 
-sayHello('WittCode of justice and tranquilityyy');
+// Serve static files from the 'public' directory
+app.use(express.static('public'));
+
+// Basic route
+app.get('/', (req, res) => {
+  res.send('Hello World!!!');
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
