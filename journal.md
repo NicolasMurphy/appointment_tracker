@@ -1,9 +1,19 @@
+# 8/8
+
+    Goals:
+        - Get typescript hot reloading working with php in single container
+        -
+    Notes:
+        -
+
 # 8/7
 
     Goals:
         - Get typescript hot reloading working with php in single container
         -
     Notes:
+        - Got it working with express
+        - Ran into issues with nodemon.json, putting it in package.json seems to work
         -
 
 # 8/6
