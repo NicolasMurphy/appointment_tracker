@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cheese List</title>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('/api/cheese')
+        .then(response => response.json())
+        .then(data => {
+          const cheeseList = document.getElementById('cheese-list');
+          data.forEach(cheese => {
+            const li = document.createElement('li');
+            li.textContent = cheese;
+            cheeseList.appendChild(li);
+          });
+        });
+    });
+  </script>
+</head>
+<body>
+  <h1>Cheese List</h1>
+  <ul id="cheese-list"></ul>
+</body>
+</html>

@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "my-app",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/index.js",
@@ -25,16 +25,28 @@
   "contributors": [],
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "npm run clean && npx tsc",
-    "start": "nodemon --legacy-watch --exec node --loader ts-node/esm src/index.ts",
+    "build": "npm run clean && tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon",
     "build:docker": "docker build -t my-img .",
     "start:docker": "docker run -it --name my-c -v %cd%\\src:/server/src my-img"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "ignore": [
+      "dist",
+      "node_modules"
+    ],
+    "ext": "ts",
+    "exec": "npm run build && node dist/index.js",
+    "legacyWatch": true
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/node": "^20.10.0",
     "nodemon": "^3.0.1",
-    "ts-node": "^10.9.1",
     "typescript": "^5.3.2"
   },
   "dependencies": {
