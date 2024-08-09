@@ -11,10 +11,7 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc",
-    "start": "node dist/index.js",
-    "dev": "nodemon",
-    "build:docker": "docker build -t my-img .",
-    "start:docker": "docker run -it --name my-c -v %cd%\\src:/server/src my-img"
+    "dev": "nodemon"
   },
   "nodemonConfig": {
     "watch": [
