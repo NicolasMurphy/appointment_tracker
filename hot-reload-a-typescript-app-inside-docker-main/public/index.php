@@ -1,3 +1,7 @@
+<?php
+echo "PHP is working!";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +11,8 @@
 </head>
 <body>
     <div id="app"></div>
+    <div>hey</div>
 
-    <script src="/dist/index.js"></script>
+    <script type="module" src="./index.js"></script>
 </body>
 </html>

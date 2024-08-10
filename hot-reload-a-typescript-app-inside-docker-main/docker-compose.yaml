@@ -7,7 +7,6 @@ services:
     volumes:
       - ./src:/app/src
       - ./public:/app/public
-      - ./index.php:/app/index.php
       - ./tsconfig.json:/app/tsconfig.json
       - ./package.json:/app/package.json
       - /app/node_modules
@@ -15,4 +14,5 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=development
-    command: npm run dev
+    command: >
+      sh -c "npm run dev & php -S 0.0.0.0:3000 -t /var/www/html"
