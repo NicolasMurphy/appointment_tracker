@@ -17,7 +17,7 @@
       "node_modules"
     ],
     "ext": "ts",
-    "exec": "npm run build",
+    "exec": "npm run build && cp dist/index.js /var/www/html/js/index.js",
     "legacyWatch": true
   },
   "devDependencies": {

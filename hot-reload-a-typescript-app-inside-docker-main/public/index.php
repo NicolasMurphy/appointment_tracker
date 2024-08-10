@@ -13,6 +13,6 @@ echo "PHP is working!";
     <div id="app"></div>
     <div>hey</div>
 
-    <script type="module" src="./index.js"></script>
+    <script type="module" src="../js/index.js"></script>
 </body>
 </html>

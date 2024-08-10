@@ -1,6 +1,6 @@
 const cheeseArray = ["Cheddar", "Mozzarella", "Parmesan", "Gouda", "Manchego"];
 
-console.log("test");
+console.log("testing");
 
 const appDiv = document.getElementById('app');
 

@@ -7,6 +7,7 @@ services:
     volumes:
       - ./src:/app/src
       - ./public:/app/public
+      - ./public:/var/www/html/php
       - ./tsconfig.json:/app/tsconfig.json
       - ./package.json:/app/package.json
       - /app/node_modules
