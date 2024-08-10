@@ -1,3 +1,14 @@
+# 8/10
+
+    Goals:
+        - Move hot reload files to root directory
+        - Start recreating the backend
+        - Start rebuilding the frontend
+        - Bring back MySQL
+        -
+    Notes:
+        -
+
 # 8/8
 
     Goals:
