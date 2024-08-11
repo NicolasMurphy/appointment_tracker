@@ -1,7 +1,3 @@
-<?php
-echo "PHP is working!!";
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,9 +8,8 @@ echo "PHP is working!!";
 </head>
 
 <body>
-    <div id="app"></div>
-    <div>hey</div>
-
+    <h1>Appointment List</h1>
+    <?php include 'php/list-appointments.php'; ?>
     <script type="module" src="./js/index.js"></script>
 </body>
 
