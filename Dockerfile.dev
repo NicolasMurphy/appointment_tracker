@@ -17,7 +17,7 @@ RUN npm install
 COPY src ./src
 COPY public ./public
 
-RUN npm run build && mkdir -p /var/www/html/js /var/www/html/php && cp dist/index.js /var/www/html/js/index.js && cp public/index.php /var/www/html/php/index.php
+RUN npm run build && mkdir -p /var/www/html/js && cp dist/index.js /var/www/html/js/index.js
 
 EXPOSE 3000
 

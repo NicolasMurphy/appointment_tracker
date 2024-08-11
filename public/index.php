@@ -1,5 +1,5 @@
 <?php
-echo "PHP is working!";
+echo "PHP is working!!";
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +15,7 @@ echo "PHP is working!";
     <div id="app"></div>
     <div>hey</div>
 
-    <script type="module" src="../js/index.js"></script>
+    <script type="module" src="./js/index.js"></script>
 </body>
 
 </html>

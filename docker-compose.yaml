@@ -7,10 +7,11 @@ services:
     volumes:
       - ./src:/app/src
       - ./public:/app/public
-      - ./public:/var/www/html/php
+      - ./public/index.php:/var/www/html/index.php
       - ./tsconfig.json:/app/tsconfig.json
       - ./package.json:/app/package.json
       - /app/node_modules
+      # - /var/www/html/js
     ports:
       - "3000:3000"
     environment:
