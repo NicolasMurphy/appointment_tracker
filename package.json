@@ -1,6 +1,5 @@
 {
-  "name": "my-app",
-  "version": "1.0.0",
+  "name": "appointment_tracker",
   "main": "./dist/index.js",
   "type": "module",
   "scripts": {
