@@ -1,3 +1,20 @@
+# 8/12
+
+    Goals:
+        - Add back MySQL initialization
+        -
+    Notes:
+        -
+
+# 8/11
+
+    Goals:
+        - Move hot reload files to root directory
+        -
+    Notes:
+        - Use PHP for HTML, and use TypeScript for dynamic interactions
+        -
+
 # 8/10
 
     Goals:
