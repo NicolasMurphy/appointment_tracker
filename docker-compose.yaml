@@ -3,15 +3,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    container_name: my-app
     volumes:
       - ./src:/app/src
-      - ./public:/app/public
       - ./public/index.php:/var/www/html/index.php
       - ./php:/var/www/html/php
-      - ./tsconfig.json:/app/tsconfig.json
-      - ./package.json:/app/package.json
-      - /app/node_modules
     ports:
       - "3000:3000"
     environment:
