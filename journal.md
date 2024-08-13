@@ -1,3 +1,15 @@
+# 8/13
+
+    Goals:
+        - env for mysql
+        - create a dbconnect.php file
+            - singleton pattern?
+        - crud for php mysql
+        - alter table - perhaps address, date, start time, end time, notes
+        -
+    Notes:
+        -
+
 # 8/12
 
     Goals:
