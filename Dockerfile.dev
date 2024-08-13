@@ -1,6 +1,10 @@
 FROM php:latest
 
-RUN apt-get update && apt-get install -y curl gnupg build-essential
+RUN apt-get update && apt-get install -y \
+    curl gnupg build-essential \
+    git unzip \
+    && docker-php-ext-install pdo pdo_mysql \
+    && apt-get clean
 
 RUN curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o /usr/local/bin/n && \
     chmod +x /usr/local/bin/n && \
