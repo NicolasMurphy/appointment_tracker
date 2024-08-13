@@ -6,8 +6,6 @@ RUN curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o /usr/local/bi
     chmod +x /usr/local/bin/n && \
     n latest
 
-RUN npm install -g npm
-
 WORKDIR /app
 
 COPY package.json package-lock.json tsconfig.json ./
