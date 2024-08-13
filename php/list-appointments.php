@@ -1,28 +1,23 @@
 <?php
-$appointments = [
-    [
-        'id' => 1,
-        'title' => 'B',
-        'description' => 'Description 1',
-        'address' => '123',
-        'date' => date('Y-m-d'),
-        'time' => date('H:i')
-    ],
-    [
-        'id' => 2,
-        'title' => 'A',
-        'description' => 'Description 2',
-        'address' => '456',
-        'date' => date('Y-m-d', strtotime('+1 day')),
-        'time' => date('H:i', strtotime('+1 hour'))
-    ]
-];
+$host = 'mysql';
+$dbname = 'mydatabase';
+$user = 'user';
+$pass = 'password';
 
-echo '<ul id="appointment-list">';
-foreach ($appointments as $appointment) {
-    echo '<li data-title="' . $appointment['title'] . '" data-date="' . $appointment['date'] . '">';
-    echo $appointment['title'] . ' - ' . $appointment['description'] . ' - ' . $appointment['address'] . ' - ' . $appointment['date'] . ' at ' . $appointment['time'];
-    echo '</li>';
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $stmt = $pdo->query("SELECT id, title, description, address, date, time FROM appointments ORDER BY date, time");
+    $appointments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    echo '<ul id="appointment-list">';
+    foreach ($appointments as $appointment) {
+        echo '<li data-title="' . htmlspecialchars($appointment['title']) . '" data-date="' . htmlspecialchars($appointment['date']) . '">';
+        echo htmlspecialchars($appointment['title']) . ' - ' . htmlspecialchars($appointment['description']) . ' - ' . htmlspecialchars($appointment['address']) . ' - ' . htmlspecialchars($appointment['date']) . ' at ' . htmlspecialchars($appointment['time']);
+        echo '</li>';
+    }
+    echo '</ul>';
+} catch (PDOException $e) {
+    echo 'Connection failed: ' . $e->getMessage();
 }
-echo '</ul>';
-?>
