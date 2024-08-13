@@ -18,5 +18,3 @@ COPY public ./public
 RUN npm run build && mkdir -p /var/www/html/js && cp dist/index.js /var/www/html/js/index.js
 
 EXPOSE 3000
-
-CMD ["php", "-S", "0.0.0.0:3000", "-t", "/var/www/html"]
