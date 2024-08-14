@@ -1,3 +1,13 @@
+# 8/14
+
+    Goals:
+        - singleton pattern
+        - finish crud
+        - alter table - perhaps address, date, start time, end time, notes
+        -
+    Notes:
+        -
+
 # 8/13
 
     Goals:
