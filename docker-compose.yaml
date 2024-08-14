@@ -16,7 +16,7 @@ services:
       - DB_PASS=${DB_PASS}
       - DB_NAME=${DB_NAME}
     command: >
-      sh -c "npm run dev & php -S 0.0.0.0:3000 -t /var/www/html"
+      sh -c "npm run dev & apachectl -D FOREGROUND"
 
   mysql:
     image: mysql:8.4

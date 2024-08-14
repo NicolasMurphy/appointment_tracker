@@ -1,4 +1,4 @@
-FROM php:latest
+FROM php:8.3-apache
 
 RUN apt-get update && apt-get install -y \
     curl gnupg build-essential \
@@ -6,8 +6,9 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo pdo_mysql \
     && apt-get clean
 
-ENV COMPOSER_ALLOW_SUPERUSER=1
+RUN sed -i 's/Listen 80/Listen 3000/' /etc/apache2/ports.conf
 
+ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o /usr/local/bin/n && \
     chmod +x /usr/local/bin/n && \
     n latest
@@ -22,6 +23,7 @@ RUN composer install --no-scripts --no-plugins --prefer-dist
 RUN cp -r /app/vendor /var/www/html/vendor
 
 COPY .env /var/www/html
+COPY .htaccess /var/www/html/.htaccess
 
 COPY package.json package-lock.json tsconfig.json ./
 RUN npm install
@@ -32,3 +34,5 @@ COPY public ./public
 RUN npm run build && mkdir -p /var/www/html/js && cp dist/index.js /var/www/html/js/index.js
 
 EXPOSE 3000
+
+CMD ["apachectl", "-D", "FOREGROUND"]
