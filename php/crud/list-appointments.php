@@ -1,13 +1,5 @@
 <?php
-require '/var/www/html/vendor/autoload.php';
-
-$dotenv = Dotenv\Dotenv::createImmutable('/var/www/html');
-$dotenv->load();
-
-$host = getenv('DB_HOST');
-$dbname = getenv('DB_NAME');
-$user = getenv('DB_USER');
-$pass = getenv('DB_PASS');
+require dirname(__DIR__) . '/config.php';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);

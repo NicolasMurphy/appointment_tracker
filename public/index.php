@@ -9,8 +9,8 @@
 
 <body>
     <h1>Appointment List</h1>
-    <?php include 'php/list-appointments.php'; ?>
-    <a href="php/create-appointment.php">Create New Appointment</a>
+    <?php include 'php/crud/list-appointments.php'; ?>
+    <a href="php/crud/create-appointment.php">Create New Appointment</a>
     <script type="module" src="./js/index.js"></script>
 </body>
 

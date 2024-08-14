@@ -1,13 +1,5 @@
 <?php
-require '/var/www/html/vendor/autoload.php';
-
-$dotenv = Dotenv\Dotenv::createImmutable('/var/www/html');
-$dotenv->load();
-
-$host = getenv('DB_HOST');
-$dbname = getenv('DB_NAME');
-$user = getenv('DB_USER');
-$pass = getenv('DB_PASS');
+require dirname(__DIR__) . '/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -43,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->bindParam(':time', $time, PDO::PARAM_STR);
 
             if ($stmt->execute()) {
-                header('Location: ../index.php');
+                header('Location: ../../');
                 exit();
             } else {
                 echo "Failed to create appointment.";
