@@ -1,4 +1,14 @@
-# 8/14
+# 8/16
+
+    Goals:
+        - singleton pattern
+        - alter table - perhaps address, date, start time, end time, notes
+        - update readme
+        -
+    Notes:
+        -
+
+# 8/15
 
     Goals:
         - singleton pattern
@@ -8,7 +18,7 @@
     Notes:
         -
 
-# 8/13
+# 8/14
 
     Goals:
         - block .env from localhost:3000/.env
