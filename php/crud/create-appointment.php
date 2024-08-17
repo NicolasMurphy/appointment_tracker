@@ -1,5 +1,5 @@
 <?php
-require dirname(__DIR__) . '/config.php';
+require dirname(__DIR__) . '/Database.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -22,8 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (validateDate($date) && validateTime($time)) {
         try {
-            $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $db = Database::getInstance();
+            $pdo = $db->getConnection();
 
             $sql = "INSERT INTO appointments (title, description, address, date, time) VALUES (:title, :description, :address, :date, :time)";
             $stmt = $pdo->prepare($sql);

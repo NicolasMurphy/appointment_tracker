@@ -1,9 +1,9 @@
 <?php
-require dirname(__DIR__) . '/config.php';
+require dirname(__DIR__) . '/Database.php';
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $db = Database::getInstance();
+    $pdo = $db->getConnection();
 
     $stmt = $pdo->query("SELECT id, title, description, address, date, time FROM appointments ORDER BY date, time");
     $appointments = $stmt->fetchAll(PDO::FETCH_ASSOC);

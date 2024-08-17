@@ -1,5 +1,5 @@
 <?php
-require dirname(__DIR__) . '/config.php';
+require dirname(__DIR__) . '/Database.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
@@ -10,6 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     try {
+        $db = Database::getInstance();
+        $pdo = $db->getConnection();
+
         $sql = "DELETE FROM appointments WHERE id = :id";
         $stmt = $pdo->prepare($sql);
 

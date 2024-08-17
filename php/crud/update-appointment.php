@@ -1,5 +1,5 @@
 <?php
-require dirname(__DIR__) . '/config.php';
+require dirname(__DIR__) . '/Database.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
@@ -28,6 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (validateDate($date) && validateTime($time)) {
         try {
+            $db = Database::getInstance();
+            $pdo = $db->getConnection();
+
             $sql = "UPDATE appointments SET title = :title, description = :description, address = :address, date = :date, time = :time WHERE id = :id";
             $stmt = $pdo->prepare($sql);
 
@@ -61,6 +64,9 @@ if ($id === false || $id === null) {
 }
 
 try {
+    $db = Database::getInstance();
+    $pdo = $db->getConnection();
+
     $stmt = $pdo->prepare("SELECT id, title, description, address, date, TIME_FORMAT(time, '%H:%i') AS time FROM appointments WHERE id = :id");
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
