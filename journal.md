@@ -1,3 +1,12 @@
+# 8/17
+
+    Goals:
+        - alter table - perhaps address, date, start time, end time, notes
+        - update readme
+        -
+    Notes:
+        -
+
 # 8/16
 
     Goals:
