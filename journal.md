@@ -1,3 +1,15 @@
+# 8/18
+
+    Goals:
+        - Create client and caregiver table to be referenced by id in the appointments table
+        - CRUD for client and caregiver
+        - nav
+        - styling
+        - authentication
+        -
+    Notes:
+        -
+
 # 8/17
 
     Goals:
