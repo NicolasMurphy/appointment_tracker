@@ -14,27 +14,43 @@ CREATE TABLE IF NOT EXISTS appointments (
 );
 
 INSERT INTO
-        appointments (client, caregiver, address, date, startTime, endTime, notes)
+        appointments (
+                client,
+                caregiver,
+                address,
+                date,
+                startTime,
+                endTime,
+                notes
+        )
 VALUES
         (
                 'John Doe',
                 'Jane Smith',
                 '123 Address Lane',
                 CURDATE(),
-                TIME_FORMAT(CURTIME(), '%H:%i'),
-                TIME_FORMAT(CURTIME() + INTERVAL 1 HOUR, '%H:%i'),
+                TIME('12:00'),
+                TIME('13:00'),
                 'notes...'
         );
 
 INSERT INTO
-        appointments (client, caregiver, address, date, startTime, endTime, notes)
+        appointments (
+                client,
+                caregiver,
+                address,
+                date,
+                startTime,
+                endTime,
+                notes
+        )
 VALUES
         (
                 'Alice Johnson',
                 'Bob Brown',
                 '456 Street Street',
                 CURDATE() + INTERVAL 1 DAY,
-                TIME_FORMAT(CURTIME(), '%H:%i'),
-                TIME_FORMAT(CURTIME() + INTERVAL 1 HOUR, '%H:%i'),
+                TIME('12:00'),
+                TIME('13:00'),
                 'notes...'
         );
