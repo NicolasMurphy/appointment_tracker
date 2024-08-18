@@ -1,7 +1,23 @@
+# 8/19
+
+    Goals:
+        - use autoload
+        - Create client and caregiver tables to be referenced by id in the appointments table
+            - client (name, email, phone number, address)
+            - caregiver (name, email, phone number, address, pay rate)
+            - CRUD for client and caregiver
+        - nav
+        - CRUD for services (service name, description, rate)
+        - Billing report, Payroll report
+        - styling - tailwind, table (calendar later)
+        - authentication
+        -
+    Notes:
+        -
+
 # 8/18
 
     Goals:
-        - use strict types
         - use autoload
         - Create client and caregiver tables to be referenced by id in the appointments table
             - client (name, email, phone number, address)
