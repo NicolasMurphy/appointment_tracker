@@ -1,3 +1,15 @@
+<?php
+require __DIR__ . '/../../Appointment.php';
+
+$dbConnection = Database::getInstance()->getConnection();
+
+$clientStmt = $dbConnection->query("SELECT id, name FROM clients ORDER BY name ASC");
+$clients = $clientStmt->fetchAll(PDO::FETCH_ASSOC);
+
+$caregiverStmt = $dbConnection->query("SELECT id, name FROM caregivers ORDER BY name ASC");
+$caregivers = $caregiverStmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,11 +22,25 @@
 <body>
     <h1>Create New Appointment</h1>
     <form method="POST" action="../create-appointment.php">
-        <label for="client">Client:</label><br>
-        <input type="text" id="client" name="client" required><br><br>
+        <label for="client_id">Client:</label><br>
+        <select id="client_id" name="client_id" required>
+            <option value="">Select a client</option>
+            <?php foreach ($clients as $client): ?>
+                <option value="<?php echo htmlspecialchars($client['id']); ?>">
+                    <?php echo htmlspecialchars($client['name']); ?>
+                </option>
+            <?php endforeach; ?>
+        </select><br><br>
 
-        <label for="caregiver">Caregiver:</label><br>
-        <input type="text" id="caregiver" name="caregiver" required><br><br>
+        <label for="caregiver_id">Caregiver:</label><br>
+        <select id="caregiver_id" name="caregiver_id" required>
+            <option value="">Select a caregiver</option>
+            <?php foreach ($caregivers as $caregiver): ?>
+                <option value="<?php echo htmlspecialchars($caregiver['id']); ?>">
+                    <?php echo htmlspecialchars($caregiver['name']); ?>
+                </option>
+            <?php endforeach; ?>
+        </select><br><br>
 
         <label for="address">Address:</label><br>
         <input type="text" id="address" name="address" required><br><br>

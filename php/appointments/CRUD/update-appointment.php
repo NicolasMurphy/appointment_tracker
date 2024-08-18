@@ -13,6 +13,12 @@ if ($id !== false && $id !== null) {
         echo "Appointment not found.";
         exit();
     }
+
+    $clientStmt = $dbConnection->query("SELECT id, name FROM clients ORDER BY name ASC");
+    $clients = $clientStmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $caregiverStmt = $dbConnection->query("SELECT id, name FROM caregivers ORDER BY name ASC");
+    $caregivers = $caregiverStmt->fetchAll(PDO::FETCH_ASSOC);
 } else {
     echo "Invalid appointment ID.";
     exit();
@@ -20,17 +26,17 @@ if ($id !== false && $id !== null) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-    $client = $_POST['client'] ?? '';
-    $caregiver = $_POST['caregiver'] ?? '';
+    $clientId = filter_input(INPUT_POST, 'client_id', FILTER_VALIDATE_INT);
+    $caregiverId = filter_input(INPUT_POST, 'caregiver_id', FILTER_VALIDATE_INT);
     $address = $_POST['address'] ?? '';
     $date = $_POST['date'] ?? '';
     $startTime = $_POST['startTime'] ?? '';
     $endTime = $_POST['endTime'] ?? '';
     $notes = $_POST['notes'] ?? '';
 
-    if ($id !== false && $id !== null) {
+    if ($id !== false && $clientId !== false && $caregiverId !== false) {
         $appointment->setId($id);
-        $appointment->setDetails($client, $caregiver, $address, $date, $startTime, $endTime, $notes);
+        $appointment->setDetails($clientId, $caregiverId, $address, $date, $startTime, $endTime, $notes);
 
         if ($appointment->updateAppointment()) {
             header('Location: ../../../../');
@@ -39,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "Failed to update appointment.";
         }
     } else {
-        echo "Invalid appointment ID.";
+        echo "Invalid appointment ID, client ID, or caregiver ID.";
     }
 }
 

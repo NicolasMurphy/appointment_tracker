@@ -6,8 +6,8 @@ require_once __DIR__ . '/../Database.php';
 class Appointment
 {
     private ?int $id = null;
-    private string $client;
-    private string $caregiver;
+    private int $clientId;
+    private int $caregiverId;
     private string $address;
     private string $date;
     private string $startTime;
@@ -26,16 +26,16 @@ class Appointment
     }
 
     public function setDetails(
-        string $client,
-        string $caregiver,
+        int $clientId,
+        int $caregiverId,
         string $address,
         string $date,
         string $startTime,
         string $endTime,
         ?string $notes = null
     ): void {
-        $this->client = $client;
-        $this->caregiver = $caregiver;
+        $this->clientId = $clientId;
+        $this->caregiverId = $caregiverId;
         $this->address = $address;
         $this->date = $date;
         $this->startTime = $startTime;
@@ -59,12 +59,12 @@ class Appointment
     {
         if ($this->validateDate($this->date) && $this->validateTime($this->startTime) && $this->validateTime($this->endTime)) {
             try {
-                $sql = "INSERT INTO appointments (client, caregiver, address, date, startTime, endTime, notes)
-                        VALUES (:client, :caregiver, :address, :date, :startTime, :endTime, :notes)";
+                $sql = "INSERT INTO appointments (client_id, caregiver_id, address, date, startTime, endTime, notes)
+                        VALUES (:client_id, :caregiver_id, :address, :date, :startTime, :endTime, :notes)";
                 $stmt = $this->db->prepare($sql);
 
-                $stmt->bindParam(':client', $this->client, PDO::PARAM_STR);
-                $stmt->bindParam(':caregiver', $this->caregiver, PDO::PARAM_STR);
+                $stmt->bindParam(':client_id', $this->clientId, PDO::PARAM_INT);
+                $stmt->bindParam(':caregiver_id', $this->caregiverId, PDO::PARAM_INT);
                 $stmt->bindParam(':address', $this->address, PDO::PARAM_STR);
                 $stmt->bindParam(':date', $this->date, PDO::PARAM_STR);
                 $stmt->bindParam(':startTime', $this->startTime, PDO::PARAM_STR);
@@ -86,13 +86,13 @@ class Appointment
         if ($this->validateDate($this->date) && $this->validateTime($this->startTime) && $this->validateTime($this->endTime)) {
             try {
                 $sql = "UPDATE appointments
-                        SET client = :client, caregiver = :caregiver, address = :address, date = :date,
+                        SET client_id = :client_id, caregiver_id = :caregiver_id, address = :address, date = :date,
                             startTime = :startTime, endTime = :endTime, notes = :notes
                         WHERE id = :id";
                 $stmt = $this->db->prepare($sql);
 
-                $stmt->bindParam(':client', $this->client, PDO::PARAM_STR);
-                $stmt->bindParam(':caregiver', $this->caregiver, PDO::PARAM_STR);
+                $stmt->bindParam(':client_id', $this->clientId, PDO::PARAM_INT);
+                $stmt->bindParam(':caregiver_id', $this->caregiverId, PDO::PARAM_INT);
                 $stmt->bindParam(':address', $this->address, PDO::PARAM_STR);
                 $stmt->bindParam(':date', $this->date, PDO::PARAM_STR);
                 $stmt->bindParam(':startTime', $this->startTime, PDO::PARAM_STR);
@@ -130,12 +130,25 @@ class Appointment
     public function fetchAll(): array
     {
         try {
-            $stmt = $this->db->query("SELECT id, client, caregiver, address, date,
-                                DATE_FORMAT(startTime, '%l:%i %p') AS startTime,
-                                DATE_FORMAT(endTime, '%l:%i %p') AS endTime,
-                                notes
-                         FROM appointments
-                         ORDER BY date, startTime");
+            $stmt = $this->db->query(
+                "SELECT
+                appointments.id,
+                clients.name AS client_name,
+                caregivers.name AS caregiver_name,
+                appointments.address,
+                appointments.date,
+                DATE_FORMAT(appointments.startTime, '%l:%i %p') AS startTime,
+                DATE_FORMAT(appointments.endTime, '%l:%i %p') AS endTime,
+                appointments.notes
+            FROM
+                appointments
+            JOIN
+                clients ON appointments.client_id = clients.id
+            JOIN
+                caregivers ON appointments.caregiver_id = caregivers.id
+            ORDER BY
+                appointments.date, appointments.startTime"
+            );
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
@@ -147,10 +160,21 @@ class Appointment
     public function fetchById(int $id): array|false
     {
         try {
-            $stmt = $this->db->prepare("SELECT id, client, caregiver, address, date,
-                                   TIME_FORMAT(startTime, '%H:%i') AS startTime,
-                                   TIME_FORMAT(endTime, '%H:%i') AS endTime, notes
-                                   FROM appointments WHERE id = :id");
+            $stmt = $this->db->prepare(
+                "SELECT
+                    appointments.id,
+                    appointments.client_id,
+                    appointments.caregiver_id,
+                    appointments.address,
+                    appointments.date,
+                    TIME_FORMAT(appointments.startTime, '%H:%i') AS startTime,
+                    TIME_FORMAT(appointments.endTime, '%H:%i') AS endTime,
+                    appointments.notes
+                FROM
+                    appointments
+                WHERE
+                    appointments.id = :id"
+            );
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
 
