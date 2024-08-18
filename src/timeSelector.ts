@@ -34,8 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (startTimeSelect && endTimeSelect) {
     const currentStartTime =
-      startTimeSelect.getAttribute("data-start-time") || "";
-    const currentEndTime = endTimeSelect.getAttribute("data-end-time") || "";
+      startTimeSelect.getAttribute("data-start-time") || "12:00";
+    const currentEndTime = endTimeSelect.getAttribute("data-end-time") || "13:00";
 
     populateTimeSelect(startTimeSelect, currentStartTime);
     populateTimeSelect(endTimeSelect, currentEndTime);

@@ -1,14 +1,12 @@
 # 8/18
 
     Goals:
-        - Fix htmlspecialchars for ' and other symbols
+        - Refactor to use classes
         - Create client and caregiver tables to be referenced by id in the appointments table
             - client (name, email, phone number, address)
             - caregiver (name, email, phone number, address, pay rate)
             - CRUD for client and caregiver
         - nav
-        - Set default time and date when creating appointment (current day, 12-1p)
-            - will need to update to a more sophisticated time picker when the time comes
         - CRUD for services (service name, description, rate)
         - Billing report, Payroll report
         - styling - tailwind, table (calendar later)
