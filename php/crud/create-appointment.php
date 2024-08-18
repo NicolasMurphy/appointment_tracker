@@ -2,13 +2,13 @@
 require dirname(__DIR__) . '/Database.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $client = filter_input(INPUT_POST, 'client', FILTER_SANITIZE_SPECIAL_CHARS);
-    $caregiver = filter_input(INPUT_POST, 'caregiver', FILTER_SANITIZE_SPECIAL_CHARS);
-    $address = filter_input(INPUT_POST, 'address', FILTER_SANITIZE_SPECIAL_CHARS);
-    $date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_SPECIAL_CHARS);
-    $startTime = filter_input(INPUT_POST, 'startTime', FILTER_SANITIZE_SPECIAL_CHARS);
-    $endTime = filter_input(INPUT_POST, 'endTime', FILTER_SANITIZE_SPECIAL_CHARS);
-    $notes = filter_input(INPUT_POST, 'notes', FILTER_SANITIZE_SPECIAL_CHARS);
+    $client = $_POST['client'] ?? '';
+    $caregiver = $_POST['caregiver'] ?? '';
+    $address = $_POST['address'] ?? '';
+    $date = $_POST['date'] ?? '';
+    $startTime = $_POST['startTime'] ?? '';
+    $endTime = $_POST['endTime'] ?? '';
+    $notes = $_POST['notes'] ?? '';
 
     function validateDate($date, $format = 'Y-m-d')
     {
