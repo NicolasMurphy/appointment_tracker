@@ -16,11 +16,10 @@
       "node_modules"
     ],
     "ext": "ts",
-    "exec": "npm run build && cp dist/index.js /var/www/html/js/index.js",
+    "exec": "npm run build && cp -r dist/* /var/www/html/js/",
     "legacyWatch": true
   },
   "devDependencies": {
-    "@types/express": "^4.17.21",
     "@types/node": "^20.14.14",
     "nodemon": "^3.1.4",
     "typescript": "^5.5.4"
