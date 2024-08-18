@@ -79,16 +79,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input type="date" id="date" name="date" required><br><br>
 
         <label for="startTime">Start Time:</label><br>
-        <input type="time" id="startTime" name="startTime" required><br><br>
+        <select id="startTime" name="startTime" required></select><br><br>
 
         <label for="endTime">End Time:</label><br>
-        <input type="time" id="endTime" name="endTime" required><br><br>
+        <select id="endTime" name="endTime" required></select><br><br>
 
         <label for="notes">Notes:</label><br>
         <textarea id="notes" name="notes"></textarea><br><br>
 
         <button type="submit">Create Appointment</button>
     </form>
+    <script src="../../js/timeSelector.js"></script>
 </body>
 
 </html>

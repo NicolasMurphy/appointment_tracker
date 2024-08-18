@@ -114,16 +114,17 @@ try {
         <input type="date" id="date" name="date" value="<?php echo htmlspecialchars($appointment['date']); ?>" required><br><br>
 
         <label for="startTime">Start Time:</label><br>
-        <input type="time" id="startTime" name="startTime" value="<?php echo htmlspecialchars($appointment['startTime']); ?>" required><br><br>
+        <select id="startTime" name="startTime" data-start-time="<?php echo htmlspecialchars($appointment['startTime']); ?>" required></select><br><br>
 
         <label for="endTime">End Time:</label><br>
-        <input type="time" id="endTime" name="endTime" value="<?php echo htmlspecialchars($appointment['endTime']); ?>" required><br><br>
+        <select id="endTime" name="endTime" data-end-time="<?php echo htmlspecialchars($appointment['endTime']); ?>" required></select><br><br>
 
         <label for="notes">Notes:</label><br>
         <textarea id="notes" name="notes"><?php echo htmlspecialchars($appointment['notes']); ?></textarea><br><br>
 
         <button type="submit">Update Appointment</button>
     </form>
+    <script src="../../js/timeSelector.js"></script>
 </body>
 
 </html>
