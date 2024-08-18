@@ -8,10 +8,8 @@
 </head>
 
 <body>
-    <h1>Appointment List</h1>
-    <?php include 'php/crud/list-appointments.php'; ?>
-    <a href="php/crud/create-appointment.php">Create New Appointment</a>
-    <script type="module" src="./js/index.js"></script>
+    <?php include './php/appointments/CRUD/views/list-appointments.php'; ?>
+    <a href="./php/appointments/CRUD/views/create-form.php">Create New Appointment</a>
 </body>
 
 </html>
