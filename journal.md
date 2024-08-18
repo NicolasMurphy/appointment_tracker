@@ -1,7 +1,8 @@
 # 8/18
 
     Goals:
-        - Create client and caregiver table to be referenced by id in the appointments table
+        - Fix htmlspecialchars for ' and other symbols
+        - Create client and caregiver tables to be referenced by id in the appointments table
         - CRUD for client and caregiver
         - nav
         - styling
