@@ -20,8 +20,8 @@ $appointments = $appointment->fetchAll();
     <?php if (!empty($appointments)): ?>
         <ul id="appointment-list">
             <?php foreach ($appointments as $appointmentItem): ?>
-                <li data-client="<?php echo htmlspecialchars($appointmentItem['client_name']); ?>" data-caregiver="<?php echo htmlspecialchars($appointmentItem['caregiver_name']); ?>" data-date="<?php echo htmlspecialchars($appointmentItem['date']); ?>">
-                    Client: <?php echo htmlspecialchars($appointmentItem['client_name']); ?> - Caregiver: <?php echo htmlspecialchars($appointmentItem['caregiver_name']); ?> - <?php echo htmlspecialchars($appointmentItem['address']); ?> - <?php echo htmlspecialchars($appointmentItem['date']); ?> from <?php echo htmlspecialchars($appointmentItem['startTime']); ?> to <?php echo htmlspecialchars($appointmentItem['endTime']); ?> - <?php echo htmlspecialchars($appointmentItem['notes']); ?>
+                <li data-client="<?php echo htmlspecialchars($appointmentItem['clientName']); ?>" data-caregiver="<?php echo htmlspecialchars($appointmentItem['caregiverName']); ?>" data-date="<?php echo htmlspecialchars($appointmentItem['date']); ?>">
+                    Client: <?php echo htmlspecialchars($appointmentItem['clientName']); ?> - Caregiver: <?php echo htmlspecialchars($appointmentItem['caregiverName']); ?> - <?php echo htmlspecialchars($appointmentItem['address']); ?> - <?php echo htmlspecialchars($appointmentItem['date']); ?> from <?php echo htmlspecialchars($appointmentItem['startTime']); ?> to <?php echo htmlspecialchars($appointmentItem['endTime']); ?> - <?php echo htmlspecialchars($appointmentItem['notes']); ?>
 
                     <a href="./php/appointments/crud/update-appointment.php?id=<?php echo htmlspecialchars($appointmentItem['id']); ?>">Edit</a>
 

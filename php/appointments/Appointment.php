@@ -59,12 +59,12 @@ class Appointment
     {
         if ($this->validateDate($this->date) && $this->validateTime($this->startTime) && $this->validateTime($this->endTime)) {
             try {
-                $sql = "INSERT INTO appointments (client_id, caregiver_id, address, date, startTime, endTime, notes)
-                        VALUES (:client_id, :caregiver_id, :address, :date, :startTime, :endTime, :notes)";
+                $sql = "INSERT INTO appointments (clientId, caregiverId, address, date, startTime, endTime, notes)
+                        VALUES (:clientId, :caregiverId, :address, :date, :startTime, :endTime, :notes)";
                 $stmt = $this->db->prepare($sql);
 
-                $stmt->bindParam(':client_id', $this->clientId, PDO::PARAM_INT);
-                $stmt->bindParam(':caregiver_id', $this->caregiverId, PDO::PARAM_INT);
+                $stmt->bindParam(':clientId', $this->clientId, PDO::PARAM_INT);
+                $stmt->bindParam(':caregiverId', $this->caregiverId, PDO::PARAM_INT);
                 $stmt->bindParam(':address', $this->address, PDO::PARAM_STR);
                 $stmt->bindParam(':date', $this->date, PDO::PARAM_STR);
                 $stmt->bindParam(':startTime', $this->startTime, PDO::PARAM_STR);
@@ -86,13 +86,13 @@ class Appointment
         if ($this->validateDate($this->date) && $this->validateTime($this->startTime) && $this->validateTime($this->endTime)) {
             try {
                 $sql = "UPDATE appointments
-                        SET client_id = :client_id, caregiver_id = :caregiver_id, address = :address, date = :date,
+                        SET clientId = :clientId, caregiverId = :caregiverId, address = :address, date = :date,
                             startTime = :startTime, endTime = :endTime, notes = :notes
                         WHERE id = :id";
                 $stmt = $this->db->prepare($sql);
 
-                $stmt->bindParam(':client_id', $this->clientId, PDO::PARAM_INT);
-                $stmt->bindParam(':caregiver_id', $this->caregiverId, PDO::PARAM_INT);
+                $stmt->bindParam(':clientId', $this->clientId, PDO::PARAM_INT);
+                $stmt->bindParam(':caregiverId', $this->caregiverId, PDO::PARAM_INT);
                 $stmt->bindParam(':address', $this->address, PDO::PARAM_STR);
                 $stmt->bindParam(':date', $this->date, PDO::PARAM_STR);
                 $stmt->bindParam(':startTime', $this->startTime, PDO::PARAM_STR);
@@ -133,8 +133,8 @@ class Appointment
             $stmt = $this->db->query(
                 "SELECT
                 appointments.id,
-                clients.name AS client_name,
-                caregivers.name AS caregiver_name,
+                clients.name AS clientName,
+                caregivers.name AS caregiverName,
                 appointments.address,
                 appointments.date,
                 DATE_FORMAT(appointments.startTime, '%l:%i %p') AS startTime,
@@ -143,9 +143,9 @@ class Appointment
             FROM
                 appointments
             JOIN
-                clients ON appointments.client_id = clients.id
+                clients ON appointments.clientId = clients.id
             JOIN
-                caregivers ON appointments.caregiver_id = caregivers.id
+                caregivers ON appointments.caregiverId = caregivers.id
             ORDER BY
                 appointments.date, appointments.startTime"
             );
@@ -163,8 +163,8 @@ class Appointment
             $stmt = $this->db->prepare(
                 "SELECT
                     appointments.id,
-                    appointments.client_id,
-                    appointments.caregiver_id,
+                    appointments.clientId,
+                    appointments.caregiverId,
                     appointments.address,
                     appointments.date,
                     TIME_FORMAT(appointments.startTime, '%H:%i') AS startTime,
