@@ -6,8 +6,8 @@ try {
     $pdo = $db->getConnection();
 
     $stmt = $pdo->query("SELECT id, client, caregiver, address, date,
-                                DATE_FORMAT(startTime, '%h:%i %p') AS startTime,
-                                DATE_FORMAT(endTime, '%h:%i %p') AS endTime,
+                                DATE_FORMAT(startTime, '%l:%i %p') AS startTime,
+                                DATE_FORMAT(endTime, '%l:%i %p') AS endTime,
                                 notes
                          FROM appointments
                          ORDER BY date, startTime");
