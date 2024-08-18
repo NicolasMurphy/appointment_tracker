@@ -1,26 +1,54 @@
-const sortTitleButton = document.createElement("button");
-sortTitleButton.textContent = "Sort by Title";
+const sortClientButton = document.createElement("button");
+sortClientButton.textContent = "Sort by Client";
 document.body.insertBefore(
-  sortTitleButton,
+  sortClientButton,
+  document.getElementById("appointment-list")
+);
+
+const sortCaregiverButton = document.createElement("button");
+sortCaregiverButton.textContent = "Sort by Caregiver";
+document.body.insertBefore(
+  sortCaregiverButton,
   document.getElementById("appointment-list")
 );
 
 const sortDateButton = document.createElement("button");
-sortDateButton.textContent = "Sort by Date";
+sortDateButton.textContent = "Sort by Start Date";
 document.body.insertBefore(
   sortDateButton,
   document.getElementById("appointment-list")
 );
 
-sortTitleButton.addEventListener("click", () => {
+sortClientButton.addEventListener("click", () => {
   const appointmentList = document.getElementById("appointment-list");
   if (appointmentList) {
     const itemsArray = Array.from(appointmentList.querySelectorAll("li"));
 
     itemsArray.sort((a, b) => {
-      const titleA = a.getAttribute("data-title")?.toLowerCase() || "";
-      const titleB = b.getAttribute("data-title")?.toLowerCase() || "";
-      return titleA.localeCompare(titleB);
+      const clientA = a.getAttribute("data-client")?.toLowerCase() || "";
+      const clientB = b.getAttribute("data-client")?.toLowerCase() || "";
+      return clientA.localeCompare(clientB);
+    });
+
+    appointmentList.innerHTML = "";
+
+    itemsArray.forEach((item) => {
+      appointmentList.appendChild(item);
+    });
+  } else {
+    console.error("Element with id 'appointment-list' not found");
+  }
+});
+
+sortCaregiverButton.addEventListener("click", () => {
+  const appointmentList = document.getElementById("appointment-list");
+  if (appointmentList) {
+    const itemsArray = Array.from(appointmentList.querySelectorAll("li"));
+
+    itemsArray.sort((a, b) => {
+      const caregiverA = a.getAttribute("data-caregiver")?.toLowerCase() || "";
+      const caregiverB = b.getAttribute("data-caregiver")?.toLowerCase() || "";
+      return caregiverA.localeCompare(caregiverB);
     });
 
     appointmentList.innerHTML = "";
