@@ -5,8 +5,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $dbConnection = Database::getInstance()->getConnection();
     $appointment = new Appointment($dbConnection);
 
-    $clientId = (int)($_POST['clientId'] ?? 0);
-    $caregiverId = (int)($_POST['caregiverId'] ?? 0);
+    $clientId = (int)($_POST['client_id'] ?? 0);
+    $caregiverId = (int)($_POST['caregiver_id'] ?? 0);
     $address = $_POST['address'] ?? '';
     $date = $_POST['date'] ?? '';
     $startTime = $_POST['startTime'] ?? '';

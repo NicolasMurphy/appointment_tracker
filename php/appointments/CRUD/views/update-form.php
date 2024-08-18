@@ -12,21 +12,21 @@
     <form method="POST" action="">
         <input type="hidden" name="id" value="<?php echo htmlspecialchars($appointmentDetails['id']); ?>">
 
-        <label for="clientId">Client:</label><br>
-        <select id="clientId" name="clientId" required>
+        <label for="client_id">Client:</label><br>
+        <select id="client_id" name="client_id" required>
             <option value="">Select a client</option>
             <?php foreach ($clients as $client): ?>
-                <option value="<?php echo htmlspecialchars($client['id']); ?>" <?php echo $client['id'] == $appointmentDetails['clientId'] ? 'selected' : ''; ?>>
+                <option value="<?php echo htmlspecialchars($client['id']); ?>" <?php echo $client['id'] == $appointmentDetails['client_id'] ? 'selected' : ''; ?>>
                     <?php echo htmlspecialchars($client['name']); ?>
                 </option>
             <?php endforeach; ?>
         </select><br><br>
 
-        <label for="caregiverId">Caregiver:</label><br>
-        <select id="caregiverId" name="caregiverId" required>
+        <label for="caregiver_id">Caregiver:</label><br>
+        <select id="caregiver_id" name="caregiver_id" required>
             <option value="">Select a caregiver</option>
             <?php foreach ($caregivers as $caregiver): ?>
-                <option value="<?php echo htmlspecialchars($caregiver['id']); ?>" <?php echo $caregiver['id'] == $appointmentDetails['caregiverId'] ? 'selected' : ''; ?>>
+                <option value="<?php echo htmlspecialchars($caregiver['id']); ?>" <?php echo $caregiver['id'] == $appointmentDetails['caregiver_id'] ? 'selected' : ''; ?>>
                     <?php echo htmlspecialchars($caregiver['name']); ?>
                 </option>
             <?php endforeach; ?>

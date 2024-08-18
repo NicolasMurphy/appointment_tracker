@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS clients (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL,
-        phoneNumber VARCHAR(20) NOT NULL,
+        phone_number VARCHAR(20) NOT NULL,
         address VARCHAR(255) NOT NULL
 );
 
@@ -14,26 +14,26 @@ CREATE TABLE IF NOT EXISTS caregivers (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL,
-        phoneNumber VARCHAR(20) NOT NULL,
+        phone_number VARCHAR(20) NOT NULL,
         address VARCHAR(255) NOT NULL,
-        payRate DECIMAL(10, 2) NOT NULL
+        pay_rate DECIMAL(10, 2) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS appointments (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        clientId INT NOT NULL,
-        caregiverId INT NOT NULL,
+        client_id INT NOT NULL,
+        caregiver_id INT NOT NULL,
         address VARCHAR(255) NOT NULL,
         date DATE NOT NULL,
         startTime TIME NOT NULL,
         endTime TIME NOT NULL,
         notes VARCHAR(1000),
-        FOREIGN KEY (clientId) REFERENCES clients(id),
-        FOREIGN KEY (caregiverId) REFERENCES caregivers(id)
+        FOREIGN KEY (client_id) REFERENCES clients(id),
+        FOREIGN KEY (caregiver_id) REFERENCES caregivers(id)
 );
 
 INSERT INTO
-        clients (name, email, phoneNumber, address)
+        clients (name, email, phone_number, address)
 VALUES
         (
                 'John Doe',
@@ -49,7 +49,7 @@ VALUES
         );
 
 INSERT INTO
-        caregivers (name, email, phoneNumber, address, payRate)
+        caregivers (name, email, phone_number, address, pay_rate)
 VALUES
         (
                 'Jane Smith',
@@ -68,8 +68,8 @@ VALUES
 
 INSERT INTO
         appointments (
-                clientId,
-                caregiverId,
+                client_id,
+                caregiver_id,
                 address,
                 date,
                 startTime,
@@ -89,8 +89,8 @@ VALUES
 
 INSERT INTO
         appointments (
-                clientId,
-                caregiverId,
+                client_id,
+                caregiver_id,
                 address,
                 date,
                 startTime,
