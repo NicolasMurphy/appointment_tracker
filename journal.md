@@ -1,7 +1,8 @@
 # 8/18
 
     Goals:
-        - Refactor to use classes
+        - use strict types
+        - use autoload
         - Create client and caregiver tables to be referenced by id in the appointments table
             - client (name, email, phone number, address)
             - caregiver (name, email, phone number, address, pay rate)
