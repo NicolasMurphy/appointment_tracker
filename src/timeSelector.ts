@@ -28,9 +28,11 @@ function populateTimeSelect(
 
 document.addEventListener("DOMContentLoaded", () => {
   const startTimeSelect = document.getElementById(
-    "startTime"
+    "start_time"
   ) as HTMLSelectElement;
-  const endTimeSelect = document.getElementById("endTime") as HTMLSelectElement;
+  const endTimeSelect = document.getElementById(
+    "end_time"
+  ) as HTMLSelectElement;
 
   if (startTimeSelect && endTimeSelect) {
     const currentStartTime =

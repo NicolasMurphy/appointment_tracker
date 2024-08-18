@@ -48,11 +48,11 @@ $caregivers = $caregiverStmt->fetchAll(PDO::FETCH_ASSOC);
         <label for="date">Date:</label><br>
         <input type="date" id="date" name="date" value="<?php echo date('Y-m-d'); ?>" required><br><br>
 
-        <label for="startTime">Start Time:</label><br>
-        <select id="startTime" name="startTime" data-start-time="12:00" required></select><br><br>
+        <label for="start_time">Start Time:</label><br>
+        <select id="start_time" name="start_time" data-start-time="12:00" required></select><br><br>
 
-        <label for="endTime">End Time:</label><br>
-        <select id="endTime" name="endTime" data-end-time="13:00" required></select><br><br>
+        <label for="end_time">End Time:</label><br>
+        <select id="end_time" name="end_time" data-end-time="13:00" required></select><br><br>
 
         <label for="notes">Notes:</label><br>
         <textarea id="notes" name="notes"></textarea><br><br>
