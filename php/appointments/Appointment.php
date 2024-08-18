@@ -59,16 +59,16 @@ class Appointment
     {
         if ($this->validateDate($this->date) && $this->validateTime($this->startTime) && $this->validateTime($this->endTime)) {
             try {
-                $sql = "INSERT INTO appointments (client_id, caregiver_id, address, date, startTime, endTime, notes)
-                        VALUES (:client_id, :caregiver_id, :address, :date, :startTime, :endTime, :notes)";
+                $sql = "INSERT INTO appointments (client_id, caregiver_id, address, date, start_time, end_time, notes)
+                        VALUES (:client_id, :caregiver_id, :address, :date, :start_time, :end_time, :notes)";
                 $stmt = $this->db->prepare($sql);
 
                 $stmt->bindParam(':client_id', $this->clientId, PDO::PARAM_INT);
                 $stmt->bindParam(':caregiver_id', $this->caregiverId, PDO::PARAM_INT);
                 $stmt->bindParam(':address', $this->address, PDO::PARAM_STR);
                 $stmt->bindParam(':date', $this->date, PDO::PARAM_STR);
-                $stmt->bindParam(':startTime', $this->startTime, PDO::PARAM_STR);
-                $stmt->bindParam(':endTime', $this->endTime, PDO::PARAM_STR);
+                $stmt->bindParam(':start_time', $this->startTime, PDO::PARAM_STR);
+                $stmt->bindParam(':end_time', $this->endTime, PDO::PARAM_STR);
                 $stmt->bindParam(':notes', $this->notes, PDO::PARAM_STR);
 
                 return $stmt->execute();
@@ -87,7 +87,7 @@ class Appointment
             try {
                 $sql = "UPDATE appointments
                         SET client_id = :client_id, caregiver_id = :caregiver_id, address = :address, date = :date,
-                            startTime = :startTime, endTime = :endTime, notes = :notes
+                            start_time = :start_time, end_time = :end_time, notes = :notes
                         WHERE id = :id";
                 $stmt = $this->db->prepare($sql);
 
@@ -95,8 +95,8 @@ class Appointment
                 $stmt->bindParam(':caregiver_id', $this->caregiverId, PDO::PARAM_INT);
                 $stmt->bindParam(':address', $this->address, PDO::PARAM_STR);
                 $stmt->bindParam(':date', $this->date, PDO::PARAM_STR);
-                $stmt->bindParam(':startTime', $this->startTime, PDO::PARAM_STR);
-                $stmt->bindParam(':endTime', $this->endTime, PDO::PARAM_STR);
+                $stmt->bindParam(':start_time', $this->startTime, PDO::PARAM_STR);
+                $stmt->bindParam(':end_time', $this->endTime, PDO::PARAM_STR);
                 $stmt->bindParam(':notes', $this->notes, PDO::PARAM_STR);
                 $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
 
@@ -137,8 +137,8 @@ class Appointment
                 caregivers.name AS caregiver_name,
                 appointments.address,
                 appointments.date,
-                DATE_FORMAT(appointments.startTime, '%l:%i %p') AS startTime,
-                DATE_FORMAT(appointments.endTime, '%l:%i %p') AS endTime,
+                DATE_FORMAT(appointments.start_time, '%l:%i %p') AS start_time,
+                DATE_FORMAT(appointments.end_time, '%l:%i %p') AS end_time,
                 appointments.notes
             FROM
                 appointments
@@ -147,7 +147,7 @@ class Appointment
             JOIN
                 caregivers ON appointments.caregiver_id = caregivers.id
             ORDER BY
-                appointments.date, appointments.startTime"
+                appointments.date, appointments.start_time"
             );
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -167,8 +167,8 @@ class Appointment
                     appointments.caregiver_id,
                     appointments.address,
                     appointments.date,
-                    TIME_FORMAT(appointments.startTime, '%H:%i') AS startTime,
-                    TIME_FORMAT(appointments.endTime, '%H:%i') AS endTime,
+                    TIME_FORMAT(appointments.start_time, '%H:%i') AS start_time,
+                    TIME_FORMAT(appointments.end_time, '%H:%i') AS end_time,
                     appointments.notes
                 FROM
                     appointments

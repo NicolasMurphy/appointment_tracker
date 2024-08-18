@@ -25,8 +25,8 @@ CREATE TABLE IF NOT EXISTS appointments (
         caregiver_id INT NOT NULL,
         address VARCHAR(255) NOT NULL,
         date DATE NOT NULL,
-        startTime TIME NOT NULL,
-        endTime TIME NOT NULL,
+        start_time TIME NOT NULL,
+        end_time TIME NOT NULL,
         notes VARCHAR(1000),
         FOREIGN KEY (client_id) REFERENCES clients(id),
         FOREIGN KEY (caregiver_id) REFERENCES caregivers(id)
@@ -72,8 +72,8 @@ INSERT INTO
                 caregiver_id,
                 address,
                 date,
-                startTime,
-                endTime,
+                start_time,
+                end_time,
                 notes
         )
 VALUES
@@ -93,8 +93,8 @@ INSERT INTO
                 caregiver_id,
                 address,
                 date,
-                startTime,
-                endTime,
+                start_time,
+                end_time,
                 notes
         )
 VALUES

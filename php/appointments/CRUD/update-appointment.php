@@ -30,8 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $caregiverId = filter_input(INPUT_POST, 'caregiver_id', FILTER_VALIDATE_INT);
     $address = $_POST['address'] ?? '';
     $date = $_POST['date'] ?? '';
-    $startTime = $_POST['startTime'] ?? '';
-    $endTime = $_POST['endTime'] ?? '';
+    $startTime = $_POST['start_time'] ?? '';
+    $endTime = $_POST['end_time'] ?? '';
     $notes = $_POST['notes'] ?? '';
 
     if ($id !== false && $clientId !== false && $caregiverId !== false) {
