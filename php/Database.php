@@ -1,10 +1,12 @@
 <?php
+
+declare(strict_types=1);
 require '/var/www/html/vendor/autoload.php';
 
 class Database
 {
-    private static $instance = null;
-    private $pdo;
+    private static ?Database $instance = null;
+    private PDO $pdo;
 
     private function __construct()
     {
@@ -25,7 +27,7 @@ class Database
         }
     }
 
-    public static function getInstance()
+    public static function getInstance(): Database
     {
         if (self::$instance === null) {
             self::$instance = new Database();
@@ -33,7 +35,7 @@ class Database
         return self::$instance;
     }
 
-    public function getConnection()
+    public function getConnection(): PDO
     {
         return $this->pdo;
     }

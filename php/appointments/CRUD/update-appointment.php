@@ -5,7 +5,8 @@ $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $appointmentDetails = null;
 
 if ($id !== false && $id !== null) {
-    $appointment = new Appointment($db);
+    $dbConnection = Database::getInstance()->getConnection();
+    $appointment = new Appointment($dbConnection);
     $appointmentDetails = $appointment->fetchById($id);
 
     if (!$appointmentDetails) {
@@ -31,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $appointment->setId($id);
         $appointment->setDetails($client, $caregiver, $address, $date, $startTime, $endTime, $notes);
 
-        if ($appointment->update()) {
+        if ($appointment->updateAppointment()) {
             header('Location: ../../../../');
             exit();
         } else {

@@ -5,11 +5,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 
     if ($id !== false && $id !== null) {
-        $db = Database::getInstance();
-        $appointment = new Appointment($db);
+        $dbConnection = Database::getInstance()->getConnection();
+        $appointment = new Appointment($dbConnection);
         $appointment->setId($id);
 
-        if ($appointment->delete()) {
+        if ($appointment->deleteAppointment()) {
             header('Location: ../../../');
             exit();
         } else {

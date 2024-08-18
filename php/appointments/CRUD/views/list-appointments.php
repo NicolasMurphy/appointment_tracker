@@ -1,7 +1,8 @@
 <?php
 require __DIR__ . '/../../Appointment.php';
 
-$appointment = new Appointment($db);
+$dbConnection = Database::getInstance()->getConnection();
+$appointment = new Appointment($dbConnection);
 $appointments = $appointment->fetchAll();
 ?>
 
@@ -22,9 +23,9 @@ $appointments = $appointment->fetchAll();
                 <li data-client="<?php echo htmlspecialchars($appointmentItem['client']); ?>" data-caregiver="<?php echo htmlspecialchars($appointmentItem['caregiver']); ?>" data-date="<?php echo htmlspecialchars($appointmentItem['date']); ?>">
                     Client: <?php echo htmlspecialchars($appointmentItem['client']); ?> - Caregiver: <?php echo htmlspecialchars($appointmentItem['caregiver']); ?> - <?php echo htmlspecialchars($appointmentItem['address']); ?> - <?php echo htmlspecialchars($appointmentItem['date']); ?> from <?php echo htmlspecialchars($appointmentItem['startTime']); ?> to <?php echo htmlspecialchars($appointmentItem['endTime']); ?> - <?php echo htmlspecialchars($appointmentItem['notes']); ?>
 
-                    <a href="./php/appointments/CRUD/update-appointment.php?id=<?php echo htmlspecialchars($appointmentItem['id']); ?>">Edit</a>
+                    <a href="./php/appointments/crud/update-appointment.php?id=<?php echo htmlspecialchars($appointmentItem['id']); ?>">Edit</a>
 
-                    <form method="POST" action="./php/appointments/CRUD/delete-appointment.php" style="display:inline;">
+                    <form method="POST" action="./php/appointments/crud/delete-appointment.php" style="display:inline;">
                         <input type="hidden" name="id" value="<?php echo htmlspecialchars($appointmentItem['id']); ?>">
                         <button type="submit">Delete</button>
                     </form>

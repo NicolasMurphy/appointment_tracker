@@ -1,62 +1,67 @@
 <?php
-require __DIR__ . '/../Database.php';
 
-$db = Database::getInstance();
+declare(strict_types=1);
+require_once __DIR__ . '/../Database.php';
 
 class Appointment
 {
-    private $id;
-    private $client;
-    private $caregiver;
-    private $address;
-    private $date;
-    private $startTime;
-    private $endTime;
-    private $notes;
-    private $db;
+    private ?int $id = null;
+    private string $client;
+    private string $caregiver;
+    private string $address;
+    private string $date;
+    private string $startTime;
+    private string $endTime;
+    private string $notes;
+    private PDO $db;
 
-    public function __construct($db)
+    public function __construct(PDO $db)
     {
         $this->db = $db;
     }
 
-    public function setId($id)
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
 
-    public function setDetails($client, $caregiver, $address, $date, $startTime, $endTime, $notes = '')
-    {
+    public function setDetails(
+        string $client,
+        string $caregiver,
+        string $address,
+        string $date,
+        string $startTime,
+        string $endTime,
+        ?string $notes = null
+    ): void {
         $this->client = $client;
         $this->caregiver = $caregiver;
         $this->address = $address;
         $this->date = $date;
         $this->startTime = $startTime;
         $this->endTime = $endTime;
-        $this->notes = $notes;
+        $this->notes = $notes ?? '';
     }
 
-    public function validateDate($date, $format = 'Y-m-d')
+    private function validateDate(string $date, string $format = 'Y-m-d'): bool
     {
         $d = DateTime::createFromFormat($format, $date);
         return $d && $d->format($format) === $date;
     }
 
-    public function validateTime($time, $format = 'H:i')
+    private function validateTime(string $time, string $format = 'H:i'): bool
     {
         $t = DateTime::createFromFormat($format, $time);
         return $t && $t->format($format) === $time;
     }
 
-    public function save()
+    public function saveAppointment(): bool
     {
         if ($this->validateDate($this->date) && $this->validateTime($this->startTime) && $this->validateTime($this->endTime)) {
             try {
-                $pdo = $this->db->getConnection();
-
                 $sql = "INSERT INTO appointments (client, caregiver, address, date, startTime, endTime, notes)
                         VALUES (:client, :caregiver, :address, :date, :startTime, :endTime, :notes)";
-                $stmt = $pdo->prepare($sql);
+                $stmt = $this->db->prepare($sql);
 
                 $stmt->bindParam(':client', $this->client, PDO::PARAM_STR);
                 $stmt->bindParam(':caregiver', $this->caregiver, PDO::PARAM_STR);
@@ -69,24 +74,22 @@ class Appointment
                 return $stmt->execute();
             } catch (PDOException $e) {
                 error_log('Database error: ' . $e->getMessage());
-                return false;
+                throw new Exception('Failed to execute database operation.', 0, $e);
             }
         } else {
             return false;
         }
     }
 
-    public function update()
+    public function updateAppointment(): bool
     {
         if ($this->validateDate($this->date) && $this->validateTime($this->startTime) && $this->validateTime($this->endTime)) {
             try {
-                $pdo = $this->db->getConnection();
-
                 $sql = "UPDATE appointments
                         SET client = :client, caregiver = :caregiver, address = :address, date = :date,
                             startTime = :startTime, endTime = :endTime, notes = :notes
                         WHERE id = :id";
-                $stmt = $pdo->prepare($sql);
+                $stmt = $this->db->prepare($sql);
 
                 $stmt->bindParam(':client', $this->client, PDO::PARAM_STR);
                 $stmt->bindParam(':caregiver', $this->caregiver, PDO::PARAM_STR);
@@ -100,35 +103,34 @@ class Appointment
                 return $stmt->execute();
             } catch (PDOException $e) {
                 error_log('Database error: ' . $e->getMessage());
-                return false;
+                throw new Exception('Failed to execute database operation.', 0, $e);
             }
         } else {
             return false;
         }
     }
 
-    public function delete()
+    public function deleteAppointment(): bool
     {
         try {
-            $pdo = $this->db->getConnection();
-
             $sql = "DELETE FROM appointments WHERE id = :id";
-            $stmt = $pdo->prepare($sql);
+            $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
 
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log('Database error: ' . $e->getMessage());
-            return false;
+            throw new Exception('Failed to execute database operation.', 0, $e);
         }
     }
 
-    public function fetchAll()
+    /**
+     * @return array<array<string, string>>
+     */
+    public function fetchAll(): array
     {
         try {
-            $pdo = $this->db->getConnection();
-
-            $stmt = $pdo->query("SELECT id, client, caregiver, address, date,
+            $stmt = $this->db->query("SELECT id, client, caregiver, address, date,
                                 DATE_FORMAT(startTime, '%l:%i %p') AS startTime,
                                 DATE_FORMAT(endTime, '%l:%i %p') AS endTime,
                                 notes
@@ -142,19 +144,18 @@ class Appointment
         }
     }
 
-    public function fetchById($id)
+    public function fetchById(int $id): array|false
     {
         try {
-            $pdo = $this->db->getConnection();
-
-            $stmt = $pdo->prepare("SELECT id, client, caregiver, address, date,
+            $stmt = $this->db->prepare("SELECT id, client, caregiver, address, date,
                                    TIME_FORMAT(startTime, '%H:%i') AS startTime,
                                    TIME_FORMAT(endTime, '%H:%i') AS endTime, notes
                                    FROM appointments WHERE id = :id");
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
 
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result ?: false;
         } catch (PDOException $e) {
             error_log('Database error: ' . $e->getMessage());
             return false;

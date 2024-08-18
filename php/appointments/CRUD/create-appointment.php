@@ -2,7 +2,8 @@
 require __DIR__ . '/../Appointment.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $appointment = new Appointment($db);
+    $dbConnection = Database::getInstance()->getConnection();
+    $appointment = new Appointment($dbConnection);
 
     $client = $_POST['client'] ?? '';
     $caregiver = $_POST['caregiver'] ?? '';
@@ -14,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $appointment->setDetails($client, $caregiver, $address, $date, $startTime, $endTime, $notes);
 
-    if ($appointment->save()) {
+    if ($appointment->saveAppointment()) {
         header('Location: ../../../');
         exit();
     } else {
