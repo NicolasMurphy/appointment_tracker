@@ -7,13 +7,15 @@
             - caregiver (name, email, phone number, address, pay rate)
             - CRUD for client and caregiver
         - nav
-        - 15 minute increments for time
+        - Set default time and date when creating appointment (current day, 12-1p)
+            - will need to update to a more sophisticated time picker when the time comes
         - CRUD for services (service name, description, rate)
         - Billing report, Payroll report
         - styling - tailwind, table (calendar later)
         - authentication
         -
     Notes:
+        - HTML time picker does not support only showing 15 min increments
         -
 
 # 8/17
