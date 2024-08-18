@@ -3,9 +3,14 @@
     Goals:
         - Fix htmlspecialchars for ' and other symbols
         - Create client and caregiver tables to be referenced by id in the appointments table
-        - CRUD for client and caregiver
+            - client (name, email, phone number, address)
+            - caregiver (name, email, phone number, address, pay rate)
+            - CRUD for client and caregiver
         - nav
-        - styling
+        - 15 minute increments for time
+        - CRUD for services (service name, description, rate)
+        - Billing report, Payroll report
+        - styling - tailwind, table (calendar later)
         - authentication
         -
     Notes:
