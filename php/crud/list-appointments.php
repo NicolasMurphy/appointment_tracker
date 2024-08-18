@@ -5,17 +5,22 @@ try {
     $db = Database::getInstance();
     $pdo = $db->getConnection();
 
-    $stmt = $pdo->query("SELECT id, title, description, address, date, time FROM appointments ORDER BY date, time");
+    $stmt = $pdo->query("SELECT id, client, caregiver, address, date,
+                                DATE_FORMAT(startTime, '%h:%i %p') AS startTime,
+                                DATE_FORMAT(endTime, '%h:%i %p') AS endTime,
+                                notes
+                         FROM appointments
+                         ORDER BY date, startTime");
     $appointments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     echo '<ul id="appointment-list">';
     foreach ($appointments as $appointment) {
-        echo '<li data-title="' . htmlspecialchars($appointment['title']) . '" data-date="' . htmlspecialchars($appointment['date']) . '">';
-        echo htmlspecialchars($appointment['title']) . ' - ' . htmlspecialchars($appointment['description']) . ' - ' . htmlspecialchars($appointment['address']) . ' - ' . htmlspecialchars($appointment['date']) . ' at ' . htmlspecialchars($appointment['time']);
+        echo '<li data-client="' . htmlspecialchars($appointment['client']) . '" data-caregiver="' . htmlspecialchars($appointment['caregiver']) . '" data-date="' . htmlspecialchars($appointment['date']) . '">';
+        echo 'Client: ' . htmlspecialchars($appointment['client']) . ' - Caregiver: ' . htmlspecialchars($appointment['caregiver']) . ' - ' . htmlspecialchars($appointment['address']) . ' - ' . htmlspecialchars($appointment['date']) . ' from ' . htmlspecialchars($appointment['startTime']) . ' to ' . htmlspecialchars($appointment['endTime']) . ' - ' . htmlspecialchars($appointment['notes']);
 
-        echo '<a href="php/crud/update-appointment.php?id=' . htmlspecialchars($appointment['id']) . '">Edit</a>';
+        echo ' <a href="php/crud/update-appointment.php?id=' . htmlspecialchars($appointment['id']) . '">Edit</a>';
 
-        echo '<form method="POST" action="php/crud/delete-appointment.php" style="display:inline;">';
+        echo ' <form method="POST" action="php/crud/delete-appointment.php" style="display:inline;">';
         echo '<input type="hidden" name="id" value="' . htmlspecialchars($appointment['id']) . '">';
         echo '<button type="submit">Delete</button>';
         echo '</form>';

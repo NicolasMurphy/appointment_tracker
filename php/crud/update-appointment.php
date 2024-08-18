@@ -3,11 +3,13 @@ require dirname(__DIR__) . '/Database.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-    $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
-    $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_SPECIAL_CHARS);
+    $client = filter_input(INPUT_POST, 'client', FILTER_SANITIZE_SPECIAL_CHARS);
+    $caregiver = filter_input(INPUT_POST, 'caregiver', FILTER_SANITIZE_SPECIAL_CHARS);
     $address = filter_input(INPUT_POST, 'address', FILTER_SANITIZE_SPECIAL_CHARS);
     $date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_SPECIAL_CHARS);
-    $time = filter_input(INPUT_POST, 'time', FILTER_SANITIZE_SPECIAL_CHARS);
+    $startTime = filter_input(INPUT_POST, 'startTime', FILTER_SANITIZE_SPECIAL_CHARS);
+    $endTime = filter_input(INPUT_POST, 'endTime', FILTER_SANITIZE_SPECIAL_CHARS);
+    $notes = filter_input(INPUT_POST, 'notes', FILTER_SANITIZE_SPECIAL_CHARS);
 
     if ($id === false || $id === null) {
         echo "Invalid appointment ID.";
@@ -26,19 +28,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         return $t && $t->format($format) === $time;
     }
 
-    if (validateDate($date) && validateTime($time)) {
+    if (validateDate($date) && validateTime($startTime) && validateTime($endTime)) {
         try {
             $db = Database::getInstance();
             $pdo = $db->getConnection();
 
-            $sql = "UPDATE appointments SET title = :title, description = :description, address = :address, date = :date, time = :time WHERE id = :id";
+            $sql = "UPDATE appointments SET client = :client, caregiver = :caregiver, address = :address, date = :date, startTime = :startTime, endTime = :endTime, notes = :notes WHERE id = :id";
             $stmt = $pdo->prepare($sql);
 
-            $stmt->bindParam(':title', $title, PDO::PARAM_STR);
-            $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+            $stmt->bindParam(':client', $client, PDO::PARAM_STR);
+            $stmt->bindParam(':caregiver', $caregiver, PDO::PARAM_STR);
             $stmt->bindParam(':address', $address, PDO::PARAM_STR);
             $stmt->bindParam(':date', $date, PDO::PARAM_STR);
-            $stmt->bindParam(':time', $time, PDO::PARAM_STR);
+            $stmt->bindParam(':startTime', $startTime, PDO::PARAM_STR);
+            $stmt->bindParam(':endTime', $endTime, PDO::PARAM_STR);
+            $stmt->bindParam(':notes', $notes, PDO::PARAM_STR);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
             if ($stmt->execute()) {
@@ -67,7 +71,7 @@ try {
     $db = Database::getInstance();
     $pdo = $db->getConnection();
 
-    $stmt = $pdo->prepare("SELECT id, title, description, address, date, TIME_FORMAT(time, '%H:%i') AS time FROM appointments WHERE id = :id");
+    $stmt = $pdo->prepare("SELECT id, client, caregiver, address, date, TIME_FORMAT(startTime, '%H:%i') AS startTime, TIME_FORMAT(endTime, '%H:%i') AS endTime, notes FROM appointments WHERE id = :id");
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
     $appointment = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -97,11 +101,11 @@ try {
     <form method="POST" action="update-appointment.php?id=<?php echo htmlspecialchars($appointment['id']); ?>">
         <input type="hidden" name="id" value="<?php echo htmlspecialchars($appointment['id']); ?>">
 
-        <label for="title">Title:</label><br>
-        <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($appointment['title']); ?>" required><br><br>
+        <label for="client">Client:</label><br>
+        <input type="text" id="client" name="client" value="<?php echo htmlspecialchars($appointment['client']); ?>" required><br><br>
 
-        <label for="description">Description:</label><br>
-        <textarea id="description" name="description" required><?php echo htmlspecialchars($appointment['description']); ?></textarea><br><br>
+        <label for="caregiver">Caregiver:</label><br>
+        <input type="text" id="caregiver" name="caregiver" value="<?php echo htmlspecialchars($appointment['caregiver']); ?>" required><br><br>
 
         <label for="address">Address:</label><br>
         <input type="text" id="address" name="address" value="<?php echo htmlspecialchars($appointment['address']); ?>" required><br><br>
@@ -109,8 +113,14 @@ try {
         <label for="date">Date:</label><br>
         <input type="date" id="date" name="date" value="<?php echo htmlspecialchars($appointment['date']); ?>" required><br><br>
 
-        <label for="time">Time:</label><br>
-        <input type="time" id="time" name="time" value="<?php echo htmlspecialchars($appointment['time']); ?>" required><br><br>
+        <label for="startTime">Start Time:</label><br>
+        <input type="time" id="startTime" name="startTime" value="<?php echo htmlspecialchars($appointment['startTime']); ?>" required><br><br>
+
+        <label for="endTime">End Time:</label><br>
+        <input type="time" id="endTime" name="endTime" value="<?php echo htmlspecialchars($appointment['endTime']); ?>" required><br><br>
+
+        <label for="notes">Notes:</label><br>
+        <textarea id="notes" name="notes"><?php echo htmlspecialchars($appointment['notes']); ?></textarea><br><br>
 
         <button type="submit">Update Appointment</button>
     </form>

@@ -2,11 +2,13 @@
 require dirname(__DIR__) . '/Database.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
-    $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_SPECIAL_CHARS);
+    $client = filter_input(INPUT_POST, 'client', FILTER_SANITIZE_SPECIAL_CHARS);
+    $caregiver = filter_input(INPUT_POST, 'caregiver', FILTER_SANITIZE_SPECIAL_CHARS);
     $address = filter_input(INPUT_POST, 'address', FILTER_SANITIZE_SPECIAL_CHARS);
     $date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_SPECIAL_CHARS);
-    $time = filter_input(INPUT_POST, 'time', FILTER_SANITIZE_SPECIAL_CHARS);
+    $startTime = filter_input(INPUT_POST, 'startTime', FILTER_SANITIZE_SPECIAL_CHARS);
+    $endTime = filter_input(INPUT_POST, 'endTime', FILTER_SANITIZE_SPECIAL_CHARS);
+    $notes = filter_input(INPUT_POST, 'notes', FILTER_SANITIZE_SPECIAL_CHARS);
 
     function validateDate($date, $format = 'Y-m-d')
     {
@@ -20,19 +22,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         return $t && $t->format($format) === $time;
     }
 
-    if (validateDate($date) && validateTime($time)) {
+    if (validateDate($date) && validateTime($startTime) && validateTime($endTime)) {
         try {
             $db = Database::getInstance();
             $pdo = $db->getConnection();
 
-            $sql = "INSERT INTO appointments (title, description, address, date, time) VALUES (:title, :description, :address, :date, :time)";
+            $sql = "INSERT INTO appointments (client, caregiver, address, date, startTime, endTime, notes) VALUES (:client, :caregiver, :address, :date, :startTime, :endTime, :notes)";
             $stmt = $pdo->prepare($sql);
 
-            $stmt->bindParam(':title', $title, PDO::PARAM_STR);
-            $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+            $stmt->bindParam(':client', $client, PDO::PARAM_STR);
+            $stmt->bindParam(':caregiver', $caregiver, PDO::PARAM_STR);
             $stmt->bindParam(':address', $address, PDO::PARAM_STR);
             $stmt->bindParam(':date', $date, PDO::PARAM_STR);
-            $stmt->bindParam(':time', $time, PDO::PARAM_STR);
+            $stmt->bindParam(':startTime', $startTime, PDO::PARAM_STR);
+            $stmt->bindParam(':endTime', $endTime, PDO::PARAM_STR);
+            $stmt->bindParam(':notes', $notes, PDO::PARAM_STR);
 
             if ($stmt->execute()) {
                 header('Location: ../../');
@@ -62,11 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <h1>Create New Appointment</h1>
     <form method="POST" action="create-appointment.php">
-        <label for="title">Title:</label><br>
-        <input type="text" id="title" name="title" required><br><br>
+        <label for="client">Client:</label><br>
+        <input type="text" id="client" name="client" required><br><br>
 
-        <label for="description">Description:</label><br>
-        <textarea id="description" name="description" required></textarea><br><br>
+        <label for="caregiver">Caregiver:</label><br>
+        <input type="text" id="caregiver" name="caregiver" required><br><br>
 
         <label for="address">Address:</label><br>
         <input type="text" id="address" name="address" required><br><br>
@@ -74,8 +78,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label for="date">Date:</label><br>
         <input type="date" id="date" name="date" required><br><br>
 
-        <label for="time">Time:</label><br>
-        <input type="time" id="time" name="time" required><br><br>
+        <label for="startTime">Start Time:</label><br>
+        <input type="time" id="startTime" name="startTime" required><br><br>
+
+        <label for="endTime">End Time:</label><br>
+        <input type="time" id="endTime" name="endTime" required><br><br>
+
+        <label for="notes">Notes:</label><br>
+        <textarea id="notes" name="notes"></textarea><br><br>
 
         <button type="submit">Create Appointment</button>
     </form>
