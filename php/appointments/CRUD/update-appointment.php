@@ -48,4 +48,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-include 'views/update-form.php';
+include 'views/update-appointment-form.php';

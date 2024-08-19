@@ -45,7 +45,7 @@ $appointments = $appointment->fetchAll();
     <?php else: ?>
         <p>No appointments found.</p>
     <?php endif; ?>
-    <a href="./php/appointments/crud/views/create-form.php">Create New Appointment</a>
+    <a href="./php/appointments/crud/views/create-appointment-form.php">Create New Appointment</a>
     <script type="module" src="js/sortFunctions.js"></script>
 </body>
 

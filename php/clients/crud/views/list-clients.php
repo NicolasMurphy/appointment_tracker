@@ -39,7 +39,7 @@ $clients = $client->fetchAll();
     <?php else: ?>
         <p>No clients found.</p>
     <?php endif; ?>
-    <a href="./create-form.php">Create New Client</a>
+    <a href="./create-client-form.php">Create New Client</a>
 </body>
 
 </html>

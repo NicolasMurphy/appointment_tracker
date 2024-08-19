@@ -1,7 +1,6 @@
 # 8/19
 
     Goals:
-        - more descriptive create and update views
         - use autoload
         - CRUD for client and caregiver
             - client
