@@ -24,7 +24,9 @@ $clients = $client->fetchAll();
                 <li>
                     <?php echo htmlspecialchars($clientItem['id']); ?>
                     -
-                    <?php echo htmlspecialchars($clientItem['name']); ?>
+                    <?php echo htmlspecialchars($clientItem['first_name']); ?>
+                    -
+                    <?php echo htmlspecialchars($clientItem['last_name']); ?>
                     -
                     <?php echo htmlspecialchars($clientItem['email']); ?>
                     -

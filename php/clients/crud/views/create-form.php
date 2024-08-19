@@ -17,8 +17,11 @@ $dbConnection = Database::getInstance()->getConnection();
     <h1>Create New Client</h1>
     <form method="POST" action="../create-client.php">
 
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" required><br><br>
+        <label for="first_name">First name:</label><br>
+        <input type="text" id="first_name" name="first_name" required><br><br>
+
+        <label for="last_name">Last name:</label><br>
+        <input type="text" id="last_name" name="last_name" required><br><br>
 
         <label for="email">Email:</label><br>
         <input type="email" id="email" name="email" required><br><br>

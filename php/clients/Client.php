@@ -6,7 +6,8 @@ require_once __DIR__ . '/../Database.php';
 class Client
 {
     private ?int $id = null;
-    private string $name;
+    private string $firstName;
+    private string $lastName;
     private string $email;
     private string $phoneNumber;
     private string $address;
@@ -23,12 +24,14 @@ class Client
     }
 
     public function setDetails(
-        string $name,
+        string $firstName,
+        string $lastName,
         string $email,
         string $phoneNumber,
         string $address,
     ): void {
-        $this->name = $name;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
         $this->email = $email;
         $this->phoneNumber = $phoneNumber;
         $this->address = $address;
@@ -37,11 +40,12 @@ class Client
     public function saveClient(): bool
     {
         try {
-            $sql = "INSERT INTO clients (name, email, phone_number, address)
+            $sql = "INSERT INTO clients (first_name, last_name, email, phone_number, address)
                         VALUES (:name, :email, :phone_number, :address)";
             $stmt = $this->db->prepare($sql);
 
-            $stmt->bindParam(':name', $this->name, PDO::PARAM_STR);
+            $stmt->bindParam(':first_name', $this->firstName, PDO::PARAM_STR);
+            $stmt->bindParam(':last_name', $this->lastName, PDO::PARAM_STR);
             $stmt->bindParam(':email', $this->email, PDO::PARAM_STR);
             $stmt->bindParam(':phone_number', $this->phoneNumber, PDO::PARAM_STR);
             $stmt->bindParam(':address', $this->address, PDO::PARAM_STR);
@@ -62,14 +66,15 @@ class Client
             $stmt = $this->db->query(
                 "SELECT
                 id,
-                name,
+                first_name,
+                last_name,
                 email,
                 phone_number,
                 address
             FROM
                 clients
             ORDER BY
-                name"
+                last_name"
             );
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -85,7 +90,8 @@ class Client
             $stmt = $this->db->prepare(
                 "SELECT
                 id,
-                name,
+                first_name,
+                last_name,
                 email,
                 phone_number,
                 address
