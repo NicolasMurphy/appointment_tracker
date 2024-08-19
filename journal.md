@@ -5,6 +5,7 @@
         - CRUD for client and caregiver
         - nav
         - CRUD for services (service name, description, rate)
+        - verification
         - Billing report, Payroll report
         - styling - tailwind, table (calendar later)
         - authentication
