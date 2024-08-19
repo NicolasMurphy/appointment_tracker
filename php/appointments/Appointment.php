@@ -8,7 +8,6 @@ class Appointment
     private ?int $id = null;
     private int $clientId;
     private int $caregiverId;
-    private string $address;
     private string $date;
     private string $startTime;
     private string $endTime;
@@ -28,7 +27,6 @@ class Appointment
     public function setDetails(
         int $clientId,
         int $caregiverId,
-        string $address,
         string $date,
         string $startTime,
         string $endTime,
@@ -36,7 +34,6 @@ class Appointment
     ): void {
         $this->clientId = $clientId;
         $this->caregiverId = $caregiverId;
-        $this->address = $address;
         $this->date = $date;
         $this->startTime = $startTime;
         $this->endTime = $endTime;
@@ -59,13 +56,12 @@ class Appointment
     {
         if ($this->validateDate($this->date) && $this->validateTime($this->startTime) && $this->validateTime($this->endTime)) {
             try {
-                $sql = "INSERT INTO appointments (client_id, caregiver_id, address, date, start_time, end_time, notes)
-                        VALUES (:client_id, :caregiver_id, :address, :date, :start_time, :end_time, :notes)";
+                $sql = "INSERT INTO appointments (client_id, caregiver_id, date, start_time, end_time, notes)
+                        VALUES (:client_id, :caregiver_id, :date, :start_time, :end_time, :notes)";
                 $stmt = $this->db->prepare($sql);
 
                 $stmt->bindParam(':client_id', $this->clientId, PDO::PARAM_INT);
                 $stmt->bindParam(':caregiver_id', $this->caregiverId, PDO::PARAM_INT);
-                $stmt->bindParam(':address', $this->address, PDO::PARAM_STR);
                 $stmt->bindParam(':date', $this->date, PDO::PARAM_STR);
                 $stmt->bindParam(':start_time', $this->startTime, PDO::PARAM_STR);
                 $stmt->bindParam(':end_time', $this->endTime, PDO::PARAM_STR);
@@ -86,14 +82,13 @@ class Appointment
         if ($this->validateDate($this->date) && $this->validateTime($this->startTime) && $this->validateTime($this->endTime)) {
             try {
                 $sql = "UPDATE appointments
-                        SET client_id = :client_id, caregiver_id = :caregiver_id, address = :address, date = :date,
+                        SET client_id = :client_id, caregiver_id = :caregiver_id, date = :date,
                             start_time = :start_time, end_time = :end_time, notes = :notes
                         WHERE id = :id";
                 $stmt = $this->db->prepare($sql);
 
                 $stmt->bindParam(':client_id', $this->clientId, PDO::PARAM_INT);
                 $stmt->bindParam(':caregiver_id', $this->caregiverId, PDO::PARAM_INT);
-                $stmt->bindParam(':address', $this->address, PDO::PARAM_STR);
                 $stmt->bindParam(':date', $this->date, PDO::PARAM_STR);
                 $stmt->bindParam(':start_time', $this->startTime, PDO::PARAM_STR);
                 $stmt->bindParam(':end_time', $this->endTime, PDO::PARAM_STR);
@@ -135,7 +130,6 @@ class Appointment
                 appointments.id,
                 clients.name AS client_name,
                 caregivers.name AS caregiver_name,
-                appointments.address,
                 appointments.date,
                 DATE_FORMAT(appointments.start_time, '%l:%i %p') AS start_time,
                 DATE_FORMAT(appointments.end_time, '%l:%i %p') AS end_time,
@@ -165,7 +159,6 @@ class Appointment
                     appointments.id,
                     appointments.client_id,
                     appointments.caregiver_id,
-                    appointments.address,
                     appointments.date,
                     TIME_FORMAT(appointments.start_time, '%H:%i') AS start_time,
                     TIME_FORMAT(appointments.end_time, '%H:%i') AS end_time,

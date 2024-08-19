@@ -32,9 +32,6 @@
             <?php endforeach; ?>
         </select><br><br>
 
-        <label for="address">Address:</label><br>
-        <input type="text" id="address" name="address" value="<?php echo htmlspecialchars($appointmentDetails['address']); ?>" required><br><br>
-
         <label for="date">Date:</label><br>
         <input type="date" id="date" name="date" value="<?php echo htmlspecialchars($appointmentDetails['date']); ?>" required><br><br>
 

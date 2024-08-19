@@ -25,8 +25,6 @@ $appointments = $appointment->fetchAll();
                     - Caregiver:
                     <?php echo htmlspecialchars($appointmentItem['caregiver_name']); ?>
                     -
-                    <?php echo htmlspecialchars($appointmentItem['address']); ?>
-                    -
                     <?php echo htmlspecialchars($appointmentItem['date']); ?>
                     from
                     <?php echo htmlspecialchars($appointmentItem['start_time']); ?>

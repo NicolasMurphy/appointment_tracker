@@ -28,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
     $clientId = filter_input(INPUT_POST, 'client_id', FILTER_VALIDATE_INT);
     $caregiverId = filter_input(INPUT_POST, 'caregiver_id', FILTER_VALIDATE_INT);
-    $address = $_POST['address'] ?? '';
     $date = $_POST['date'] ?? '';
     $startTime = $_POST['start_time'] ?? '';
     $endTime = $_POST['end_time'] ?? '';
@@ -36,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($id !== false && $clientId !== false && $caregiverId !== false) {
         $appointment->setId($id);
-        $appointment->setDetails($clientId, $caregiverId, $address, $date, $startTime, $endTime, $notes);
+        $appointment->setDetails($clientId, $caregiverId, $date, $startTime, $endTime, $notes);
 
         if ($appointment->updateAppointment()) {
             header('Location: ../../../../');

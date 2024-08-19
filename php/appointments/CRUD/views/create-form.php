@@ -42,9 +42,6 @@ $caregivers = $caregiverStmt->fetchAll(PDO::FETCH_ASSOC);
             <?php endforeach; ?>
         </select><br><br>
 
-        <label for="address">Address:</label><br>
-        <input type="text" id="address" name="address" required><br><br>
-
         <label for="date">Date:</label><br>
         <input type="date" id="date" name="date" value="<?php echo date('Y-m-d'); ?>" required><br><br>
 
