@@ -128,8 +128,10 @@ class Appointment
             $stmt = $this->db->query(
                 "SELECT
                 appointments.id,
-                clients.name AS client_name,
-                caregivers.name AS caregiver_name,
+                clients.first_name AS client_first_name,
+                clients.last_name AS client_last_name,
+                caregivers.first_name AS caregiver_first_name,
+                caregivers.last_name AS caregiver_last_name,
                 appointments.date,
                 DATE_FORMAT(appointments.start_time, '%l:%i %p') AS start_time,
                 DATE_FORMAT(appointments.end_time, '%l:%i %p') AS end_time,

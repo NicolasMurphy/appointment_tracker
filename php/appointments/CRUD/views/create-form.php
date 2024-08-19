@@ -3,10 +3,10 @@ require __DIR__ . '/../../Appointment.php';
 
 $dbConnection = Database::getInstance()->getConnection();
 
-$clientStmt = $dbConnection->query("SELECT id, name FROM clients ORDER BY name ASC");
+$clientStmt = $dbConnection->query("SELECT id, first_name, last_name FROM clients ORDER BY last_name ASC");
 $clients = $clientStmt->fetchAll(PDO::FETCH_ASSOC);
 
-$caregiverStmt = $dbConnection->query("SELECT id, name FROM caregivers ORDER BY name ASC");
+$caregiverStmt = $dbConnection->query("SELECT id, first_name, last_name FROM caregivers ORDER BY last_name ASC");
 $caregivers = $caregiverStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -27,7 +27,7 @@ $caregivers = $caregiverStmt->fetchAll(PDO::FETCH_ASSOC);
             <option value="">Select a client</option>
             <?php foreach ($clients as $client): ?>
                 <option value="<?php echo htmlspecialchars($client['id']); ?>">
-                    <?php echo htmlspecialchars($client['name']); ?>
+                    <?php echo htmlspecialchars($client['first_name']) . ' ' . htmlspecialchars($client['last_name']); ?>
                 </option>
             <?php endforeach; ?>
         </select><br><br>
@@ -37,7 +37,7 @@ $caregivers = $caregiverStmt->fetchAll(PDO::FETCH_ASSOC);
             <option value="">Select a caregiver</option>
             <?php foreach ($caregivers as $caregiver): ?>
                 <option value="<?php echo htmlspecialchars($caregiver['id']); ?>">
-                    <?php echo htmlspecialchars($caregiver['name']); ?>
+                    <?php echo htmlspecialchars($caregiver['first_name']) . ' ' . htmlspecialchars($caregiver['last_name']); ?>
                 </option>
             <?php endforeach; ?>
         </select><br><br>

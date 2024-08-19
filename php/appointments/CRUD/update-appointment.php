@@ -14,10 +14,10 @@ if ($id !== false && $id !== null) {
         exit();
     }
 
-    $clientStmt = $dbConnection->query("SELECT id, name FROM clients ORDER BY name ASC");
+    $clientStmt = $dbConnection->query("SELECT id, first_name, last_name FROM clients ORDER BY last_name ASC");
     $clients = $clientStmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $caregiverStmt = $dbConnection->query("SELECT id, name FROM caregivers ORDER BY name ASC");
+    $caregiverStmt = $dbConnection->query("SELECT id, first_name, last_name FROM caregivers ORDER BY last_name ASC");
     $caregivers = $caregiverStmt->fetchAll(PDO::FETCH_ASSOC);
 } else {
     echo "Invalid appointment ID.";

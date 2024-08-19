@@ -20,10 +20,10 @@ $appointments = $appointment->fetchAll();
     <?php if (!empty($appointments)): ?>
         <ul id="appointment-list">
             <?php foreach ($appointments as $appointmentItem): ?>
-                <li data-client="<?php echo htmlspecialchars($appointmentItem['client_name']); ?>" data-caregiver="<?php echo htmlspecialchars($appointmentItem['caregiver_name']); ?>" data-date="<?php echo htmlspecialchars($appointmentItem['date']); ?>">
-                    Client: <?php echo htmlspecialchars($appointmentItem['client_name']); ?>
+                <li data-client="<?php echo htmlspecialchars($appointmentItem['client_last_name']); ?>" data-caregiver="<?php echo htmlspecialchars($appointmentItem['caregiver_last_name']); ?>" data-date="<?php echo htmlspecialchars($appointmentItem['date']); ?>">
+                    Client: <?php echo htmlspecialchars($appointmentItem['client_first_name']) . ' ' . htmlspecialchars($appointmentItem['client_last_name']); ?>
                     - Caregiver:
-                    <?php echo htmlspecialchars($appointmentItem['caregiver_name']); ?>
+                    <?php echo htmlspecialchars($appointmentItem['caregiver_first_name']) . ' ' . htmlspecialchars($appointmentItem['caregiver_last_name']); ?>
                     -
                     <?php echo htmlspecialchars($appointmentItem['date']); ?>
                     from

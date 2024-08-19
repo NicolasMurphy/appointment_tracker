@@ -41,7 +41,7 @@ class Client
     {
         try {
             $sql = "INSERT INTO clients (first_name, last_name, email, phone_number, address)
-                        VALUES (:name, :email, :phone_number, :address)";
+                        VALUES (:first_name, :last_name, :email, :phone_number, :address)";
             $stmt = $this->db->prepare($sql);
 
             $stmt->bindParam(':first_name', $this->firstName, PDO::PARAM_STR);
