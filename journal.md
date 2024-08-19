@@ -1,8 +1,13 @@
 # 8/19
 
     Goals:
+        - more descriptive create and update views
         - use autoload
         - CRUD for client and caregiver
+            - client
+                - first and last name
+                - validate email in class function
+                - remove address from appointment
         - nav
         - CRUD for services (service name, description, rate)
         - verification

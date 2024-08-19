@@ -1,0 +1,37 @@
+<?php
+require __DIR__ . '/../../Client.php';
+
+$dbConnection = Database::getInstance()->getConnection();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Client</title>
+</head>
+
+<body>
+    <h1>Create New Client</h1>
+    <form method="POST" action="../create-client.php">
+
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="phone_number">Phone Number:</label><br>
+        <input type="text" id="phone_number" name="phone_number" required><br><br>
+
+        <label for="address">Address:</label><br>
+        <input type="text" id="address" name="address" required><br><br>
+
+
+        <button type="submit">Create Client</button>
+    </form>
+</body>
+
+</html>

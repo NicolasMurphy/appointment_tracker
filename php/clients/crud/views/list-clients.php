@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../../Clients.php';
+require __DIR__ . '/../../Client.php';
 
 $dbConnection = Database::getInstance()->getConnection();
 $client = new Client($dbConnection);
@@ -37,6 +37,7 @@ $clients = $client->fetchAll();
     <?php else: ?>
         <p>No clients found.</p>
     <?php endif; ?>
+    <a href="./create-form.php">Create New Client</a>
 </body>
 
 </html>

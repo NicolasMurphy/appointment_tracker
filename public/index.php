@@ -10,7 +10,6 @@
 <body>
     <?php include './php/nav.php'; ?>
     <?php include './php/appointments/crud/views/list-appointments.php'; ?>
-    <a href="./php/appointments/crud/views/create-form.php">Create New Appointment</a>
 </body>
 
 </html>
