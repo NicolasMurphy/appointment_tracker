@@ -2,11 +2,13 @@
 
     Goals:
         - use autoload
+        - write tests with PHPUnit, playwright
         - CRUD for client and caregiver
             - client
                 - validate email in class function
         - nav
         - CRUD for services (service name, description, rate)
+            - add service to appointment
         - verification
         - Billing report, Payroll report
         - styling - tailwind, table (calendar later)
