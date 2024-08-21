@@ -1,5 +1,9 @@
 <?php
-require __DIR__ . '/../Client.php';
+
+use Clients\Client;
+use Database\Database;
+
+require '/var/www/html/vendor/autoload.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $dbConnection = Database::getInstance()->getConnection();

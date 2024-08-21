@@ -1,3 +1,7 @@
+<?php
+require_once '/var/www/html/vendor/autoload.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +13,7 @@
 
 <body>
     <?php include './php/nav.php'; ?>
-    <?php include './php/appointments/crud/views/list-appointments.php'; ?>
+    <?php include './php/Appointments/crud/views/list-appointments.php'; ?>
 </body>
 
 </html>

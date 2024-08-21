@@ -1,3 +1,14 @@
+# 8/21
+
+    Goals:
+        - namespace
+        - optimize paths
+        - separate sql from class
+        - tests
+        -
+    Notes:
+        -
+
 # 8/19
 
     Goals:

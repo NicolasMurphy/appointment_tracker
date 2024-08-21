@@ -1,5 +1,8 @@
 <?php
-require __DIR__ . '/../../Appointment.php';
+
+use Database\Database;
+
+require '/var/www/html/vendor/autoload.php';
 
 $dbConnection = Database::getInstance()->getConnection();
 

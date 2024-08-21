@@ -1,6 +1,13 @@
 <?php
 
 declare(strict_types=1);
+
+namespace Database;
+
+use PDO;
+use PDOException;
+use Dotenv\Dotenv;
+
 require '/var/www/html/vendor/autoload.php';
 
 class Database
@@ -10,7 +17,7 @@ class Database
 
     private function __construct()
     {
-        $dotenv = Dotenv\Dotenv::createImmutable('/var/www/html');
+        $dotenv = Dotenv::createImmutable('/var/www/html');
         $dotenv->load();
 
         $host = getenv('DB_HOST');

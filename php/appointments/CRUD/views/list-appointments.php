@@ -1,5 +1,7 @@
 <?php
-require __DIR__ . '/../../Appointment.php';
+
+use Appointments\Appointment;
+use Database\Database;
 
 $dbConnection = Database::getInstance()->getConnection();
 $appointment = new Appointment($dbConnection);
@@ -33,9 +35,9 @@ $appointments = $appointment->fetchAll();
                     -
                     <?php echo htmlspecialchars($appointmentItem['notes']); ?>
 
-                    <a href="./php/appointments/crud/update-appointment.php?id=<?php echo htmlspecialchars($appointmentItem['id']); ?>">Edit</a>
+                    <a href="./php/Appointments/crud/update-appointment.php?id=<?php echo htmlspecialchars($appointmentItem['id']); ?>">Edit</a>
 
-                    <form method="POST" action="./php/appointments/crud/delete-appointment.php" style="display:inline;">
+                    <form method="POST" action="./php/Appointments/crud/delete-appointment.php" style="display:inline;">
                         <input type="hidden" name="id" value="<?php echo htmlspecialchars($appointmentItem['id']); ?>">
                         <button type="submit">Delete</button>
                     </form>
@@ -45,7 +47,7 @@ $appointments = $appointment->fetchAll();
     <?php else: ?>
         <p>No appointments found.</p>
     <?php endif; ?>
-    <a href="./php/appointments/crud/views/create-appointment-form.php">Create New Appointment</a>
+    <a href="./php/Appointments/crud/views/create-appointment-form.php">Create New Appointment</a>
     <script type="module" src="js/sortFunctions.js"></script>
 </body>
 

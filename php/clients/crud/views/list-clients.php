@@ -1,5 +1,9 @@
 <?php
-require __DIR__ . '/../../Client.php';
+
+use Clients\Client;
+use Database\Database;
+
+require '/var/www/html/vendor/autoload.php';
 
 $dbConnection = Database::getInstance()->getConnection();
 $client = new Client($dbConnection);

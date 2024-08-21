@@ -1,7 +1,12 @@
 <?php
 
 declare(strict_types=1);
-require_once __DIR__ . '/../Database.php';
+
+namespace Clients;
+
+use PDO;
+use PDOException;
+use Exception;
 
 class Client
 {
