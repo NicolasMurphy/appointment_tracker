@@ -2,7 +2,7 @@
 
 use Database\Database;
 
-require '/var/www/html/vendor/autoload.php';
+require_once '/var/www/html/vendor/autoload.php';
 
 $dbConnection = Database::getInstance()->getConnection();
 ?>

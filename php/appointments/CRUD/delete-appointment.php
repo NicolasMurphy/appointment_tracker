@@ -3,7 +3,7 @@
 use Appointments\Appointment;
 use Database\Database;
 
-require '/var/www/html/vendor/autoload.php';
+require_once '/var/www/html/vendor/autoload.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);

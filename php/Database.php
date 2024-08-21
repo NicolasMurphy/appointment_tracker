@@ -8,7 +8,7 @@ use PDO;
 use PDOException;
 use Dotenv\Dotenv;
 
-require '/var/www/html/vendor/autoload.php';
+require_once '/var/www/html/vendor/autoload.php';
 
 class Database
 {
