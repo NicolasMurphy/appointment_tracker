@@ -4,6 +4,8 @@
         - namespace
         - optimize paths
         - separate sql from class
+        - validate email, phone number
+        - not allowed to make a duplicate name
         - tests
         -
     Notes:

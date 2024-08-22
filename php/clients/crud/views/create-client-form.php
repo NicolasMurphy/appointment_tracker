@@ -30,7 +30,7 @@ $dbConnection = Database::getInstance()->getConnection();
         <input type="email" id="email" name="email" required><br><br>
 
         <label for="phone_number">Phone Number:</label><br>
-        <input type="text" id="phone_number" name="phone_number" required><br><br>
+        <input type="tel" id="phone_number" name="phone_number" required><br><br>
 
         <label for="address">Address:</label><br>
         <input type="text" id="address" name="address" required><br><br>

@@ -1,0 +1,98 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Clients;
+
+use PDO;
+use PDOException;
+use Exception;
+
+class ClientRepository
+{
+    private PDO $db;
+
+    public function __construct(PDO $db)
+    {
+        $this->db = $db;
+    }
+
+    public function save(Client $client): bool
+    {
+        try {
+            $sql = "INSERT INTO clients (first_name, last_name, email, phone_number, address)
+                    VALUES (:first_name, :last_name, :email, :phone_number, :address)";
+            $stmt = $this->db->prepare($sql);
+
+            $firstName = $client->getFirstName();
+            $lastName = $client->getLastName();
+            $email = $client->getEmail();
+            $phoneNumber = $client->getPhoneNumber();
+            $address = $client->getAddress();
+
+            $stmt->bindParam(':first_name', $firstName, PDO::PARAM_STR);
+            $stmt->bindParam(':last_name', $lastName, PDO::PARAM_STR);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->bindParam(':phone_number', $phoneNumber, PDO::PARAM_STR);
+            $stmt->bindParam(':address', $address, PDO::PARAM_STR);
+
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log('Database error: ' . $e->getMessage());
+            throw new Exception('Failed to execute database operation.', 0, $e);
+        }
+    }
+
+    /**
+     * @return array<array<string, string>>
+     */
+    public function fetchAll(): array
+    {
+        try {
+            $stmt = $this->db->query(
+                "SELECT
+                    id,
+                    first_name,
+                    last_name,
+                    email,
+                    phone_number,
+                    address
+                FROM
+                    clients
+                ORDER BY
+                    last_name"
+            );
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log('Database error: ' . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function fetchById(int $id): array|false
+    {
+        try {
+            $stmt = $this->db->prepare(
+                "SELECT
+                    id,
+                    first_name,
+                    last_name,
+                    email,
+                    phone_number,
+                    address
+                FROM
+                    clients
+                WHERE id = :id"
+            );
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result ?: false;
+        } catch (PDOException $e) {
+            error_log('Database error: ' . $e->getMessage());
+            return false;
+        }
+    }
+}

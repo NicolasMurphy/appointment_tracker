@@ -1,13 +1,13 @@
 <?php
 
-use Clients\Client;
+use Clients\ClientRepository;
 use Database\Database;
 
 require_once '/var/www/html/vendor/autoload.php';
 
 $dbConnection = Database::getInstance()->getConnection();
-$client = new Client($dbConnection);
-$clients = $client->fetchAll();
+$clientRepo = new ClientRepository($dbConnection);
+$clients = $clientRepo->fetchAll();
 ?>
 
 <!DOCTYPE html>
