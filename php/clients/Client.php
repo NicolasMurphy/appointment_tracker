@@ -21,6 +21,10 @@ class Client
         string $address
     ) {
 
+        if (!$this->isValidEmail($email)) {
+            throw new \InvalidArgumentException("Invalid email format.");
+        }
+
         if (!$this->isValidPhoneNumber($phoneNumber)) {
             throw new \InvalidArgumentException("Invalid phone number format.");
         }
@@ -65,6 +69,11 @@ class Client
     public function getAddress(): string
     {
         return $this->address;
+    }
+
+    private function isValidEmail(string $email): bool
+    {
+        return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
     }
 
     private function isValidPhoneNumber(string $phoneNumber): bool
