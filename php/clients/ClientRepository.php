@@ -19,6 +19,11 @@ class ClientRepository
 
     public function save(Client $client): bool
     {
+
+        if ($this->isDuplicateName($client->getFirstName(), $client->getLastName())) {
+            throw new \InvalidArgumentException("A client with this first and last name already exists.");
+        }
+
         try {
             $sql = "INSERT INTO clients (first_name, last_name, email, phone_number, address)
                     VALUES (:first_name, :last_name, :email, :phone_number, :address)";
@@ -39,7 +44,24 @@ class ClientRepository
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log('Database error: ' . $e->getMessage());
-            throw new Exception('Failed to execute database operation.', 0, $e);
+            throw new \Exception('Failed to save client.');
+        }
+    }
+
+    public function isDuplicateName(string $firstName, string $lastName): bool
+    {
+        try {
+            $stmt = $this->db->prepare(
+                "SELECT COUNT(*) FROM clients WHERE first_name = :first_name AND last_name = :last_name"
+            );
+            $stmt->bindParam(':first_name', $firstName, PDO::PARAM_STR);
+            $stmt->bindParam(':last_name', $lastName, PDO::PARAM_STR);
+            $stmt->execute();
+
+            return $stmt->fetchColumn() > 0;
+        } catch (PDOException $e) {
+            error_log('Database error: ' . $e->getMessage());
+            throw new \Exception('Failed to check for duplicate client name.');
         }
     }
 
