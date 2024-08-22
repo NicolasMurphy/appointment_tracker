@@ -9,6 +9,7 @@
         - tests
         -
     Notes:
+        - Created Client Repo to make Client easier to test
         -
 
 # 8/19

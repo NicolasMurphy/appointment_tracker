@@ -16,12 +16,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $phoneNumber = $_POST['phone_number'] ?? '';
     $address = $_POST['address'] ?? '';
 
-    $client = new Client($firstName, $lastName, $email, $phoneNumber, $address);
+    try {
+        $client = new Client($firstName, $lastName, $email, $phoneNumber, $address);
 
-    if ($clientRepo->save($client)) {
-        header('Location: ./views/list-clients.php');
-        exit();
-    } else {
-        echo "Failed to create client.";
+        if ($clientRepo->save($client)) {
+            header('Location: ./views/list-clients.php');
+            exit();
+        } else {
+            echo "Failed to create client.";
+        }
+    } catch (InvalidArgumentException $e) {
+        if ($e->getMessage() === "Invalid phone number format.") {
+            echo "<p style='color:red;'>The phone number you entered is invalid. Please use a valid format.</p>";
+        }
     }
 }

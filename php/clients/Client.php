@@ -20,6 +20,11 @@ class Client
         string $phoneNumber,
         string $address
     ) {
+
+        if (!$this->isValidPhoneNumber($phoneNumber)) {
+            throw new \InvalidArgumentException("Invalid phone number format.");
+        }
+
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->email = $email;
@@ -60,5 +65,10 @@ class Client
     public function getAddress(): string
     {
         return $this->address;
+    }
+
+    private function isValidPhoneNumber(string $phoneNumber): bool
+    {
+        return preg_match('/^\+?[0-9\s\-()]{10,20}$/', $phoneNumber) === 1;
     }
 }
