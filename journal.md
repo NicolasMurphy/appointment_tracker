@@ -1,3 +1,13 @@
+# 8/22
+
+    Goals:
+        - optimize paths
+        - appointment repo
+        - tests
+        -
+    Notes:
+        -
+
 # 8/21
 
     Goals:
