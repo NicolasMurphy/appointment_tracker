@@ -44,9 +44,43 @@ class ClientRepository
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log('Database error: ' . $e->getMessage());
-            throw new \Exception('Failed to save client.');
+            throw new Exception('Failed to save client.');
         }
     }
+
+    public function update(Client $client): bool
+    {
+        try {
+            $sql = "UPDATE clients
+                SET first_name = :first_name,
+                    last_name = :last_name,
+                    email = :email,
+                    phone_number = :phone_number,
+                    address = :address
+                WHERE id = :id";
+            $stmt = $this->db->prepare($sql);
+
+            $firstName = $client->getFirstName();
+            $lastName = $client->getLastName();
+            $email = $client->getEmail();
+            $phoneNumber = $client->getPhoneNumber();
+            $address = $client->getAddress();
+            $id = $client->getId();
+
+            $stmt->bindParam(':first_name', $firstName, PDO::PARAM_STR);
+            $stmt->bindParam(':last_name', $lastName, PDO::PARAM_STR);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->bindParam(':phone_number', $phoneNumber, PDO::PARAM_STR);
+            $stmt->bindParam(':address', $address, PDO::PARAM_STR);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log('Database error during update: ' . $e->getMessage());
+            throw new Exception('Failed to update client.');
+        }
+    }
+
 
     public function isDuplicateName(string $firstName, string $lastName): bool
     {
@@ -61,7 +95,7 @@ class ClientRepository
             return $stmt->fetchColumn() > 0;
         } catch (PDOException $e) {
             error_log('Database error: ' . $e->getMessage());
-            throw new \Exception('Failed to check for duplicate client name.');
+            throw new Exception('Failed to check for duplicate client name.');
         }
     }
 

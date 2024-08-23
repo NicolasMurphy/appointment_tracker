@@ -6,7 +6,7 @@ namespace Clients;
 
 class Client
 {
-    // private ?int $id = null;
+    private ?int $id = null;
     private string $firstName;
     private string $lastName;
     private string $email;
@@ -36,15 +36,15 @@ class Client
         $this->address = $address;
     }
 
-    // public function getId(): ?int
-    // {
-    //     return $this->id;
-    // }
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
-    // public function setId(int $id): void
-    // {
-    //     $this->id = $id;
-    // }
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
 
     public function getFirstName(): string
     {

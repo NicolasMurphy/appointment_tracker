@@ -37,6 +37,9 @@ $clients = $clientRepo->fetchAll();
                     <?php echo htmlspecialchars($clientItem['phone_number']); ?>
                     -
                     <?php echo htmlspecialchars($clientItem['address']); ?>
+
+                    <a href="../update-client.php?id=<?php echo htmlspecialchars($clientItem['id']); ?>">Edit</a>
+
                 </li>
             <?php endforeach; ?>
         </ul>
