@@ -3,7 +3,13 @@
     Goals:
         - tests
         - optimize paths
-        -
+        - finish CRUD for client
+        - CRUD for services (service name, description, rate)
+            - add service to appointment
+        - verification
+        - Billing report, Payroll report
+        - styling - tailwind, table (calendar later)
+        - authentication
     Notes:
         -
 
