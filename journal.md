@@ -2,6 +2,8 @@
 
     Goals:
         - validate pay rate
+        - CRU for service - add service to appointment
+        -
     Notes:
         -
 
