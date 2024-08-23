@@ -1,6 +1,15 @@
 # 8/22
 
     Goals:
+        - tests
+        - optimize paths
+        -
+    Notes:
+        -
+
+# 8/22
+
+    Goals:
         - optimize paths
         - appointment repo
         - tests
