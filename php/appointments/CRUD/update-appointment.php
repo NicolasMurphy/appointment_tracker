@@ -1,6 +1,7 @@
 <?php
 
 use Appointments\Appointment;
+use Appointments\AppointmentRepository;
 use Database\Database;
 
 require_once '/var/www/html/vendor/autoload.php';
@@ -8,10 +9,11 @@ require_once '/var/www/html/vendor/autoload.php';
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $appointmentDetails = null;
 
+$dbConnection = Database::getInstance()->getConnection();
+$appointmentRepo = new AppointmentRepository($dbConnection);
+
 if ($id !== false && $id !== null) {
-    $dbConnection = Database::getInstance()->getConnection();
-    $appointment = new Appointment($dbConnection);
-    $appointmentDetails = $appointment->fetchById($id);
+    $appointmentDetails = $appointmentRepo->fetchById($id);
 
     if (!$appointmentDetails) {
         echo "Appointment not found.";
@@ -38,10 +40,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $notes = $_POST['notes'] ?? '';
 
     if ($id !== false && $clientId !== false && $caregiverId !== false) {
+        $appointment = new Appointment($clientId, $caregiverId, $date, $startTime, $endTime, $notes);
         $appointment->setId($id);
-        $appointment->setDetails($clientId, $caregiverId, $date, $startTime, $endTime, $notes);
 
-        if ($appointment->updateAppointment()) {
+        if ($appointmentRepo->update($appointment)) {
             header('Location: ../../../../');
             exit();
         } else {

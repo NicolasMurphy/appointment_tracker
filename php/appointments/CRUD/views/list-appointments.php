@@ -1,11 +1,11 @@
 <?php
 
-use Appointments\Appointment;
+use Appointments\AppointmentRepository;
 use Database\Database;
 
 $dbConnection = Database::getInstance()->getConnection();
-$appointment = new Appointment($dbConnection);
-$appointments = $appointment->fetchAll();
+$appointmentRepo = new AppointmentRepository($dbConnection);
+$appointments = $appointmentRepo->fetchAll();
 ?>
 
 <!DOCTYPE html>

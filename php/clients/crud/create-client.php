@@ -26,14 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "Failed to create client.";
         }
     } catch (InvalidArgumentException $e) {
-        if ($e->getMessage() === "Invalid phone number format.") {
-            echo "<p style='color:red;'>The phone number you entered is invalid. Please use a valid format.</p>";
-        } elseif ($e->getMessage() === "Invalid email format.") {
-            echo "<p style='color:red;'>The email address you entered is invalid. Please enter a valid email address.</p>";
-        } elseif ($e->getMessage() === "A client with this first and last name already exists.") {
-            echo "<p style='color:red;'>A client with this first and last name already exists. Please enter a different name.</p>";
-        } else {
-            echo "<p style='color:red;'>An unexpected error occurred. Please try again later.</p>";
-        }
+        echo "<p style='color:red;'>{$e->getMessage()}</p>";
     }
 }
