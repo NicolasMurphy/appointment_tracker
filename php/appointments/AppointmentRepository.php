@@ -40,8 +40,8 @@ class AppointmentRepository
 
             return $stmt->execute();
         } catch (PDOException $e) {
-            error_log('Database error: ' . $e->getMessage());
-            throw new Exception('Failed to execute database operation.', 0, $e);
+            error_log('Database error during save: ' . $e->getMessage());
+            throw new Exception('Failed to save Appointment', 0, $e);
         }
     }
 
@@ -72,8 +72,8 @@ class AppointmentRepository
 
             return $stmt->execute();
         } catch (PDOException $e) {
-            error_log('Database error: ' . $e->getMessage());
-            throw new Exception('Failed to execute database operation.', 0, $e);
+            error_log('Database error during update: ' . $e->getMessage());
+            throw new Exception('Failed to update Appointment.', 0, $e);
         }
     }
 
@@ -86,8 +86,8 @@ class AppointmentRepository
 
             return $stmt->execute();
         } catch (PDOException $e) {
-            error_log('Database error: ' . $e->getMessage());
-            throw new Exception('Failed to execute database operation.', 0, $e);
+            error_log('Database error during delete: ' . $e->getMessage());
+            throw new Exception('Failed to delete Appointment', 0, $e);
         }
     }
 
@@ -120,7 +120,7 @@ class AppointmentRepository
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            error_log('Database error: ' . $e->getMessage());
+            error_log('Database error during fetchAll: ' . $e->getMessage());
             return [];
         }
     }
@@ -148,7 +148,7 @@ class AppointmentRepository
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             return $result ?: false;
         } catch (PDOException $e) {
-            error_log('Database error: ' . $e->getMessage());
+            error_log('Database error during fetchById: ' . $e->getMessage());
             return false;
         }
     }
