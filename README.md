@@ -16,13 +16,27 @@ The application allows users to schedule, view, edit, and delete appointments, p
 - **Database**: MySQL for data storage.
 - **Frontend**: PHP for serving HTML and vanilla TypeScript for dynamic changes.
 - **Environment**: Docker for containerized development, with nodemon for hot reloading during TypeScript development.
+- **Testing**: PHPUnit for unit testing the PHP codebase.
 
 ## Features
 
-- **Create Appointments**: Users can add new appointments with details such as client name, caregiver name, address, date, start time, end time, notes.
-- **View Appointments**: All scheduled appointments are displayed on the main page.
-- **Edit Appointments**: Users can modify the details of existing appointments.
-- **Delete Appointments**: Users can remove appointments that are no longer needed.
+- **Appointments**
+
+  - **Create Appointments**: Client name, caregiver name, address, date, start time, end time, notes. (Client ID and Caregiver ID are used as foreign keys.)
+  - **View Appointments**
+  - **Edit Appointments**
+  - **Delete Appointments**
+
+- **Clients**
+
+  - **Create Clients**: Client first name, client last name, email, phone number, address.
+  - **View Clients**
+  - **Edit Clients**
+
+- **Caregivers**
+  - **Create Caregivers**: Caregiver first name, caregiver last name, email, phone number, address, pay rate.
+  - **View Caregivers**
+  - **Edit Caregivers**
 
 ## Project Initialization
 
