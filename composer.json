@@ -6,6 +6,7 @@
         "psr-4": {
             "Appointments\\": "php/Appointments/",
             "Clients\\": "php/Clients/",
+            "Caregivers\\": "php/Caregivers/",
             "Database\\": "php/"
         }
     },

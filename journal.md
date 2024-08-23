@@ -1,3 +1,10 @@
+# 8/23
+
+    Goals:
+        - validate pay rate
+    Notes:
+        -
+
 # 8/22
 
     Goals:
@@ -10,6 +17,7 @@
         - Billing report, Payroll report
         - styling - tailwind, table (calendar later)
         - authentication
+        -
     Notes:
         -
 
