@@ -17,7 +17,7 @@
             <option value="">Select a client</option>
             <?php foreach ($clients as $client): ?>
                 <option value="<?php echo htmlspecialchars($client['id']); ?>" <?php echo $client['id'] == $appointmentDetails['client_id'] ? 'selected' : ''; ?>>
-                    <?php echo htmlspecialchars($client['first_name']) . ' ' . htmlspecialchars($client['last_name']); ?>
+                    <?php echo htmlspecialchars($client['last_name']) . ', ' . htmlspecialchars($client['first_name']); ?>
                 </option>
             <?php endforeach; ?>
         </select><br><br>
@@ -27,7 +27,7 @@
             <option value="">Select a caregiver</option>
             <?php foreach ($caregivers as $caregiver): ?>
                 <option value="<?php echo htmlspecialchars($caregiver['id']); ?>" <?php echo $caregiver['id'] == $appointmentDetails['caregiver_id'] ? 'selected' : ''; ?>>
-                    <?php echo htmlspecialchars($caregiver['first_name']) . ' ' . htmlspecialchars($caregiver['last_name']); ?>
+                    <?php echo htmlspecialchars($caregiver['last_name']) . ', ' . htmlspecialchars($caregiver['first_name']); ?>
                 </option>
             <?php endforeach; ?>
         </select><br><br>

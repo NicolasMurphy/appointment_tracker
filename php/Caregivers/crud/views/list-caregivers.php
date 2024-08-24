@@ -28,9 +28,7 @@ $caregivers = $caregiverRepo->fetchAll();
                 <li>
                     <?php echo htmlspecialchars($caregiverItem['id']); ?>
                     -
-                    <?php echo htmlspecialchars($caregiverItem['first_name']); ?>
-                    -
-                    <?php echo htmlspecialchars($caregiverItem['last_name']); ?>
+                    <?php echo htmlspecialchars($caregiverItem['last_name']) . ', ' . htmlspecialchars($caregiverItem['first_name']); ?>
                     -
                     <?php echo htmlspecialchars($caregiverItem['email']); ?>
                     -
