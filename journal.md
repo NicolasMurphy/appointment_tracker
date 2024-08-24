@@ -1,3 +1,11 @@
+# 8/24
+
+    Goals:
+        - format names -> last, first
+        -
+    Notes:
+        -
+
 # 8/23
 
     Goals:
