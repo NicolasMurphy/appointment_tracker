@@ -21,7 +21,7 @@ $services = $serviceRepo->fetchAll();
 
 <body>
     <?php include '../../../nav.php'; ?>
-    <h1>Service List</h1>
+    <h1>Services</h1>
     <?php if (!empty($services)): ?>
         <ul>
             <?php foreach ($services as $serviceItem): ?>

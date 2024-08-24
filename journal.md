@@ -2,6 +2,10 @@
 
     Goals:
         - use data provider in other tests
+        - verification - automatically send post request when checked in appointment list?
+        - Billing report, Payroll report
+        - styling - tailwind, table (calendar later)
+        - authentication
         -
     Notes:
         -
