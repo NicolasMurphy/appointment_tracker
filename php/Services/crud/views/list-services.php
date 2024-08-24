@@ -30,6 +30,8 @@ $services = $serviceRepo->fetchAll();
                     -
                     <?php echo htmlspecialchars($serviceItem['code']); ?>
                     -
+                    <?php echo htmlspecialchars($serviceItem['description']); ?>
+                    -
                     <?php echo htmlspecialchars($serviceItem['bill_rate']); ?>
 
                     <a href="../update-service.php?id=<?php echo htmlspecialchars($serviceItem['id']); ?>">Edit</a>

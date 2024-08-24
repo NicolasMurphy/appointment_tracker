@@ -2,6 +2,7 @@
 
     Goals:
         - format names -> last, first
+        - display bill rate along with service in appointment list
         -
     Notes:
         -

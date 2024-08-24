@@ -21,7 +21,7 @@ class Service
             throw new \InvalidArgumentException("Invalid bill rate format. It should be a valid number.");
         }
 
-        $this->$code = $code;
+        $this->code = $code;
         $this->description = $description;
         $this->billRate = (float) $billRate;
     }
