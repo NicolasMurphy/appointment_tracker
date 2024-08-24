@@ -37,7 +37,7 @@
             <option value="">Select a service</option>
             <?php foreach ($services as $service): ?>
                 <option value="<?php echo htmlspecialchars($service['id']); ?>" <?php echo $service['id'] == $appointmentDetails['service_id'] ? 'selected' : ''; ?>>
-                    <?php echo htmlspecialchars($service['code']) ?>
+                    <?php echo htmlspecialchars($service['code']) . ' - $' . htmlspecialchars($service['bill_rate']) ?>
                 </option>
             <?php endforeach; ?>
         </select><br><br>

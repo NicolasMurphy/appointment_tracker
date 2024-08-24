@@ -1,8 +1,6 @@
 # 8/24
 
     Goals:
-        - format names -> last, first
-        - display bill rate along with service in appointment list
         - use data provider in other tests
         -
     Notes:

@@ -26,7 +26,7 @@ if ($id !== false && $id !== null) {
     $caregiverStmt = $dbConnection->query("SELECT id, first_name, last_name FROM caregivers ORDER BY last_name ASC");
     $caregivers = $caregiverStmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $serviceStmt = $dbConnection->query("SELECT id, code FROM services");
+    $serviceStmt = $dbConnection->query("SELECT id, code, bill_rate FROM services");
     $services = $serviceStmt->fetchAll(PDO::FETCH_ASSOC);
 } else {
     echo "Invalid appointment ID.";

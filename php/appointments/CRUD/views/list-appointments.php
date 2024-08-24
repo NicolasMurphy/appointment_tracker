@@ -29,7 +29,7 @@ $appointments = $appointmentRepo->fetchAll();
                     <?php echo htmlspecialchars($appointmentItem['caregiver_last_name']) . ', ' . htmlspecialchars($appointmentItem['caregiver_first_name']); ?>
                     -
                     Service:
-                    <?php echo htmlspecialchars($appointmentItem['service_code']) ?>
+                    <?php echo htmlspecialchars($appointmentItem['service_code']) . ' - $' . htmlspecialchars($appointmentItem['service_bill_rate'])?>
                     -
                     <?php echo htmlspecialchars($appointmentItem['date']); ?>
                     from

@@ -12,7 +12,7 @@ $clients = $clientStmt->fetchAll(PDO::FETCH_ASSOC);
 $caregiverStmt = $dbConnection->query("SELECT id, first_name, last_name FROM caregivers ORDER BY last_name ASC");
 $caregivers = $caregiverStmt->fetchAll(PDO::FETCH_ASSOC);
 
-$serviceStmt = $dbConnection->query("SELECT id, code FROM services");
+$serviceStmt = $dbConnection->query("SELECT id, code, bill_rate FROM services");
 $services = $serviceStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -53,7 +53,7 @@ $services = $serviceStmt->fetchAll(PDO::FETCH_ASSOC);
             <option value="">Select a service</option>
             <?php foreach ($services as $service): ?>
                 <option value="<?php echo htmlspecialchars($service['id']); ?>">
-                    <?php echo htmlspecialchars($service['code']) ?>
+                    <?php echo htmlspecialchars($service['code']) . ' - $' . htmlspecialchars($service['bill_rate']) ?>
                 </option>
             <?php endforeach; ?>
         </select><br><br>

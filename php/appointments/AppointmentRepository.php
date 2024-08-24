@@ -110,6 +110,7 @@ class AppointmentRepository
                 caregivers.first_name AS caregiver_first_name,
                 caregivers.last_name AS caregiver_last_name,
                 services.code AS service_code,
+                services.bill_rate AS service_bill_rate,
                 appointments.date,
                 DATE_FORMAT(appointments.start_time, '%l:%i %p') AS start_time,
                 DATE_FORMAT(appointments.end_time, '%l:%i %p') AS end_time,
