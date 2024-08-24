@@ -22,7 +22,7 @@ The application allows users to schedule, view, edit, and delete appointments, p
 
 - **Appointments**
 
-  - **Create Appointments**: Client name, caregiver name, address, date, start time, end time, notes. (Client ID and Caregiver ID are used as foreign keys.)
+  - **Create Appointments**: Client name, caregiver name, service code, address, date, start time, end time, notes. (Client ID, Caregiver ID, and Service ID are used as foreign keys.)
   - **View Appointments**
   - **Edit Appointments**
   - **Delete Appointments**
@@ -34,9 +34,16 @@ The application allows users to schedule, view, edit, and delete appointments, p
   - **Edit Clients**
 
 - **Caregivers**
+
   - **Create Caregivers**: Caregiver first name, caregiver last name, email, phone number, address, pay rate.
   - **View Caregivers**
   - **Edit Caregivers**
+
+- **Services**
+
+  - **Create Services**: Service code, description, bill rate.
+  - **View Services**
+  - **Edit Services**
 
 ## Project Initialization
 
