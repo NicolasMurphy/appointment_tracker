@@ -24,8 +24,12 @@ $appointments = $appointmentRepo->fetchAll();
             <?php foreach ($appointments as $appointmentItem): ?>
                 <li data-client="<?php echo htmlspecialchars($appointmentItem['client_last_name']); ?>" data-caregiver="<?php echo htmlspecialchars($appointmentItem['caregiver_last_name']); ?>" data-date="<?php echo htmlspecialchars($appointmentItem['date']); ?>">
                     Client: <?php echo htmlspecialchars($appointmentItem['client_first_name']) . ' ' . htmlspecialchars($appointmentItem['client_last_name']); ?>
-                    - Caregiver:
+                    -
+                    Caregiver:
                     <?php echo htmlspecialchars($appointmentItem['caregiver_first_name']) . ' ' . htmlspecialchars($appointmentItem['caregiver_last_name']); ?>
+                    -
+                    Service:
+                    <?php echo htmlspecialchars($appointmentItem['service_code']) ?>
                     -
                     <?php echo htmlspecialchars($appointmentItem['date']); ?>
                     from

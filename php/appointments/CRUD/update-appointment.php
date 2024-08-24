@@ -25,6 +25,9 @@ if ($id !== false && $id !== null) {
 
     $caregiverStmt = $dbConnection->query("SELECT id, first_name, last_name FROM caregivers ORDER BY last_name ASC");
     $caregivers = $caregiverStmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $serviceStmt = $dbConnection->query("SELECT id, code FROM services");
+    $services = $serviceStmt->fetchAll(PDO::FETCH_ASSOC);
 } else {
     echo "Invalid appointment ID.";
     exit();
@@ -34,13 +37,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
     $clientId = filter_input(INPUT_POST, 'client_id', FILTER_VALIDATE_INT);
     $caregiverId = filter_input(INPUT_POST, 'caregiver_id', FILTER_VALIDATE_INT);
+    $serviceId = filter_input(INPUT_POST, 'service_id', FILTER_VALIDATE_INT);
     $date = $_POST['date'] ?? '';
     $startTime = $_POST['start_time'] ?? '';
     $endTime = $_POST['end_time'] ?? '';
     $notes = $_POST['notes'] ?? '';
 
-    if ($id !== false && $clientId !== false && $caregiverId !== false) {
-        $appointment = new Appointment($clientId, $caregiverId, $date, $startTime, $endTime, $notes);
+    if ($id !== false && $clientId !== false && $caregiverId !== false && $serviceId !== false) {
+        $appointment = new Appointment($clientId, $caregiverId, $serviceId, $date, $startTime, $endTime, $notes);
         $appointment->setId($id);
 
         if ($appointmentRepo->update($appointment)) {
@@ -50,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "Failed to update appointment.";
         }
     } else {
-        echo "Invalid appointment ID, client ID, or caregiver ID.";
+        echo "Invalid appointment ID, client ID, caregiver ID, or service ID.";
     }
 }
 

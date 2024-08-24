@@ -11,6 +11,7 @@ class Appointment
     private ?int $id = null;
     private int $clientId;
     private int $caregiverId;
+    private int $serviceId;
     private string $date;
     private string $startTime;
     private string $endTime;
@@ -19,6 +20,7 @@ class Appointment
     public function __construct(
         int $clientId,
         int $caregiverId,
+        int $serviceId,
         string $date,
         string $startTime,
         string $endTime,
@@ -38,6 +40,7 @@ class Appointment
 
         $this->clientId = $clientId;
         $this->caregiverId = $caregiverId;
+        $this->serviceId = $serviceId;
         $this->date = $date;
         $this->startTime = $startTime;
         $this->endTime = $endTime;
@@ -62,6 +65,11 @@ class Appointment
     public function getCaregiverId(): int
     {
         return $this->caregiverId;
+    }
+
+    public function getServiceId(): int
+    {
+        return $this->serviceId;
     }
 
     public function getDate(): string

@@ -12,13 +12,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $clientId = (int)($_POST['client_id'] ?? 0);
     $caregiverId = (int)($_POST['caregiver_id'] ?? 0);
+    $serviceId = (int)($_POST['service_id'] ?? 0);
     $date = $_POST['date'] ?? '';
     $startTime = $_POST['start_time'] ?? '';
     $endTime = $_POST['end_time'] ?? '';
     $notes = $_POST['notes'] ?? '';
 
     try {
-        $appointment = new Appointment($clientId, $caregiverId, $date, $startTime, $endTime, $notes);
+        $appointment = new Appointment($clientId, $caregiverId, $serviceId, $date, $startTime, $endTime, $notes);
 
         if ($appointmentRepo->save($appointment)) {
             header('Location: ../../../');

@@ -11,6 +11,9 @@ $clients = $clientStmt->fetchAll(PDO::FETCH_ASSOC);
 
 $caregiverStmt = $dbConnection->query("SELECT id, first_name, last_name FROM caregivers ORDER BY last_name ASC");
 $caregivers = $caregiverStmt->fetchAll(PDO::FETCH_ASSOC);
+
+$serviceStmt = $dbConnection->query("SELECT id, code FROM services");
+$services = $serviceStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -41,6 +44,16 @@ $caregivers = $caregiverStmt->fetchAll(PDO::FETCH_ASSOC);
             <?php foreach ($caregivers as $caregiver): ?>
                 <option value="<?php echo htmlspecialchars($caregiver['id']); ?>">
                     <?php echo htmlspecialchars($caregiver['first_name']) . ' ' . htmlspecialchars($caregiver['last_name']); ?>
+                </option>
+            <?php endforeach; ?>
+        </select><br><br>
+
+        <label for="service_id">Service:</label><br>
+        <select id="service_id" name="service_id" required>
+            <option value="">Select a service</option>
+            <?php foreach ($services as $service): ?>
+                <option value="<?php echo htmlspecialchars($service['id']); ?>">
+                    <?php echo htmlspecialchars($service['code']) ?>
                 </option>
             <?php endforeach; ?>
         </select><br><br>

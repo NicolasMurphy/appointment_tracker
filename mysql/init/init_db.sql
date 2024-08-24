@@ -21,16 +21,25 @@ CREATE TABLE IF NOT EXISTS caregivers (
         pay_rate DECIMAL(10, 2) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS services (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        code VARCHAR(255) NOT NULL,
+        description VARCHAR(255) NOT NULL,
+        bill_rate DECIMAL(10, 2) NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS appointments (
         id INT AUTO_INCREMENT PRIMARY KEY,
         client_id INT NOT NULL,
         caregiver_id INT NOT NULL,
+        service_id INT NOT NULL,
         date DATE NOT NULL,
         start_time TIME NOT NULL,
         end_time TIME NOT NULL,
         notes VARCHAR(1000),
         FOREIGN KEY (client_id) REFERENCES clients(id),
-        FOREIGN KEY (caregiver_id) REFERENCES caregivers(id)
+        FOREIGN KEY (caregiver_id) REFERENCES caregivers(id),
+        FOREIGN KEY (service_id) REFERENCES services(id)
 );
 
 INSERT INTO
@@ -73,7 +82,7 @@ VALUES
                 'jane.smith@example.com',
                 '321-654-9870',
                 '123 Caregiver Avenue',
-                25.00
+                15.00
         ),
         (
                 'Bob',
@@ -81,13 +90,28 @@ VALUES
                 'bob.brown@example.com',
                 '654-987-3210',
                 '456 Caregiver Road',
-                30.00
+                20.00
+        );
+
+INSERT INTO
+        services (code, description, bill_rate)
+VALUES
+        (
+                'HC',
+                'Home Care',
+                35.00
+        ),
+        (
+                'HMK',
+                'Homemaker',
+                29.00
         );
 
 INSERT INTO
         appointments (
                 client_id,
                 caregiver_id,
+                service_id,
                 date,
                 start_time,
                 end_time,
@@ -95,6 +119,7 @@ INSERT INTO
         )
 VALUES
         (
+                1,
                 1,
                 1,
                 CURDATE(),
@@ -107,6 +132,7 @@ INSERT INTO
         appointments (
                 client_id,
                 caregiver_id,
+                service_id,
                 date,
                 start_time,
                 end_time,
@@ -114,6 +140,7 @@ INSERT INTO
         )
 VALUES
         (
+                2,
                 2,
                 2,
                 CURDATE() + INTERVAL 1 DAY,

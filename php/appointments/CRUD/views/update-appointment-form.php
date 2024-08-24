@@ -17,7 +17,7 @@
             <option value="">Select a client</option>
             <?php foreach ($clients as $client): ?>
                 <option value="<?php echo htmlspecialchars($client['id']); ?>" <?php echo $client['id'] == $appointmentDetails['client_id'] ? 'selected' : ''; ?>>
-                <?php echo htmlspecialchars($client['first_name']) . ' ' . htmlspecialchars($client['last_name']); ?>
+                    <?php echo htmlspecialchars($client['first_name']) . ' ' . htmlspecialchars($client['last_name']); ?>
                 </option>
             <?php endforeach; ?>
         </select><br><br>
@@ -27,7 +27,17 @@
             <option value="">Select a caregiver</option>
             <?php foreach ($caregivers as $caregiver): ?>
                 <option value="<?php echo htmlspecialchars($caregiver['id']); ?>" <?php echo $caregiver['id'] == $appointmentDetails['caregiver_id'] ? 'selected' : ''; ?>>
-                <?php echo htmlspecialchars($caregiver['first_name']) . ' ' . htmlspecialchars($caregiver['last_name']); ?>
+                    <?php echo htmlspecialchars($caregiver['first_name']) . ' ' . htmlspecialchars($caregiver['last_name']); ?>
+                </option>
+            <?php endforeach; ?>
+        </select><br><br>
+
+        <label for="service_id">Service:</label><br>
+        <select id="service_id" name="service_id" required>
+            <option value="">Select a service</option>
+            <?php foreach ($services as $service): ?>
+                <option value="<?php echo htmlspecialchars($service['id']); ?>" <?php echo $service['id'] == $appointmentDetails['service_id'] ? 'selected' : ''; ?>>
+                    <?php echo htmlspecialchars($service['code']) ?>
                 </option>
             <?php endforeach; ?>
         </select><br><br>
