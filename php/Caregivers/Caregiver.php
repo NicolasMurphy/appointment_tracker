@@ -12,7 +12,7 @@ class Caregiver
     private string $email;
     private string $phoneNumber;
     private string $address;
-    private string $payRate;
+    private float $payRate;
 
     public function __construct(
         string $firstName,
@@ -31,12 +31,16 @@ class Caregiver
             throw new \InvalidArgumentException("Invalid phone number format.");
         }
 
+        if (!$this->isValidPayRate($payRate)) {
+            throw new \InvalidArgumentException("Invalid pay rate format. It should be a valid number.");
+        }
+
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->email = $email;
         $this->phoneNumber = $phoneNumber;
         $this->address = $address;
-        $this->payRate = $payRate;
+        $this->payRate = (float) $payRate;
     }
 
     public function getId(): ?int
@@ -74,7 +78,7 @@ class Caregiver
         return $this->address;
     }
 
-    public function getPayRate(): string
+    public function getPayRate(): float
     {
         return $this->payRate;
     }
@@ -87,5 +91,10 @@ class Caregiver
     private function isValidPhoneNumber(string $phoneNumber): bool
     {
         return preg_match('/^\+?[0-9\s\-()]{10,20}$/', $phoneNumber) === 1;
+    }
+
+    private function isValidPayRate(string $payRate): bool
+    {
+        return is_numeric($payRate) && $payRate > 0;
     }
 }
