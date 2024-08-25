@@ -1,3 +1,15 @@
+# 8/25
+
+    Goals:
+        - use data provider in other tests
+        - Billing report - refactor
+        - Payroll report
+        - styling - tailwind, table (calendar later)
+        - authentication
+        -
+    Notes:
+        -
+
 # 8/24
 
     Goals:
