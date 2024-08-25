@@ -16,6 +16,7 @@ class Appointment
     private string $startTime;
     private string $endTime;
     private string $notes;
+    private bool $verified;
 
     public function __construct(
         int $clientId,
@@ -24,7 +25,8 @@ class Appointment
         string $date,
         string $startTime,
         string $endTime,
-        ?string $notes = null
+        ?string $notes = null,
+        bool $verified = false
     ) {
         if (!$this->isValidDate($date)) {
             throw new \InvalidArgumentException("Invalid date format.");
@@ -45,6 +47,7 @@ class Appointment
         $this->startTime = $startTime;
         $this->endTime = $endTime;
         $this->notes = $notes ?? '';
+        $this->verified = $verified;
     }
 
     public function getId(): ?int
@@ -90,6 +93,16 @@ class Appointment
     public function getNotes(): string
     {
         return $this->notes;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->verified;
+    }
+
+    public function setVerified(bool $verified): void
+    {
+        $this->verified = $verified;
     }
 
     private function isValidDate(string $date): bool

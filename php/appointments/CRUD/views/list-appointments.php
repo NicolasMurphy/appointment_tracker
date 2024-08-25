@@ -29,7 +29,7 @@ $appointments = $appointmentRepo->fetchAll();
                     <?php echo htmlspecialchars($appointmentItem['caregiver_last_name']) . ', ' . htmlspecialchars($appointmentItem['caregiver_first_name']); ?>
                     -
                     Service:
-                    <?php echo htmlspecialchars($appointmentItem['service_code']) . ' - $' . htmlspecialchars($appointmentItem['service_bill_rate'])?>
+                    <?php echo htmlspecialchars($appointmentItem['service_code']) . ' - $' . htmlspecialchars($appointmentItem['service_bill_rate']) ?>
                     -
                     <?php echo htmlspecialchars($appointmentItem['date']); ?>
                     from
@@ -38,6 +38,14 @@ $appointments = $appointmentRepo->fetchAll();
                     <?php echo htmlspecialchars($appointmentItem['end_time']); ?>
                     -
                     <?php echo htmlspecialchars($appointmentItem['notes']); ?>
+
+                    <form method="POST" action="./php/Appointments/crud/verify-appointment.php" style="display:inline;">
+                        <input type="hidden" name="id" value="<?php echo htmlspecialchars($appointmentItem['id']); ?>">
+                        <input type="hidden" name="verified" value="0">
+                        <input type="checkbox" name="verified" value="1" <?php echo $appointmentItem['verified'] ? 'checked' : ''; ?> onchange="this.form.submit()">
+                        Verified
+                    </form>
+
 
                     <a href="./php/Appointments/crud/update-appointment.php?id=<?php echo htmlspecialchars($appointmentItem['id']); ?>">Edit</a>
 

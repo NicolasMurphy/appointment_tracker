@@ -43,7 +43,7 @@ class AppointmentRepository
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log('Database error during save: ' . $e->getMessage());
-            throw new Exception('Failed to save Appointment', 0, $e);
+            throw new Exception('Failed to save Appointment');
         }
     }
 
@@ -78,7 +78,22 @@ class AppointmentRepository
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log('Database error during update: ' . $e->getMessage());
-            throw new Exception('Failed to update Appointment.', 0, $e);
+            throw new Exception('Failed to update Appointment.');
+        }
+    }
+
+    public function updateVerificationStatus(int $id, bool $verified): bool
+    {
+        try {
+            $sql = "UPDATE appointments SET verified = :verified WHERE id = :id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':verified', $verified, PDO::PARAM_BOOL);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log('Database error during updateVerificationStatus: ' . $e->getMessage());
+            return false;
         }
     }
 
@@ -92,7 +107,7 @@ class AppointmentRepository
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log('Database error during delete: ' . $e->getMessage());
-            throw new Exception('Failed to delete Appointment', 0, $e);
+            throw new Exception('Failed to delete Appointment');
         }
     }
 
@@ -114,7 +129,8 @@ class AppointmentRepository
                 appointments.date,
                 DATE_FORMAT(appointments.start_time, '%l:%i %p') AS start_time,
                 DATE_FORMAT(appointments.end_time, '%l:%i %p') AS end_time,
-                appointments.notes
+                appointments.notes,
+                appointments.verified
             FROM
                 appointments
             JOIN

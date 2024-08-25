@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS appointments (
         start_time TIME NOT NULL,
         end_time TIME NOT NULL,
         notes VARCHAR(1000),
+        verified TINYINT(1) NOT NULL DEFAULT 0,
         FOREIGN KEY (client_id) REFERENCES clients(id),
         FOREIGN KEY (caregiver_id) REFERENCES caregivers(id),
         FOREIGN KEY (service_id) REFERENCES services(id)
@@ -115,7 +116,8 @@ INSERT INTO
                 date,
                 start_time,
                 end_time,
-                notes
+                notes,
+                verified
         )
 VALUES
         (
@@ -125,7 +127,8 @@ VALUES
                 CURDATE(),
                 TIME('12:00'),
                 TIME('13:00'),
-                'Initial meeting'
+                'Initial meeting',
+                0
         );
 
 INSERT INTO
@@ -136,7 +139,8 @@ INSERT INTO
                 date,
                 start_time,
                 end_time,
-                notes
+                notes,
+                verified
         )
 VALUES
         (
@@ -146,5 +150,6 @@ VALUES
                 CURDATE() + INTERVAL 1 DAY,
                 TIME('12:00'),
                 TIME('13:00'),
-                'Follow-up visit'
+                'Follow-up visit',
+                0
         );
