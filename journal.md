@@ -2,7 +2,7 @@
 
     Goals:
         - use data provider in other tests
-        - Billing report - refactor
+        - Use controller for Appointment, Client, Caregiver, Service
         - Payroll report
         - styling - tailwind, table (calendar later)
         - authentication
