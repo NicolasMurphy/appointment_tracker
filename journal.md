@@ -1,4 +1,15 @@
-# 8/25
+# 8/27
+
+    Goals:
+        - Use controller for Appointment, Client, Caregiver, Service
+        - Payroll report
+        - styling - tailwind, table (calendar later)
+        - authentication
+        -
+    Notes:
+        -
+
+# 8/26
 
     Goals:
         - use data provider in other tests
@@ -10,7 +21,7 @@
     Notes:
         -
 
-# 8/24
+# 8/25
 
     Goals:
         - use data provider in other tests
@@ -22,7 +33,7 @@
     Notes:
         -
 
-# 8/23
+# 8/24
 
     Goals:
         - validate pay rate
@@ -31,7 +42,7 @@
     Notes:
         -
 
-# 8/22
+# 8/23
 
     Goals:
         - tests
