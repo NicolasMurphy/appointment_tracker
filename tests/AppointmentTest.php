@@ -1,11 +1,13 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Appointments\Appointment;
 
 class AppointmentTest extends TestCase
 {
-    public function testInvalidDateThrowsException()
+    #[DataProvider('invalidDateProvider')]
+    public function testInvalidDateThrowsException($invalidDate)
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid date format.');
@@ -13,7 +15,6 @@ class AppointmentTest extends TestCase
         $clientId = 1;
         $caregiverId = 2;
         $serviceId = 2;
-        $invalidDate = 'invalid-date';
         $startTime = '09:00';
         $endTime = '10:00';
         $notes = 'Follow-up appointment';
@@ -21,7 +22,8 @@ class AppointmentTest extends TestCase
         new Appointment($clientId, $caregiverId, $serviceId, $invalidDate, $startTime, $endTime, $notes);
     }
 
-    public function testInvalidStartTimeThrowsException()
+    #[DataProvider('invalidTimeProvider')]
+    public function testInvalidStartTimeThrowsException($invalidStartTime)
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid start time format.');
@@ -30,14 +32,14 @@ class AppointmentTest extends TestCase
         $caregiverId = 2;
         $serviceId = 2;
         $date = '2024-08-23';
-        $invalidStartTime = '25:00';
         $endTime = '10:00';
         $notes = 'Follow-up appointment';
 
         new Appointment($clientId, $caregiverId, $serviceId, $date, $invalidStartTime, $endTime, $notes);
     }
 
-    public function testInvalidEndTimeThrowsException()
+    #[DataProvider('invalidTimeProvider')]
+    public function testInvalidEndTimeThrowsException($invalidEndTime)
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid end time format.');
@@ -47,9 +49,30 @@ class AppointmentTest extends TestCase
         $serviceId = 2;
         $date = '2024-08-23';
         $startTime = '09:00';
-        $invalidEndTime = 'invalid-time';
         $notes = 'Follow-up appointment';
 
         new Appointment($clientId, $caregiverId, $serviceId, $date, $startTime, $invalidEndTime, $notes);
+    }
+
+    public static function invalidDateProvider(): array
+    {
+        return [
+            ['invalid-date'],
+            ['2024/08/23'],
+            ['08-23-2024'],
+            ['2024.08.23'],
+            [''],
+        ];
+    }
+
+    public static function invalidTimeProvider(): array
+    {
+        return [
+            ['25:00'],
+            ['99:99'],
+            ['12:60'],
+            ['invalid-time'],
+            [''],
+        ];
     }
 }
