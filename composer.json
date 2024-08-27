@@ -9,6 +9,7 @@
             "Caregivers\\": "php/Caregivers/",
             "Services\\": "php/Services/",
             "Reports\\": "php/Reports/",
+            "Payroll\\": "php/Payroll/",
             "Database\\": "php/"
         }
     },
