@@ -21,6 +21,8 @@ class BillingService
                 (int)$row['client_id'],
                 $row['client_first_name'],
                 $row['client_last_name'],
+                $row['caregiver_first_name'],
+                $row['caregiver_last_name'],
                 $row['service_code'],
                 (float)$row['service_bill_rate'],
                 $row['appointment_date'],

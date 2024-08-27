@@ -10,6 +10,8 @@ class BillingReport
         private int $clientId,
         private string $clientFirstName,
         private string $clientLastName,
+        private string $caregiverFirstName,
+        private string $caregiverLastName,
         private string $serviceCode,
         private float $serviceBillRate,
         private string $appointmentDate,
@@ -28,6 +30,14 @@ class BillingReport
     public function getClientLastName(): string
     {
         return $this->clientLastName;
+    }
+    public function getCaregiverFirstName(): string
+    {
+        return $this->caregiverFirstName;
+    }
+    public function getCaregiverLastName(): string
+    {
+        return $this->caregiverLastName;
     }
     public function getServiceCode(): string
     {

@@ -27,6 +27,7 @@
             <thead>
                 <tr>
                     <th>Client</th>
+                    <th>Caregiver</th>
                     <th>Date</th>
                     <th>Service</th>
                     <th>Bill Rate</th>
@@ -54,6 +55,7 @@
                 ?>
                     <tr>
                         <td><?php echo $previousClientName; ?></td>
+                        <td><?php echo htmlspecialchars($billingReport->getCaregiverLastName()) . ', ' . htmlspecialchars($billingReport->getCaregiverFirstName()); ?></td>
                         <td><?php echo htmlspecialchars($billingReport->getAppointmentDate()); ?></td>
                         <td><?php echo htmlspecialchars($billingReport->getServiceCode()); ?></td>
                         <td><?php echo htmlspecialchars(number_format($billingReport->getServiceBillRate(), 2)); ?></td>
