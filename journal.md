@@ -1,3 +1,14 @@
+# 8/28
+
+    Goals:
+        - Use controller for Appointment, Caregiver, Service
+        - Payroll/Billing Report tests
+        - styling - tailwind, table (calendar later)
+        - authentication
+        -
+    Notes:
+        -
+
 # 8/27
 
     Goals:
