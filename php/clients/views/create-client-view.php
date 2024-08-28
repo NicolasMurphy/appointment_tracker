@@ -16,10 +16,10 @@
 
     <form method="POST" action="/php/clients.php?action=create">
 
-        <label for="first_name">First name:</label><br>
+        <label for="first_name">First Name:</label><br>
         <input type="text" id="first_name" name="first_name" required value="<?php echo htmlspecialchars($firstName ?? ''); ?>"><br><br>
 
-        <label for="last_name">Last name:</label><br>
+        <label for="last_name">Last Name:</label><br>
         <input type="text" id="last_name" name="last_name" required value="<?php echo htmlspecialchars($lastName ?? ''); ?>"><br><br>
 
         <label for="email">Email:</label><br>

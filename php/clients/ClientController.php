@@ -37,6 +37,9 @@ class ClientController
 
     private function createClient(): void
     {
+        $errorMessage = '';
+        $firstName = $lastName = $email = $phoneNumber = $address = '';
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $firstName = $_POST['first_name'] ?? '';
             $lastName = $_POST['last_name'] ?? '';
@@ -50,15 +53,25 @@ class ClientController
                 header('Location: ?action=list');
                 exit();
             } catch (\InvalidArgumentException $e) {
-                error_log($e->getMessage());
+                $errorMessage = $e->getMessage();
             }
         }
 
-        include 'views/create-client-view.php';
+        // pass error and fields to view
+        $this->renderView('views/create-client-view.php', [
+            'errorMessage' => $errorMessage,
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'email' => $email,
+            'phoneNumber' => $phoneNumber,
+            'address' => $address
+        ]);
     }
 
     private function updateClient(): void
     {
+        $errorMessage = '';
+
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
         if ($id === false || $id === null) {
@@ -66,7 +79,13 @@ class ClientController
             exit();
         }
 
+        // Initially populate with data from the database
         $clientData = $this->clientService->getClientById($id);
+        $firstName = $clientData['first_name'] ?? '';
+        $lastName = $clientData['last_name'] ?? '';
+        $email = $clientData['email'] ?? '';
+        $phoneNumber = $clientData['phone_number'] ?? '';
+        $address = $clientData['address'] ?? '';
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $firstName = $_POST['first_name'] ?? '';
@@ -82,16 +101,32 @@ class ClientController
                 header('Location: ?action=list');
                 exit();
             } catch (\InvalidArgumentException $e) {
-                error_log($e->getMessage());
+                $errorMessage = $e->getMessage();
             }
         }
 
-        include 'views/update-client-view.php';
+        // Pass the possibly updated fields and error message to the view
+        $this->renderView('views/update-client-view.php', [
+            'errorMessage' => $errorMessage,
+            'clientData' => $clientData,
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'email' => $email,
+            'phoneNumber' => $phoneNumber,
+            'address' => $address,
+        ]);
     }
 
     private function listClients(): void
     {
         $clients = $this->clientService->getAllClients();
         include 'views/list-clients-view.php';
+    }
+
+    // display error message and keep fields
+    private function renderView(string $viewFile, array $data = []): void
+    {
+        extract($data);
+        include $viewFile;
     }
 }
