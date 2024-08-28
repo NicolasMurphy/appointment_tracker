@@ -1,15 +1,3 @@
-<?php
-
-use Clients\ClientRepository;
-use Database\Database;
-
-require_once '/var/www/html/vendor/autoload.php';
-
-$dbConnection = Database::getInstance()->getConnection();
-$clientRepo = new ClientRepository($dbConnection);
-$clients = $clientRepo->fetchAll();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +8,7 @@ $clients = $clientRepo->fetchAll();
 </head>
 
 <body>
-    <?php include '../../../nav.php'; ?>
+    <?php include 'nav.php'; ?>
     <h1>Client List</h1>
     <?php if (!empty($clients)): ?>
         <ul>
@@ -36,7 +24,7 @@ $clients = $clientRepo->fetchAll();
                     -
                     <?php echo htmlspecialchars($clientItem['address']); ?>
 
-                    <a href="../update-client.php?id=<?php echo htmlspecialchars($clientItem['id']); ?>">Edit</a>
+                    <a href="?action=update&id=<?php echo htmlspecialchars($clientItem['id']); ?>">Edit</a>
 
                 </li>
             <?php endforeach; ?>
@@ -44,7 +32,7 @@ $clients = $clientRepo->fetchAll();
     <?php else: ?>
         <p>No clients found.</p>
     <?php endif; ?>
-    <a href="./create-client-form.php">Create New Client</a>
+    <a href="?action=create">Create New Client</a>
 </body>
 
 </html>

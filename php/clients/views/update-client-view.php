@@ -10,6 +10,10 @@
 <body>
     <h1>Update Client</h1>
 
+    <?php if (!empty($errorMessage)): ?>
+        <p style="color: red;"><?php echo htmlspecialchars($errorMessage); ?></p>
+    <?php endif; ?>
+
     <form method="POST" action="">
         <input type="hidden" name="id" value="<?php echo htmlspecialchars($clientData['id']); ?>">
 
