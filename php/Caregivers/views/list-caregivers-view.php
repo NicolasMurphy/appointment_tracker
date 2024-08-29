@@ -1,15 +1,3 @@
-<?php
-
-use Caregivers\CaregiverRepository;
-use Database\Database;
-
-require_once '/var/www/html/vendor/autoload.php';
-
-$dbConnection = Database::getInstance()->getConnection();
-$caregiverRepo = new CaregiverRepository($dbConnection);
-$caregivers = $caregiverRepo->fetchAll();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +8,7 @@ $caregivers = $caregiverRepo->fetchAll();
 </head>
 
 <body>
-    <?php include '../../../nav.php'; ?>
+    <?php include 'nav.php'; ?>
     <h1>Caregiver List</h1>
     <?php if (!empty($caregivers)): ?>
         <ul>
@@ -38,7 +26,7 @@ $caregivers = $caregiverRepo->fetchAll();
                     -
                     <?php echo htmlspecialchars($caregiverItem['pay_rate']); ?>
 
-                    <a href="../update-caregiver.php?id=<?php echo htmlspecialchars($caregiverItem['id']); ?>">Edit</a>
+                    <a href="?action=update&id=<?php echo htmlspecialchars($caregiverItem['id']); ?>">Edit</a>
 
                 </li>
             <?php endforeach; ?>
@@ -46,7 +34,7 @@ $caregivers = $caregiverRepo->fetchAll();
     <?php else: ?>
         <p>No caregivers found.</p>
     <?php endif; ?>
-    <a href="./create-caregiver-form.php">Create New Caregiver</a>
+    <a href="?action=create">Create New Caregiver</a>
 </body>
 
 </html>
