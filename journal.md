@@ -1,3 +1,15 @@
+# 8/29
+
+    Goals:
+        - Integration tests
+        - Use controller for Appointment, Service
+        - Payroll/Billing Report tests
+        - styling - tailwind, table (calendar later)
+        - authentication
+        -
+    Notes:
+        -
+
 # 8/28
 
     Goals:
