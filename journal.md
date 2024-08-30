@@ -1,3 +1,18 @@
+# 8/31
+
+    Goals:
+        - refactor appointment controller
+        - fix docker app exit issue
+        - Integration tests
+        - Use patch instead of post for updates
+        - take /php/ out of nav links
+        - Payroll/Billing Report tests
+        - styling - tailwind, table (calendar later)
+        - authentication
+        -
+    Notes:
+        -
+
 # 8/30
 
     Goals:
