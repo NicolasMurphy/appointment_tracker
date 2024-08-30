@@ -1,21 +1,3 @@
-<?php
-
-use Database\Database;
-
-require_once '/var/www/html/vendor/autoload.php';
-
-$dbConnection = Database::getInstance()->getConnection();
-
-$clientStmt = $dbConnection->query("SELECT id, first_name, last_name FROM clients ORDER BY last_name ASC");
-$clients = $clientStmt->fetchAll(PDO::FETCH_ASSOC);
-
-$caregiverStmt = $dbConnection->query("SELECT id, first_name, last_name FROM caregivers ORDER BY last_name ASC");
-$caregivers = $caregiverStmt->fetchAll(PDO::FETCH_ASSOC);
-
-$serviceStmt = $dbConnection->query("SELECT id, code, bill_rate FROM services");
-$services = $serviceStmt->fetchAll(PDO::FETCH_ASSOC);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +9,12 @@ $services = $serviceStmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
     <h1>Create New Appointment</h1>
-    <form method="POST" action="../create-appointment.php">
+
+    <?php if (!empty($errorMessage)): ?>
+        <p style="color: red;"><?php echo htmlspecialchars($errorMessage); ?></p>
+    <?php endif; ?>
+
+    <form method="POST" action="/php/appointments.php?action=create">
         <label for="client_id">Client:</label><br>
         <select id="client_id" name="client_id" required>
             <option value="">Select a client</option>
@@ -72,7 +59,7 @@ $services = $serviceStmt->fetchAll(PDO::FETCH_ASSOC);
 
         <button type="submit">Create Appointment</button>
     </form>
-    <script src="../../../../js/timeSelector.js"></script>
+    <script src="../../../js/timeSelector.js"></script>
 </body>
 
 </html>

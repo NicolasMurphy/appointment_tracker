@@ -1,13 +1,3 @@
-<?php
-
-use Appointments\AppointmentRepository;
-use Database\Database;
-
-$dbConnection = Database::getInstance()->getConnection();
-$appointmentRepo = new AppointmentRepository($dbConnection);
-$appointments = $appointmentRepo->fetchAll();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,6 +8,7 @@ $appointments = $appointmentRepo->fetchAll();
 </head>
 
 <body>
+    <?php include './nav.php'; ?>
     <h1>Appointment List</h1>
     <?php if (!empty($appointments)): ?>
         <ul id="appointment-list">
@@ -39,17 +30,16 @@ $appointments = $appointmentRepo->fetchAll();
                     -
                     <?php echo htmlspecialchars($appointmentItem['notes']); ?>
 
-                    <form method="POST" action="./php/Appointments/crud/verify-appointment.php" style="display:inline;">
+                    <form method="POST" action="/php/appointments.php?action=verify" style="display:inline;">
                         <input type="hidden" name="id" value="<?php echo htmlspecialchars($appointmentItem['id']); ?>">
                         <input type="hidden" name="verified" value="0">
                         <input type="checkbox" name="verified" value="1" <?php echo $appointmentItem['verified'] ? 'checked' : ''; ?> onchange="this.form.submit()">
                         Verified
                     </form>
 
+                    <a href="?action=update&id=<?php echo htmlspecialchars($appointmentItem['id']); ?>">Edit</a>
 
-                    <a href="./php/Appointments/crud/update-appointment.php?id=<?php echo htmlspecialchars($appointmentItem['id']); ?>">Edit</a>
-
-                    <form method="POST" action="./php/Appointments/crud/delete-appointment.php" style="display:inline;">
+                    <form method="POST" action="/php/appointments.php?action=delete" style="display:inline;">
                         <input type="hidden" name="id" value="<?php echo htmlspecialchars($appointmentItem['id']); ?>">
                         <button type="submit">Delete</button>
                     </form>
@@ -59,7 +49,7 @@ $appointments = $appointmentRepo->fetchAll();
     <?php else: ?>
         <p>No appointments found.</p>
     <?php endif; ?>
-    <a href="./php/Appointments/crud/views/create-appointment-form.php">Create New Appointment</a>
+    <a href="/php/appointments.php?action=create">Create New Appointment</a>
     <script type="module" src="js/sortFunctions.js"></script>
 </body>
 

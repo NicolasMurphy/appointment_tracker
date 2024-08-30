@@ -4,6 +4,7 @@
         - Integration tests
         - Use controller for Appointment
         - Use patch instead of post for updates
+        - take /php/ out of nav links
         - Payroll/Billing Report tests
         - styling - tailwind, table (calendar later)
         - authentication

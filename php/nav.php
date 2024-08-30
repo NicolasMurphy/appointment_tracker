@@ -1,5 +1,5 @@
 <nav>
-    <a href="http://localhost:3000/">Appointment List</a>
+    <a href="/php/appointments.php?action=list">Appointment List</a>
     <a href="/php/clients.php?action=list">Client List</a>
     <a href="/php/caregivers.php?action=list">Caregiver List</a>
     <a href="/php/services.php?action=list">Services</a>

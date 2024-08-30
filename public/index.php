@@ -1,5 +1,6 @@
 <?php
 require_once '/var/www/html/vendor/autoload.php';
+header('Location: /php/appointments.php?action=list');
 ?>
 
 <!DOCTYPE html>
@@ -12,8 +13,6 @@ require_once '/var/www/html/vendor/autoload.php';
 </head>
 
 <body>
-    <?php include './php/nav.php'; ?>
-    <?php include './php/Appointments/crud/views/list-appointments.php'; ?>
 </body>
 
 </html>
