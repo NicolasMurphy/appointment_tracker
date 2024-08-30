@@ -20,7 +20,7 @@ $services = $serviceRepo->fetchAll();
 </head>
 
 <body>
-    <?php include '../../../nav.php'; ?>
+    <?php include 'nav.php'; ?>
     <h1>Services</h1>
     <?php if (!empty($services)): ?>
         <ul>
@@ -34,7 +34,7 @@ $services = $serviceRepo->fetchAll();
                     -
                     <?php echo htmlspecialchars($serviceItem['bill_rate']); ?>
 
-                    <a href="../update-service.php?id=<?php echo htmlspecialchars($serviceItem['id']); ?>">Edit</a>
+                    <a href="?action=update&id=<?php echo htmlspecialchars($serviceItem['id']); ?>">Edit</a>
 
                 </li>
             <?php endforeach; ?>
@@ -42,7 +42,7 @@ $services = $serviceRepo->fetchAll();
     <?php else: ?>
         <p>No services found.</p>
     <?php endif; ?>
-    <a href="./create-service-form.php">Create New Service</a>
+    <a href="?action=create">Create New Service</a>
 </body>
 
 </html>
