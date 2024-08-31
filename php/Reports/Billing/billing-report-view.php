@@ -38,6 +38,7 @@
             <tbody>
                 <?php
                 $totalRevenueAllClients = 0;
+                $totalHoursAllClients = 0;
                 $totalHoursPerClient = 0;
                 $totalRevenuePerClient = 0;
                 $currentClientId = null;
@@ -65,6 +66,7 @@
                     <?php
                     $totalHoursPerClient += $billingReport->getVisitHours();
                     $totalRevenuePerClient += $billingReport->getVisitRevenue();
+                    $totalHoursAllClients += $billingReport->getVisitHours();
                     $totalRevenueAllClients += $billingReport->getVisitRevenue();
                     ?>
                     <?php if ($index === count($report) - 1): ?>
@@ -79,6 +81,7 @@
             </tbody>
         </table>
 
+        <h3>Total Billed Hours for All Clients: <?php echo rtrim(rtrim(number_format($totalHoursAllClients, 2), '0'), '.'); ?></h3>
         <h3>Total Billed Revenue for All Clients: $<?php echo number_format($totalRevenueAllClients, 2); ?></h3>
     <?php else: ?>
         <p>No verified appointments found for the given date range.</p>
