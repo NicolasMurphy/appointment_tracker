@@ -130,7 +130,6 @@ class CaregiverRepository
         }
     }
 
-
     /**
      * @return array<array<string, string>>
      */
