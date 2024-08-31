@@ -51,13 +51,13 @@ The application allows users to schedule, view, edit, and delete visits, providi
   - **Billing Report**:
 
     - **Choose Date Range**: Select a date range to view reports for verified visits.
-    - **View Billable Hours and Revenue per Client**: Access detailed reports showing the total billable hours and revenue for each client.
-    - **View Total Billable Hours and Revenue for All Clients**: Summarize the overall billable hours and revenue across all clients within the selected date range.
+    - **View Hours and Revenue per Client**: Access detailed reports showing the total hours and revenue for each client.
+    - **View Total Hours and Revenue for All Clients**: Summarize the overall hours and revenue across all clients within the selected date range.
 
   - **Payroll Report**:
     - **Choose Date Range**: Select a date range to generate payroll reports based on verified visits.
-    - **View Payable Hours and Revenue per Caregiver**: Access detailed reports showing the total payable hours and revenue for each caregiver.
-    - **View Total Payable Hours and Revenue for All Caregivers**: Summarize the overall payable hours and payroll expenses across all caregivers within the selected date range.
+    - **View Hours and Revenue per Caregiver**: Access detailed reports showing the total hours and revenue for each caregiver.
+    - **View Total Hours and Revenue for All Caregivers**: Summarize the overall hours and payroll wages across all caregivers within the selected date range.
 
 ## Project Initialization
 
