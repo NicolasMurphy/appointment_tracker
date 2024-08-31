@@ -8,7 +8,8 @@ use PDO;
 use PDOException;
 use Dotenv\Dotenv;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once '/var/www/html/vendor/autoload.php'; // docker
+// require_once __DIR__ . '/../vendor/autoload.php'; // local
 
 class Database
 {
@@ -17,7 +18,8 @@ class Database
 
     private function __construct()
     {
-        $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+        $dotenv = Dotenv::createImmutable('/var/www/html'); // docker
+        // $dotenv = Dotenv::createImmutable(__DIR__ . '/../'); // local
         $dotenv->load();
 
         $host = $_ENV['DB_HOST'];

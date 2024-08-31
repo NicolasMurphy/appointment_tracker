@@ -52,6 +52,10 @@ class CaregiverRepository
 
     public function update(Caregiver $caregiver): bool
     {
+        if ($this->isDuplicateNameForUpdate($caregiver->getFirstName(), $caregiver->getLastName(), $caregiver->getId())) {
+            throw new \InvalidArgumentException("A caregiver with this first and last name already exists.");
+        }
+
         try {
             $sql = "UPDATE caregivers
                 SET first_name = :first_name,
@@ -87,6 +91,7 @@ class CaregiverRepository
     }
 
 
+
     public function isDuplicateName(string $firstName, string $lastName): bool
     {
         try {
@@ -103,6 +108,28 @@ class CaregiverRepository
             throw new Exception('Failed to check for duplicate caregiver name.');
         }
     }
+
+    public function isDuplicateNameForUpdate(string $firstName, string $lastName, int $id): bool
+    {
+        try {
+            $stmt = $this->db->prepare(
+                "SELECT COUNT(*) FROM caregivers
+             WHERE first_name = :first_name
+               AND last_name = :last_name
+               AND id != :id"
+            );
+            $stmt->bindParam(':first_name', $firstName, PDO::PARAM_STR);
+            $stmt->bindParam(':last_name', $lastName, PDO::PARAM_STR);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return $stmt->fetchColumn() > 0;
+        } catch (PDOException $e) {
+            error_log('Database error: ' . $e->getMessage());
+            throw new Exception('Failed to check for duplicate caregiver name.');
+        }
+    }
+
 
     /**
      * @return array<array<string, string>>
