@@ -1,3 +1,17 @@
+# 9/1
+
+    Goals:
+        - Integration tests for Clients, Appointments
+        - E2E tests
+        - Use patch instead of post for updates
+        - take /php/ out of nav links
+        - Payroll/Billing Report Unit tests
+        - styling - tailwind, table (calendar later)
+        - authentication
+        -
+    Notes:
+        -
+
 # 8/31
 
     Goals:
