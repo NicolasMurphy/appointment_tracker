@@ -8,7 +8,7 @@ use PDO;
 use PDOException;
 use Dotenv\Dotenv;
 
-require_once '/var/www/html/vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 class Database
 {
@@ -17,13 +17,13 @@ class Database
 
     private function __construct()
     {
-        $dotenv = Dotenv::createImmutable('/var/www/html');
+        $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
         $dotenv->load();
 
-        $host = getenv('DB_HOST');
-        $dbname = getenv('DB_NAME');
-        $user = getenv('DB_USER');
-        $pass = getenv('DB_PASS');
+        $host = $_ENV['DB_HOST'];
+        $dbname = $_ENV['DB_NAME'];
+        $user = $_ENV['DB_USER'];
+        $pass = $_ENV['DB_PASS'];
 
         try {
             $this->pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
