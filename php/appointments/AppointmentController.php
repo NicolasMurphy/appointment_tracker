@@ -4,13 +4,9 @@ declare(strict_types=1);
 
 namespace Appointments;
 
-use Database\Database;
 use Clients\ClientService;
-use Clients\ClientRepository;
 use Caregivers\CaregiverService;
-use Caregivers\CaregiverRepository;
 use Services\ServiceService;
-use Services\ServiceRepository;
 
 class AppointmentController
 {
@@ -19,15 +15,16 @@ class AppointmentController
     private CaregiverService $caregiverService;
     private ServiceService $serviceService;
 
-    public function __construct()
-    {
-        $dbConnection = Database::getInstance()->getConnection();
-        $appointmentRepository = new AppointmentRepository($dbConnection);
-        $this->appointmentService = new AppointmentService($appointmentRepository);
-
-        $this->clientService = new ClientService(new ClientRepository($dbConnection));
-        $this->caregiverService = new CaregiverService(new CaregiverRepository($dbConnection));
-        $this->serviceService = new ServiceService(new ServiceRepository($dbConnection));
+    public function __construct(
+        AppointmentService $appointmentService,
+        ClientService $clientService,
+        CaregiverService $caregiverService,
+        ServiceService $serviceService
+    ) {
+        $this->appointmentService = $appointmentService;
+        $this->clientService = $clientService;
+        $this->caregiverService = $caregiverService;
+        $this->serviceService = $serviceService;
     }
 
     public function handleRequest(): void
