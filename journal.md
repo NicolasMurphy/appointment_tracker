@@ -1,9 +1,8 @@
 # 8/31
 
     Goals:
-        - refactor appointment controller
-        - fix docker app exit issue
         - Integration tests
+            - find way to easily switch between dev and local mysql credentials
         - Use patch instead of post for updates
         - take /php/ out of nav links
         - Payroll/Billing Report tests
