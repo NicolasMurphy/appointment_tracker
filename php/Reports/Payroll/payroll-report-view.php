@@ -36,6 +36,7 @@
             </thead>
             <tbody>
                 <?php
+                $totalHoursAllCaregivers = 0;
                 $totalWagesAllCaregivers = 0;
                 $totalHoursPerCaregiver = 0;
                 $totalWagesPerCaregiver = 0;
@@ -63,6 +64,7 @@
                     <?php
                     $totalHoursPerCaregiver += $payrollReport->getVisitHours();
                     $totalWagesPerCaregiver += $payrollReport->getVisitWages();
+                    $totalHoursAllCaregivers += $payrollReport->getVisitHours();
                     $totalWagesAllCaregivers += $payrollReport->getVisitWages();
                     ?>
                     <?php if ($index === count($report) - 1): ?>
@@ -77,6 +79,7 @@
             </tbody>
         </table>
 
+        <h3>Total Payed Hours for All Clients: <?php echo rtrim(rtrim(number_format($totalHoursAllCaregivers, 2), '0'), '.'); ?></h3>
         <h3>Total Payed Wages for All Caregivers: $<?php echo number_format($totalWagesAllCaregivers, 2); ?></h3>
     <?php else: ?>
         <p>No verified appointments found for the given date range.</p>
