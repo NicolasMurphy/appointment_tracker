@@ -1,12 +1,12 @@
 # 9/1
 
     Goals:
-        - Rename all mentions of appointment to visit, rename app to visit tracker
         - Integration tests for Clients, Appointments
-        - E2E tests
+        - E2E tests, install playwright
         - Use patch instead of post for updates
         - take /php/ out of nav links
         - Payroll/Billing Report Unit tests
+        - Rename app to Visit-Tracker
         - styling - tailwind, table (calendar later)
         - authentication
         -

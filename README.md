@@ -26,7 +26,7 @@ The application allows users to schedule, view, edit, and delete visits, providi
   - **View Visits**
   - **Edit Visits**
   - **Delete Visits**
-  - **Verify Visit**: Mark visit as verified, enabling them to be included in reports for billing and payroll.
+  - **Verify Visits**: Mark visits as verified, enabling them to be included in reports for billing and payroll.
 
 - **Clients**
 
