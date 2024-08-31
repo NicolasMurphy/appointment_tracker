@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Appointments;
+namespace Visits;
 
 use Clients\ClientService;
 use Caregivers\CaregiverService;
 use Services\ServiceService;
 
-class AppointmentController
+class VisitController
 {
-    private AppointmentService $appointmentService;
+    private VisitService $visitService;
     private ClientService $clientService;
     private CaregiverService $caregiverService;
     private ServiceService $serviceService;
 
     public function __construct(
-        AppointmentService $appointmentService,
+        VisitService $visitService,
         ClientService $clientService,
         CaregiverService $caregiverService,
         ServiceService $serviceService
     ) {
-        $this->appointmentService = $appointmentService;
+        $this->visitService = $visitService;
         $this->clientService = $clientService;
         $this->caregiverService = $caregiverService;
         $this->serviceService = $serviceService;
@@ -33,25 +33,25 @@ class AppointmentController
 
         switch ($action) {
             case 'create':
-                $this->createAppointment();
+                $this->createVisit();
                 break;
             case 'update':
-                $this->updateAppointment();
+                $this->updateVisit();
                 break;
             case 'delete':
-                $this->deleteAppointment();
+                $this->deleteVisit();
                 break;
             case 'verify':
-                $this->verifyAppointment();
+                $this->verifyVisit();
                 break;
             case 'list':
             default:
-                $this->listAppointments();
+                $this->listVisits();
                 break;
         }
     }
 
-    private function createAppointment(): void
+    private function createVisit(): void
     {
         $errorMessage = '';
 
@@ -65,9 +65,9 @@ class AppointmentController
             $notes = $_POST['notes'] ?? '';
 
             try {
-                $appointment = new Appointment($clientId, $caregiverId, $serviceId, $date, $startTime, $endTime, $notes);
-                $this->appointmentService->saveAppointment($appointment);
-                header('Location: /php/appointments.php?action=list');
+                $visit = new Visit($clientId, $caregiverId, $serviceId, $date, $startTime, $endTime, $notes);
+                $this->visitService->saveVisit($visit);
+                header('Location: /php/visits.php?action=list');
                 exit();
             } catch (\InvalidArgumentException $e) {
                 $errorMessage = $e->getMessage();
@@ -78,7 +78,7 @@ class AppointmentController
         $caregivers = $this->caregiverService->getAllCaregivers();
         $services = $this->serviceService->getAllServices();
 
-        $this->renderView('views/create-appointment-view.php', [
+        $this->renderView('views/create-visit-view.php', [
             'errorMessage' => $errorMessage,
             'clients' => $clients,
             'caregivers' => $caregivers,
@@ -86,18 +86,18 @@ class AppointmentController
         ]);
     }
 
-    private function updateAppointment(): void
+    private function updateVisit(): void
     {
         $errorMessage = '';
 
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
         if ($id === false || $id === null) {
-            echo "Invalid appointment ID.";
+            echo "Invalid visit ID.";
             exit();
         }
 
-        $appointmentData = $this->appointmentService->getAppointmentById($id);
+        $visitData = $this->visitService->getVisitById($id);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $clientId = (int)$_POST['client_id'] ?? 0;
@@ -109,10 +109,10 @@ class AppointmentController
             $notes = $_POST['notes'] ?? '';
 
             try {
-                $appointment = new Appointment($clientId, $caregiverId, $serviceId, $date, $startTime, $endTime, $notes);
-                $appointment->setId($id);
-                $this->appointmentService->updateAppointment($appointment);
-                header('Location: /php/appointments.php?action=list');
+                $visit = new Visit($clientId, $caregiverId, $serviceId, $date, $startTime, $endTime, $notes);
+                $visit->setId($id);
+                $this->visitService->updateVisit($visit);
+                header('Location: /php/visits.php?action=list');
                 exit();
             } catch (\InvalidArgumentException $e) {
                 $errorMessage = $e->getMessage();
@@ -124,60 +124,60 @@ class AppointmentController
         $caregivers = $this->caregiverService->getAllCaregivers();
         $services = $this->serviceService->getAllServices();
 
-        $this->renderView('views/update-appointment-view.php', [
+        $this->renderView('views/update-visit-view.php', [
             'errorMessage' => $errorMessage,
-            'appointmentData' => $appointmentData,
+            'visitData' => $visitData,
             'clients' => $clients,
             'caregivers' => $caregivers,
             'services' => $services,
-            'clientId' => $appointmentData['client_id'],
-            'caregiverId' => $appointmentData['caregiver_id'],
-            'serviceId' => $appointmentData['service_id'],
-            'date' => $appointmentData['date'],
-            'startTime' => $appointmentData['start_time'],
-            'endTime' => $appointmentData['end_time'],
-            'notes' => $appointmentData['notes']
+            'clientId' => $visitData['client_id'],
+            'caregiverId' => $visitData['caregiver_id'],
+            'serviceId' => $visitData['service_id'],
+            'date' => $visitData['date'],
+            'startTime' => $visitData['start_time'],
+            'endTime' => $visitData['end_time'],
+            'notes' => $visitData['notes']
         ]);
     }
 
-    private function deleteAppointment(): void
+    private function deleteVisit(): void
     {
         $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 
         if ($id !== false && $id !== null) {
-            if ($this->appointmentService->deleteAppointment($id)) {
-                header('Location: /php/appointments.php?action=list');
+            if ($this->visitService->deleteVisit($id)) {
+                header('Location: /php/visits.php?action=list');
                 exit();
             } else {
-                echo "Failed to delete appointment.";
+                echo "Failed to delete visit.";
             }
         } else {
-            echo "Invalid appointment ID.";
+            echo "Invalid visit ID.";
         }
     }
 
-    private function verifyAppointment(): void
+    private function verifyVisit(): void
     {
         $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
         $verified = filter_input(INPUT_POST, 'verified', FILTER_VALIDATE_BOOLEAN);
 
         if ($id !== false && $id !== null) {
-            if ($this->appointmentService->updateVerificationStatus($id, $verified)) {
-                header('Location: /php/appointments.php?action=list');
+            if ($this->visitService->updateVerificationStatus($id, $verified)) {
+                header('Location: /php/visits.php?action=list');
                 exit();
             } else {
-                echo "Failed to verify appointment.";
+                echo "Failed to verify visit.";
             }
         } else {
-            echo "Invalid appointment ID.";
+            echo "Invalid visit ID.";
         }
     }
 
 
-    private function listAppointments(): void
+    private function listVisits(): void
     {
-        $appointments = $this->appointmentService->getAllAppointments();
-        include 'views/list-appointments-view.php';
+        $visits = $this->visitService->getAllVisits();
+        include 'views/list-visits-view.php';
     }
 
     private function renderView(string $viewFile, array $data = []): void

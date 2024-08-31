@@ -1,7 +1,7 @@
 # 9/1
 
     Goals:
-        - Need consistency for appointment/visit, billed/billable, payed/payable, etc.
+        - Rename all mentions of appointment to visit, rename app to visit tracker
         - Integration tests for Clients, Appointments
         - E2E tests
         - Use patch instead of post for updates

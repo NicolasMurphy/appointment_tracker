@@ -22,22 +22,22 @@ class BillingRepository
             caregivers.last_name AS caregiver_last_name,
             services.code AS service_code,
             services.bill_rate AS service_bill_rate,
-            appointments.date AS appointment_date,
-            appointments.start_time,
-            appointments.end_time
+            visits.date AS visit_date,
+            visits.start_time,
+            visits.end_time
         FROM
-            appointments
+            visits
         JOIN
-            clients ON appointments.client_id = clients.id
+            clients ON visits.client_id = clients.id
         JOIN
-            services ON appointments.service_id = services.id
+            services ON visits.service_id = services.id
         JOIN
-            caregivers ON appointments.caregiver_id = caregivers.id
+            caregivers ON visits.caregiver_id = caregivers.id
         WHERE
-            appointments.verified = 1
-            AND appointments.date BETWEEN :start_date AND :end_date
+            visits.verified = 1
+            AND visits.date BETWEEN :start_date AND :end_date
         ORDER BY
-            appointments.date, appointments.start_time;
+            visits.date, visits.start_time;
         ";
 
         $stmt = $this->dbConnection->prepare($sql);

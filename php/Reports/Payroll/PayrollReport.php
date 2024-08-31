@@ -13,7 +13,7 @@ class PayrollReport
         private string $caregiverLastName,
         private int $caregiverId,
         private float $caregiverPayRate,
-        private string $appointmentDate,
+        private string $visitDate,
         private float $visitHours,
         private float $visitWages
     ) {}
@@ -41,9 +41,9 @@ class PayrollReport
     {
         return $this->caregiverPayRate;
     }
-    public function getAppointmentDate(): string
+    public function getVisitDate(): string
     {
-        return $this->appointmentDate;
+        return $this->visitDate;
     }
     public function getVisitHours(): float
     {

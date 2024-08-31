@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS services (
         bill_rate DECIMAL(10, 2) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS appointments (
+CREATE TABLE IF NOT EXISTS visits (
         id INT AUTO_INCREMENT PRIMARY KEY,
         client_id INT NOT NULL,
         caregiver_id INT NOT NULL,
@@ -109,7 +109,7 @@ VALUES
         );
 
 INSERT INTO
-        appointments (
+        visits (
                 client_id,
                 caregiver_id,
                 service_id,
@@ -132,7 +132,7 @@ VALUES
         );
 
 INSERT INTO
-        appointments (
+        visits (
                 client_id,
                 caregiver_id,
                 service_id,

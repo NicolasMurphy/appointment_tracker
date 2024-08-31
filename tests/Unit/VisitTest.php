@@ -2,9 +2,9 @@
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Appointments\Appointment;
+use Visits\Visit;
 
-class AppointmentTest extends TestCase
+class VisitTest extends TestCase
 {
     #[DataProvider('invalidDateProvider')]
     public function testInvalidDateThrowsException($invalidDate)
@@ -17,9 +17,9 @@ class AppointmentTest extends TestCase
         $serviceId = 2;
         $startTime = '09:00';
         $endTime = '10:00';
-        $notes = 'Follow-up appointment';
+        $notes = 'Follow-up visit';
 
-        new Appointment($clientId, $caregiverId, $serviceId, $invalidDate, $startTime, $endTime, $notes);
+        new Visit($clientId, $caregiverId, $serviceId, $invalidDate, $startTime, $endTime, $notes);
     }
 
     #[DataProvider('invalidTimeProvider')]
@@ -33,9 +33,9 @@ class AppointmentTest extends TestCase
         $serviceId = 2;
         $date = '2024-08-23';
         $endTime = '10:00';
-        $notes = 'Follow-up appointment';
+        $notes = 'Follow-up visit';
 
-        new Appointment($clientId, $caregiverId, $serviceId, $date, $invalidStartTime, $endTime, $notes);
+        new Visit($clientId, $caregiverId, $serviceId, $date, $invalidStartTime, $endTime, $notes);
     }
 
     #[DataProvider('invalidTimeProvider')]
@@ -49,9 +49,9 @@ class AppointmentTest extends TestCase
         $serviceId = 2;
         $date = '2024-08-23';
         $startTime = '09:00';
-        $notes = 'Follow-up appointment';
+        $notes = 'Follow-up visit';
 
-        new Appointment($clientId, $caregiverId, $serviceId, $date, $startTime, $invalidEndTime, $notes);
+        new Visit($clientId, $caregiverId, $serviceId, $date, $startTime, $invalidEndTime, $notes);
     }
 
     public static function invalidDateProvider(): array

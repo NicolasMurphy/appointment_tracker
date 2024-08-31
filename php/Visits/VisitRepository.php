@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Appointments;
+namespace Visits;
 
 use PDO;
 use PDOException;
 use Exception;
 
-class AppointmentRepository
+class VisitRepository
 {
     private PDO $db;
 
@@ -17,20 +17,20 @@ class AppointmentRepository
         $this->db = $db;
     }
 
-    public function save(Appointment $appointment): bool
+    public function save(Visit $visit): bool
     {
         try {
-            $sql = "INSERT INTO appointments (client_id, caregiver_id, service_id, date, start_time, end_time, notes)
+            $sql = "INSERT INTO visits (client_id, caregiver_id, service_id, date, start_time, end_time, notes)
                 VALUES (:client_id, :caregiver_id, :service_id, :date, :start_time, :end_time, :notes)";
             $stmt = $this->db->prepare($sql);
 
-            $clientId = $appointment->getClientId();
-            $caregiverId = $appointment->getCaregiverId();
-            $serviceId = $appointment->getServiceId();
-            $date = $appointment->getDate();
-            $startTime = $appointment->getStartTime();
-            $endTime = $appointment->getEndTime();
-            $notes = $appointment->getNotes();
+            $clientId = $visit->getClientId();
+            $caregiverId = $visit->getCaregiverId();
+            $serviceId = $visit->getServiceId();
+            $date = $visit->getDate();
+            $startTime = $visit->getStartTime();
+            $endTime = $visit->getEndTime();
+            $notes = $visit->getNotes();
 
             $stmt->bindParam(':client_id', $clientId, PDO::PARAM_INT);
             $stmt->bindParam(':caregiver_id', $caregiverId, PDO::PARAM_INT);
@@ -43,28 +43,28 @@ class AppointmentRepository
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log('Database error during save: ' . $e->getMessage());
-            throw new Exception('Failed to save Appointment');
+            throw new Exception('Failed to save Visit');
         }
     }
 
-    public function update(Appointment $appointment): bool
+    public function update(Visit $visit): bool
     {
         try {
-            $sql = "UPDATE appointments
+            $sql = "UPDATE visits
                 SET client_id = :client_id, caregiver_id = :caregiver_id,
                 service_id = :service_id, date = :date, start_time = :start_time,
                 end_time = :end_time, notes = :notes
                 WHERE id = :id";
             $stmt = $this->db->prepare($sql);
 
-            $clientId = $appointment->getClientId();
-            $caregiverId = $appointment->getCaregiverId();
-            $serviceId = $appointment->getServiceId();
-            $date = $appointment->getDate();
-            $startTime = $appointment->getStartTime();
-            $endTime = $appointment->getEndTime();
-            $notes = $appointment->getNotes();
-            $id = $appointment->getId();
+            $clientId = $visit->getClientId();
+            $caregiverId = $visit->getCaregiverId();
+            $serviceId = $visit->getServiceId();
+            $date = $visit->getDate();
+            $startTime = $visit->getStartTime();
+            $endTime = $visit->getEndTime();
+            $notes = $visit->getNotes();
+            $id = $visit->getId();
 
             $stmt->bindParam(':client_id', $clientId, PDO::PARAM_INT);
             $stmt->bindParam(':caregiver_id', $caregiverId, PDO::PARAM_INT);
@@ -78,14 +78,14 @@ class AppointmentRepository
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log('Database error during update: ' . $e->getMessage());
-            throw new Exception('Failed to update Appointment.');
+            throw new Exception('Failed to update Visit.');
         }
     }
 
     public function updateVerificationStatus(int $id, bool $verified): bool
     {
         try {
-            $sql = "UPDATE appointments SET verified = :verified WHERE id = :id";
+            $sql = "UPDATE visits SET verified = :verified WHERE id = :id";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':verified', $verified, PDO::PARAM_BOOL);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -100,14 +100,14 @@ class AppointmentRepository
     public function delete(int $id): bool
     {
         try {
-            $sql = "DELETE FROM appointments WHERE id = :id";
+            $sql = "DELETE FROM visits WHERE id = :id";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log('Database error during delete: ' . $e->getMessage());
-            throw new Exception('Failed to delete Appointment');
+            throw new Exception('Failed to delete Visit');
         }
     }
 
@@ -119,28 +119,28 @@ class AppointmentRepository
         try {
             $stmt = $this->db->query(
                 "SELECT
-                appointments.id,
+                visits.id,
                 clients.first_name AS client_first_name,
                 clients.last_name AS client_last_name,
                 caregivers.first_name AS caregiver_first_name,
                 caregivers.last_name AS caregiver_last_name,
                 services.code AS service_code,
                 services.bill_rate AS service_bill_rate,
-                appointments.date,
-                DATE_FORMAT(appointments.start_time, '%l:%i %p') AS start_time,
-                DATE_FORMAT(appointments.end_time, '%l:%i %p') AS end_time,
-                appointments.notes,
-                appointments.verified
+                visits.date,
+                DATE_FORMAT(visits.start_time, '%l:%i %p') AS start_time,
+                DATE_FORMAT(visits.end_time, '%l:%i %p') AS end_time,
+                visits.notes,
+                visits.verified
             FROM
-                appointments
+                visits
             JOIN
-                clients ON appointments.client_id = clients.id
+                clients ON visits.client_id = clients.id
             JOIN
-                caregivers ON appointments.caregiver_id = caregivers.id
+                caregivers ON visits.caregiver_id = caregivers.id
             JOIN
-                services ON appointments.service_id = services.id
+                services ON visits.service_id = services.id
             ORDER BY
-                appointments.date, appointments.start_time"
+                visits.date, visits.start_time"
             );
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -155,18 +155,18 @@ class AppointmentRepository
         try {
             $stmt = $this->db->prepare(
                 "SELECT
-                    appointments.id,
-                    appointments.client_id,
-                    appointments.caregiver_id,
-                    appointments.service_id,
-                    appointments.date,
-                    TIME_FORMAT(appointments.start_time, '%H:%i') AS start_time,
-                    TIME_FORMAT(appointments.end_time, '%H:%i') AS end_time,
-                    appointments.notes
+                    visits.id,
+                    visits.client_id,
+                    visits.caregiver_id,
+                    visits.service_id,
+                    visits.date,
+                    TIME_FORMAT(visits.start_time, '%H:%i') AS start_time,
+                    TIME_FORMAT(visits.end_time, '%H:%i') AS end_time,
+                    visits.notes
                 FROM
-                    appointments
+                    visits
                 WHERE
-                    appointments.id = :id"
+                    visits.id = :id"
             );
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();

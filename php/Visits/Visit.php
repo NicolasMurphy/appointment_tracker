@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Appointments;
+namespace Visits;
 
 use DateTime;
 
-class Appointment
+class Visit
 {
     private ?int $id = null;
     private int $clientId;

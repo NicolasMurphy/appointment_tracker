@@ -15,7 +15,7 @@ class CaregiverIntegrationTest extends TestCase
     {
         $this->pdo = Database::getInstance()->getConnection();
 
-        $this->pdo->exec("DELETE FROM appointments");
+        $this->pdo->exec("DELETE FROM visits");
 
         $this->pdo->exec("DELETE FROM caregivers");
 

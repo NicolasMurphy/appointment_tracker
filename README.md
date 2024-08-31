@@ -1,14 +1,14 @@
-# Appointment Tracker
+# Visit Tracker
 
 ## Project Overview
 
-Appointment Tracker is a web application developed as a learning project. It demonstrates basic CRUD (Create, Read, Update, Delete) operations using PHP for backend and frontend, MySQL for database, and TypeScript for dynamic updates.
+Visit Tracker is a web application developed as a learning project. It demonstrates basic CRUD (Create, Read, Update, Delete) operations using PHP for backend and frontend, MySQL for database, and TypeScript for dynamic updates.
 
 Originally designed as a microservice architecture, the project was refactored into a monolithic structure to provide a more tightly coupled and straightforward setup. Initially, the frontend was built with React and TypeScript, but it was later refactored to use PHP and vanilla TypeScript to gain experience with PHP server-side rendering and using vanilla TypeScript.
 
 The project features a Dockerized setup for easy and consistent development environments, with nodemon configured for hot reloading in TypeScript development. An included SQL script initializes the database with sample data.
 
-The application allows users to schedule, view, edit, and delete appointments, providing a full-stack experience with a focus on learning and implementing best practices in both frontend and backend development.
+The application allows users to schedule, view, edit, and delete visits, providing a full-stack experience with a focus on learning and implementing best practices in both frontend and backend development.
 
 ## Technologies Used
 
@@ -20,13 +20,13 @@ The application allows users to schedule, view, edit, and delete appointments, p
 
 ## Features
 
-- **Appointments**
+- **Visits**
 
-  - **Create Appointments**: Client name, caregiver name, service code, address, date, start time, end time, notes. (Client ID, Caregiver ID, and Service ID are used as foreign keys.)
-  - **View Appointments**
-  - **Edit Appointments**
-  - **Delete Appointments**
-  - **Verify Appointment**: Mark appointment as verified, enabling them to be included in reports for billing and payroll.
+  - **Create Visits**: Client name, caregiver name, service code, address, date, start time, end time, notes. (Client ID, Caregiver ID, and Service ID are used as foreign keys.)
+  - **View Visits**
+  - **Edit Visits**
+  - **Delete Visits**
+  - **Verify Visit**: Mark visit as verified, enabling them to be included in reports for billing and payroll.
 
 - **Clients**
 
@@ -50,12 +50,12 @@ The application allows users to schedule, view, edit, and delete appointments, p
 
   - **Billing Report**:
 
-    - **Choose Date Range**: Select a date range to view reports for verified appointments.
+    - **Choose Date Range**: Select a date range to view reports for verified visits.
     - **View Billable Hours and Revenue per Client**: Access detailed reports showing the total billable hours and revenue for each client.
     - **View Total Billable Hours and Revenue for All Clients**: Summarize the overall billable hours and revenue across all clients within the selected date range.
 
   - **Payroll Report**:
-    - **Choose Date Range**: Select a date range to generate payroll reports based on verified appointments.
+    - **Choose Date Range**: Select a date range to generate payroll reports based on verified visits.
     - **View Payable Hours and Revenue per Caregiver**: Access detailed reports showing the total payable hours and revenue for each caregiver.
     - **View Total Payable Hours and Revenue for All Caregivers**: Summarize the overall payable hours and payroll expenses across all caregivers within the selected date range.
 

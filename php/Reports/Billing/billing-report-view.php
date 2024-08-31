@@ -57,7 +57,7 @@
                     <tr>
                         <td><?php echo $previousClientName; ?></td>
                         <td><?php echo htmlspecialchars($billingReport->getCaregiverLastName()) . ', ' . htmlspecialchars($billingReport->getCaregiverFirstName()); ?></td>
-                        <td><?php echo htmlspecialchars($billingReport->getAppointmentDate()); ?></td>
+                        <td><?php echo htmlspecialchars($billingReport->getVisitDate()); ?></td>
                         <td><?php echo htmlspecialchars($billingReport->getServiceCode()); ?></td>
                         <td><?php echo htmlspecialchars(number_format($billingReport->getServiceBillRate(), 2)); ?></td>
                         <td><?php echo rtrim(rtrim(number_format($billingReport->getVisitHours(), 2), '0'), '.'); ?></td>
@@ -81,10 +81,10 @@
             </tbody>
         </table>
 
-        <h3>Total Billed Hours for All Clients: <?php echo rtrim(rtrim(number_format($totalHoursAllClients, 2), '0'), '.'); ?></h3>
-        <h3>Total Billed Revenue for All Clients: $<?php echo number_format($totalRevenueAllClients, 2); ?></h3>
+        <h3>Total Hours for All Clients: <?php echo rtrim(rtrim(number_format($totalHoursAllClients, 2), '0'), '.'); ?></h3>
+        <h3>Total Revenue for All Clients: $<?php echo number_format($totalRevenueAllClients, 2); ?></h3>
     <?php else: ?>
-        <p>No verified appointments found for the given date range.</p>
+        <p>No verified visits found for the given date range.</p>
     <?php endif; ?>
 </body>
 

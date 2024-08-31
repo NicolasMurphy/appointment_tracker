@@ -24,7 +24,7 @@ class PayrollService
                 $row['caregiver_last_name'],
                 (int)$row['caregiver_id'],
                 (float)$row['caregiver_pay_rate'],
-                $row['appointment_date'],
+                $row['visit_date'],
                 $visitHours,
                 $visitWages
             );

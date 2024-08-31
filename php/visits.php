@@ -2,9 +2,9 @@
 
 require_once '/var/www/html/vendor/autoload.php';
 
-use Appointments\AppointmentController;
-use Appointments\AppointmentService;
-use Appointments\AppointmentRepository;
+use Visits\VisitController;
+use Visits\VisitService;
+use Visits\VisitRepository;
 use Clients\ClientService;
 use Clients\ClientRepository;
 use Caregivers\CaregiverService;
@@ -15,18 +15,18 @@ use Database\Database;
 
 $dbConnection = Database::getInstance()->getConnection();
 
-$appointmentRepository = new AppointmentRepository($dbConnection);
+$visitRepository = new VisitRepository($dbConnection);
 $clientRepository = new ClientRepository($dbConnection);
 $caregiverRepository = new CaregiverRepository($dbConnection);
 $serviceRepository = new ServiceRepository($dbConnection);
 
-$appointmentService = new AppointmentService($appointmentRepository);
+$visitService = new VisitService($visitRepository);
 $clientService = new ClientService($clientRepository);
 $caregiverService = new CaregiverService($caregiverRepository);
 $serviceService = new ServiceService($serviceRepository);
 
-$controller = new AppointmentController(
-    $appointmentService,
+$controller = new VisitController(
+    $visitService,
     $clientService,
     $caregiverService,
     $serviceService

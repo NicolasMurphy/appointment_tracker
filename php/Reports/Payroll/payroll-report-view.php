@@ -56,7 +56,7 @@
                     <tr>
                         <td><?php echo $previousCaregiverName; ?></td>
                         <td><?php echo htmlspecialchars($payrollReport->getClientLastName()) . ', ' . htmlspecialchars($payrollReport->getClientFirstName()); ?></td>
-                        <td><?php echo htmlspecialchars($payrollReport->getAppointmentDate()); ?></td>
+                        <td><?php echo htmlspecialchars($payrollReport->getVisitDate()); ?></td>
                         <td><?php echo htmlspecialchars(number_format($payrollReport->getCaregiverPayRate(), 2)); ?></td>
                         <td><?php echo rtrim(rtrim(number_format($payrollReport->getVisitHours(), 2), '0'), '.'); ?></td>
                         <td><?php echo number_format($payrollReport->getVisitWages(), 2); ?></td>
@@ -79,10 +79,10 @@
             </tbody>
         </table>
 
-        <h3>Total Payed Hours for All Clients: <?php echo rtrim(rtrim(number_format($totalHoursAllCaregivers, 2), '0'), '.'); ?></h3>
-        <h3>Total Payed Wages for All Caregivers: $<?php echo number_format($totalWagesAllCaregivers, 2); ?></h3>
+        <h3>Total Hours for All Clients: <?php echo rtrim(rtrim(number_format($totalHoursAllCaregivers, 2), '0'), '.'); ?></h3>
+        <h3>Total Wages for All Caregivers: $<?php echo number_format($totalWagesAllCaregivers, 2); ?></h3>
     <?php else: ?>
-        <p>No verified appointments found for the given date range.</p>
+        <p>No verified visits found for the given date range.</p>
     <?php endif; ?>
 </body>
 

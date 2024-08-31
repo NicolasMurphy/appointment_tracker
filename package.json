@@ -1,5 +1,5 @@
 {
-  "name": "appointment_tracker",
+  "name": "visit_tracker",
   "main": "./dist/index.js",
   "type": "module",
   "scripts": {

@@ -14,7 +14,7 @@ class BillingReport
         private string $caregiverLastName,
         private string $serviceCode,
         private float $serviceBillRate,
-        private string $appointmentDate,
+        private string $visitDate,
         private float $visitHours,
         private float $visitRevenue
     ) {}
@@ -47,9 +47,9 @@ class BillingReport
     {
         return $this->serviceBillRate;
     }
-    public function getAppointmentDate(): string
+    public function getVisitDate(): string
     {
-        return $this->appointmentDate;
+        return $this->visitDate;
     }
     public function getVisitHours(): float
     {
