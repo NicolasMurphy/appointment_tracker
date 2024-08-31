@@ -16,7 +16,7 @@ The application allows users to schedule, view, edit, and delete appointments, p
 - **Database**: MySQL for data storage.
 - **Frontend**: PHP for serving HTML and vanilla TypeScript for dynamic changes.
 - **Environment**: Docker for containerized development, with nodemon for hot reloading during TypeScript development.
-- **Testing**: PHPUnit for unit testing the PHP codebase.
+- **Testing**: PHPUnit for unit and integration testing of the PHP codebase.
 
 ## Features
 
@@ -26,6 +26,7 @@ The application allows users to schedule, view, edit, and delete appointments, p
   - **View Appointments**
   - **Edit Appointments**
   - **Delete Appointments**
+  - **Verify Appointment**: Mark appointment as verified, enabling them to be included in reports for billing and payroll.
 
 - **Clients**
 
@@ -44,6 +45,19 @@ The application allows users to schedule, view, edit, and delete appointments, p
   - **Create Services**: Service code, description, bill rate.
   - **View Services**
   - **Edit Services**
+
+- **Reports**
+
+  - **Billing Report**:
+
+    - **Choose Date Range**: Select a date range to view reports for verified appointments.
+    - **View Billable Hours and Revenue per Client**: Access detailed reports showing the total billable hours and revenue for each client.
+    - **View Total Billable Hours and Revenue for All Clients**: Summarize the overall billable hours and revenue across all clients within the selected date range.
+
+  - **Payroll Report**:
+    - **Choose Date Range**: Select a date range to generate payroll reports based on verified appointments.
+    - **View Payable Hours and Revenue per Caregiver**: Access detailed reports showing the total payable hours and revenue for each caregiver.
+    - **View Total Payable Hours and Revenue for All Caregivers**: Summarize the overall payable hours and payroll expenses across all caregivers within the selected date range.
 
 ## Project Initialization
 
