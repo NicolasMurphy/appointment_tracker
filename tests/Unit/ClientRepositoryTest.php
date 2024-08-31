@@ -32,4 +32,24 @@ class ClientRepositoryTest extends TestCase
         $client = new Client($firstName, $lastName, 'john.doe@example.com', '1234567890', '123 Main St');
         $this->clientRepository->save($client);
     }
+
+    public function testDuplicateNameOnUpdateThrowsException()
+    {
+        $firstName = "John";
+        $lastName = "Doe";
+        $id = 1;
+
+        $stmt = $this->createMock(PDOStatement::class);
+        $stmt->method('fetchColumn')->willReturn(1);
+
+        $this->pdo->method('prepare')->willReturn($stmt);
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage("A client with this first and last name already exists.");
+
+        $client = new Client($firstName, $lastName, 'john.doe@example.com', '1234567890', '123 Main St');
+        $client->setId($id);
+
+        $this->clientRepository->update($client);
+    }
 }
