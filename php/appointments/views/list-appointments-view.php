@@ -50,7 +50,7 @@
         <p>No appointments found.</p>
     <?php endif; ?>
     <a href="/php/appointments.php?action=create">Create New Appointment</a>
-    <script type="module" src="js/sortFunctions.js"></script>
+    <script type="module" src="../../../js/sortFunctions.js"></script>
 </body>
 
 </html>

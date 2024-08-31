@@ -32,4 +32,24 @@ class CaregiverRepositoryTest extends TestCase
         $caregiver = new Caregiver($firstName, $lastName, 'john.doe@example.com', '1234567890', '123 Main St', '10');
         $this->caregiverRepository->save($caregiver);
     }
+
+    public function testDuplicateNameOnUpdateThrowsException()
+    {
+        $firstName = "John";
+        $lastName = "Doe";
+        $id = 1;
+
+        $stmt = $this->createMock(PDOStatement::class);
+        $stmt->method('fetchColumn')->willReturn(1);
+
+        $this->pdo->method('prepare')->willReturn($stmt);
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage("A caregiver with this first and last name already exists.");
+
+        $caregiver = new Caregiver($firstName, $lastName, 'john.doe@example.com', '1234567890', '123 Main St', '10');
+        $caregiver->setId($id);
+
+        $this->caregiverRepository->update($caregiver);
+    }
 }
