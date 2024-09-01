@@ -1,3 +1,11 @@
+# 9/2
+
+    Goals:
+        - Create a Test Database
+        -
+    Notes:
+        -
+
 # 9/1
 
     Goals:
