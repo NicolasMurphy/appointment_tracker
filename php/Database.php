@@ -8,8 +8,14 @@ use PDO;
 use PDOException;
 use Dotenv\Dotenv;
 
-require_once '/var/www/html/vendor/autoload.php'; // docker
-// require_once __DIR__ . '/../vendor/autoload.php'; // local
+if (defined('PHPUNIT_COMPOSER_INSTALL') || defined('__PHPUNIT_PHAR__')) {
+    require_once __DIR__ . '/../vendor/autoload.php'; // local
+    $dotenv = Dotenv::createImmutable(__DIR__ . '/../', '.env.test');
+} else {
+    require_once '/var/www/html/vendor/autoload.php'; // docker
+    $dotenv = Dotenv::createImmutable('/var/www/html');
+}
+$dotenv->load();
 
 class Database
 {
@@ -18,10 +24,6 @@ class Database
 
     private function __construct()
     {
-        $dotenv = Dotenv::createImmutable('/var/www/html'); // docker
-        // $dotenv = Dotenv::createImmutable(__DIR__ . '/../'); // local
-        $dotenv->load();
-
         $host = $_ENV['DB_HOST'];
         $dbname = $_ENV['DB_NAME'];
         $user = $_ENV['DB_USER'];

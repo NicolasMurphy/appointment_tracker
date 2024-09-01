@@ -14,13 +14,18 @@ class CaregiverIntegrationTest extends TestCase
     protected function setUp(): void
     {
         $this->pdo = Database::getInstance()->getConnection();
+        $this->pdo->beginTransaction(); // Start
 
         $this->pdo->exec("DELETE FROM visits");
-
         $this->pdo->exec("DELETE FROM caregivers");
 
         $caregiverRepository = new CaregiverRepository($this->pdo);
         $this->caregiverService = new CaregiverService($caregiverRepository);
+    }
+
+    protected function tearDown(): void
+    {
+        $this->pdo->rollBack(); // Rollback
     }
 
     public function testCreateAndUpdateCaregiver()
