@@ -2,13 +2,13 @@
 
 ## Project Overview
 
-Visit Tracker is a web application developed as a learning project. It demonstrates basic CRUD (Create, Read, Update, Delete) operations using PHP for backend and frontend, MySQL for database, and TypeScript for dynamic updates.
+Visit Tracker is a web application developed as a learning project. It utilizes PHP for both the backend and frontend, MySQL for the database, and TypeScript for dynamic updates.
 
-Originally designed as a microservice architecture, the project was refactored into a monolithic structure to provide a more tightly coupled and straightforward setup. Initially, the frontend was built with React and TypeScript, but it was later refactored to use PHP and vanilla TypeScript to gain experience with PHP server-side rendering and using vanilla TypeScript.
+Originally designed as a basic CRUD application, the application has evolved to include features like visit verification and exclusion of deletion to maintain data integrity.
+
+The project was initially structured as a microservice architecture but was later refactored into a monolithic setup to provide a more tightly coupled and straightforward environment. The frontend, originally built with React and TypeScript, was refactored to use PHP and vanilla TypeScript, offering experience with PHP server-side rendering and vanilla TypeScript.
 
 The project features a Dockerized setup for easy and consistent development environments, with nodemon configured for hot reloading in TypeScript development. An included SQL script initializes the database with sample data.
-
-The application allows users to schedule, view, edit, and delete visits, providing a full-stack experience with a focus on learning and implementing best practices in both frontend and backend development.
 
 ## Technologies Used
 
@@ -58,6 +58,14 @@ The application allows users to schedule, view, edit, and delete visits, providi
     - **Choose Date Range**: Select a date range to generate payroll reports based on verified visits.
     - **View Hours and Revenue per Caregiver**: Access detailed reports showing the total hours and revenue for each caregiver.
     - **View Total Hours and Revenue for All Caregivers**: Summarize the overall hours and payroll wages across all caregivers within the selected date range.
+
+## Future Enhancements
+
+- **Authentication**
+- **Role-Based Access Control (RBAC)**
+- **Auditing**
+- **Data Import/Export Capabilities**
+- **Styling**
 
 ## Project Initialization
 
