@@ -1,9 +1,19 @@
+# 9/3
+
+    Goals:
+        - Create a Test Database
+        -
+    Notes:
+        -
+
 # 9/2
 
     Goals:
         - Create a Test Database
         -
     Notes:
+        - docker-compose.yaml automatically loads .env
+        - perhaps add .env.test to var/www/html (remember to add to .htaccess)?
         -
 
 # 9/1
