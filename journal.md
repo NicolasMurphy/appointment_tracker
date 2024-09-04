@@ -1,7 +1,24 @@
+# 9/4
+
+    Goals:
+        - Integration tests should always use testdb
+        - Integration tests for Clients, Appointments
+        - E2E tests, install playwright
+        - Use patch instead of post for updates
+        - take /php/ out of nav links
+        - Payroll/Billing Report Unit tests
+        - Rename app to Visit-Tracker
+        - styling - tailwind, table (calendar later)
+        - authentication
+        -
+    Notes:
+        -
+
 # 9/3
 
     Goals:
         - Create a Test Database
+        - Integration tests should work with test database
         -
     Notes:
         -

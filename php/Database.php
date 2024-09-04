@@ -26,21 +26,22 @@ class Database
     {
         $dbType = 'test';
 
-
         if ($dbType === 'test') {
             $host = $_ENV['TEST_DB_HOST'];
+            $port= $_ENV['TEST_DB_PORT'];
             $dbname = $_ENV['TEST_DB_NAME'];
             $user = $_ENV['TEST_DB_USER'];
             $pass = $_ENV['TEST_DB_PASS'];
         } else {
             $host = $_ENV['DB_HOST'];
+            $port= $_ENV['DB_PORT'];
             $dbname = $_ENV['DB_NAME'];
             $user = $_ENV['DB_USER'];
             $pass = $_ENV['DB_PASS'];
         }
 
         try {
-            $this->pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
+            $this->pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $user, $pass);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             error_log('Database connection failed: ' . $e->getMessage());
