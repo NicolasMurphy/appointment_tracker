@@ -15,6 +15,10 @@ services:
       - DB_USER=${DB_USER}
       - DB_PASS=${DB_PASS}
       - DB_NAME=${DB_NAME}
+      - TEST_DB_HOST=${TEST_DB_HOST}
+      - TEST_DB_USER=${TEST_DB_USER}
+      - TEST_DB_PASS=${TEST_DB_PASS}
+      - TEST_DB_NAME=${TEST_DB_NAME}
     command: >
       sh -c "npm run dev & apachectl -D FOREGROUND"
 
@@ -31,5 +35,19 @@ services:
     ports:
       - "3306:3306"
 
+  test_mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${TEST_DB_NAME}
+      MYSQL_USER: ${TEST_DB_USER}
+      MYSQL_PASSWORD: ${TEST_DB_PASS}
+    volumes:
+      - test_db_data:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d
+    ports:
+      - "3307:3306"
+
 volumes:
   db_data: {}
+  test_db_data: {}
